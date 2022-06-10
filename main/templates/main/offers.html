@@ -12,7 +12,7 @@
     {% trans "Choose " %} {% trans product.name %} {% trans "plane"%}
   </h2>
 
-  {% if rates.count == 1 %}
+  {% if rates|length == 1 %}
     {% for rate in rates %}
       <p>
           Choose a Spotify Plan Select the subscription type for a period of

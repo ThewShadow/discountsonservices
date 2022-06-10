@@ -48,9 +48,15 @@ class OffersView(ListView):
 
         if rate_slug:
             context['rate_slug'] = rate_slug
-            context['offers'] = Offer.objects.filter(product__slug=self.kwargs.get('slug'), rate__slug=rate_slug)
+            context['offers'] = Offer.objects.filter(product__slug=self.kwargs.get('slug'),
+                                                     rate__slug=rate_slug).order_by('price')
 
-            context['rates'] = Offer.objects.filter(product__slug=self.kwargs.get('slug')).order_by('price')
+            rates = []
+            for offer in Offer.objects.filter(product__slug=self.kwargs.get('slug')).order_by('price'):
+                if offer.rate not in rates:
+                    rates.append(offer.rate)
+
+            context['rates'] = rates
 
         else:
             context['offers'] = Offer.objects.filter(product__slug=self.kwargs.get('slug'))
