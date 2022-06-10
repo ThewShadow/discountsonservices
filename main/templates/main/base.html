@@ -1,0 +1,51 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+
+    {% endblock%}
+</head>
+
+<header>
+    {% load i18n %}
+
+
+
+    <a href="{% url 'index' %}">{% trans "Home" %}</a>
+    <a href="{% url 'support' %}">{% trans "Support" %}</a>
+    {% if user.is_authenticated %}
+         <a href="{% url 'profile' %}">{{user.username}}</a>
+         <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
+    {% else %}
+        <a href="{% url 'login' %}">{% trans "login" %}</a>
+        <a href="{% url 'django_registration_register' %}">{% trans "Register" %}</a>
+    {% endif %}
+
+     <a href="{% url 'about_us' %}">{% trans "About" %}</a>
+
+    <form style="display: inline-block; float: right;" action="{% url 'set_language' %}" method="post">
+      {% csrf_token %}
+      <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}" />
+      <select name="language">
+          {% get_current_language as LANGUAGE_CODE %}
+          {% get_available_languages as LANGUAGES %}
+          {% get_language_info_list for LANGUAGES as languages %}
+          {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+              {{ language.name_local }} ({{ language.code }})
+            </option>
+          {% endfor %}
+      </select>
+      <input type="submit" value="{% trans 'Change' %}" />
+    </form>
+</header>
+
+<body>
+  {% block body %}
+
+  {% endblock %}
+</body>
+</html>

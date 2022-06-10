@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+
+
+{% block title %}
+    <title>{% trans "not authorizate" %}</title>
+{% endblock%}
+
+{% block body %}
+  <h2>
+    {% trans "Permission denied, user not authorizate." %}
+  </h2>
+
+  <p>
+    {% trans "Please, register or login to your personal account:" %}
+  </p>
+  <ul>
+      <li>
+        <a href="{% url 'django_registration_register' %}">{% trans "Register" %}</a>
+          |
+        <a href="{% url 'login' %}">{% trans "Login" %}</a>
+      </li>
+  </ul>
+
+{% endblock%}

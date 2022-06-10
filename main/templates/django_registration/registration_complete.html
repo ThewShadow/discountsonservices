@@ -1,0 +1,9 @@
+{% extends "main/base.html" %}
+{% load i18n %}
+{% block body %}
+<h1>{% trans "Account activate" %}</h1>
+
+{% trans "Hello" %}, {{ account }}!<br/>
+{% trans "You account activate succsessfuly." %} <a href="{% url 'login' %}">{% trans "visite" %}}</a> {% trans "the site." %}
+<br/><br/>
+{% endblock %}

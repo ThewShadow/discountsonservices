@@ -1,0 +1,244 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-08 15:27+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: config/settings.py:126
+msgid "English"
+msgstr "Английский"
+
+#: config/settings.py:127
+msgid "Ukraine"
+msgstr "Украинский"
+
+#: main/templates/django_registration/activation_email_subject.txt:1
+msgid "Account activation on"
+msgstr "Аккаун активирован"
+
+#: main/templates/django_registration/registration_complete.html:4
+#, fuzzy
+#| msgid "Account activation on"
+msgid "Account activate"
+msgstr "Аккаун активирован"
+
+#: main/templates/django_registration/registration_complete.html:6
+msgid "Hello"
+msgstr "Привет"
+
+#: main/templates/django_registration/registration_complete.html:7
+msgid "You account activate succsessfuly."
+msgstr "Ваш аккаунт успешно активирован."
+
+#: main/templates/django_registration/registration_complete.html:7
+msgid "visite"
+msgstr "заходите"
+
+#: main/templates/django_registration/registration_complete.html:7
+msgid "the site."
+msgstr "на сайт"
+
+#: main/templates/django_registration/registration_form.html:5
+#: main/templates/django_registration/registration_form.html:13
+msgid "Registration"
+msgstr "Регистрация"
+
+#: main/templates/main/base.html:17
+msgid "home"
+msgstr "Главная"
+
+#: main/templates/main/base.html:18
+msgid "support"
+msgstr "Служба поддержки"
+
+#: main/templates/main/base.html:21
+msgid "logout"
+msgstr "Выход"
+
+#: main/templates/main/base.html:23
+msgid "login"
+msgstr "Вход"
+
+#: main/templates/main/base.html:24
+msgid "register"
+msgstr "Регистрация"
+
+#: main/templates/main/base.html:40
+msgid "Change"
+msgstr "Изменить"
+
+#: main/templates/main/index.html:6 main/templates/main/offers.html:6
+msgid "Home"
+msgstr "Главная"
+
+#: main/templates/main/index.html:12
+msgid "Prise"
+msgstr "Товары"
+
+#: main/templates/main/not_authorizate.html:11
+msgid "Permission denied, user not authorizate."
+msgstr "Доступ запрещен. Пользователь не авторизован!"
+
+#: main/templates/main/not_authorizate.html:15
+msgid "Please, register or login to your personal account:"
+msgstr "Пожалуйста зарегистрируйтесь или войдите в личний аккаунт"
+
+#: main/templates/main/not_authorizate.html:19
+msgid "Register"
+msgstr "Регистрация"
+
+#: main/templates/main/not_authorizate.html:21
+#: main/templates/registration/login.html:5
+#: main/templates/registration/login.html:13
+msgid "Login"
+msgstr "Вход"
+
+#: main/templates/main/offers.html:12
+msgid "Offers"
+msgstr "Предложения"
+
+#: main/templates/main/offers.html:16
+msgid "Buy"
+msgstr "Купить"
+
+#: main/templates/main/password_reset_complete.html:5
+#: main/templates/main/password_reset_confirm.html:5
+msgid "Change password"
+msgstr "Изменить пароль"
+
+#: main/templates/main/password_reset_complete.html:9
+msgid "Password reset sent"
+msgstr "Пароль сброшен"
+
+#: main/templates/main/password_reset_complete.html:11
+msgid ""
+"\n"
+"      We’ve emailed you instructions for setting your password,<br>\n"
+"      if an account exists with the email you entered. You should receive "
+"them shortly.<br>\n"
+"      If you don’t receive an email, please make sure you’ve entered the "
+"address you registered with,<br>\n"
+"      and check your spam folder.\n"
+"    "
+msgstr ""
+"\n"
+"Мы отправили вам инструкции по установке пароля по электронной почте,<br>\n"
+" если существует учетная запись с введенным вами адресом электронной почты. "
+"Вы должны получить скоро их.<br>\n"
+" Если вы не получили электронное письмо, убедитесь, что вы ввели адрес, с "
+"которым вы зарегистрировались,<br>\n"
+" и проверьте папку со спамом.\n"
+" "
+
+#: main/templates/main/password_reset_confirm.html:9
+msgid "Change youre password"
+msgstr "Забыли свой пароль?"
+
+#: main/templates/main/password_reset_confirm.html:15
+msgid "Confirm!"
+msgstr "Подтвердить"
+
+#: main/templates/main/password_reset_done.html:5
+#: main/templates/main/password_reset_done.html:9
+msgid "Password reset complete"
+msgstr "Пароль сброшен"
+
+#: main/templates/main/password_reset_done.html:10
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr "Ваш пароль установлен. Вы можете продолжить и войти в систему сейчас."
+
+#: main/templates/main/password_reset_form.html:5
+msgid "Forgot Your Password?"
+msgstr "Забыли свой пароль?"
+
+#: main/templates/main/password_reset_form.html:9
+msgid "Forgot your password?"
+msgstr "Забыли свой пароль?"
+
+#: main/templates/main/password_reset_form.html:10
+msgid ""
+"Enter your email address below, and we'll email instructions for setting a "
+"new one."
+msgstr ""
+"Введите свой адрес электронной почты ниже, и мы вышлем инструкции по "
+"настройке."
+
+#: main/templates/main/password_reset_form.html:21
+msgid "Send me instructions"
+msgstr "Отправить инструкции"
+
+#: main/templates/main/subscribe.html:6
+msgid "Subscribe"
+msgstr "Оформление"
+
+#: main/templates/main/subscribe.html:12
+msgid "Subscriptions order"
+msgstr "Заказ подписки"
+
+#: main/templates/main/subscribe.html:20
+msgid "Order"
+msgstr "Заказ"
+
+#: main/templates/main/support.html:6
+msgid "Support"
+msgstr "Служба поддержки"
+
+#: main/templates/main/support.html:12
+msgid "SUPPORT"
+msgstr "Служба поддержки"
+
+#: main/templates/main/support.html:18
+msgid "Send to support"
+msgstr "Отправить в службу поддержки"
+
+#: main/templates/main/user_profile.html:7
+msgid "Profile"
+msgstr "Профиль"
+
+#: main/templates/main/user_profile.html:13
+msgid "MY SUBSCRIPTION"
+msgstr "Мои подписки"
+
+#: main/templates/main/user_profile.html:24
+msgid "Product"
+msgstr "Товар"
+
+#: main/templates/main/user_profile.html:25
+msgid "Rate"
+msgstr "Ставка"
+
+#: main/templates/main/user_profile.html:26
+msgid "Price"
+msgstr "Цена"
+
+#: main/templates/main/user_profile.html:27
+msgid "Email"
+msgstr "Почта"
+
+#: main/templates/main/user_profile.html:28
+msgid "Status"
+msgstr "Статус"
+
+#: main/templates/registration/login.html:18
+msgid "Reset password"
+msgstr "Изменить пароль"
+
+#: main/templates/registration/login.html:22
+msgid "Login with"
+msgstr "Вход через"

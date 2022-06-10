@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+
+{% block title %}
+
+    <title>{% trans "Home" %}</title>
+
+{% endblock%}
+
+{% block body %}
+  <h2>
+    {% trans "Choose " %} {% trans product.name %} {% trans "plane"%}
+  </h2>
+
+  {% if rates.count == 1 %}
+    {% for rate in rates %}
+      <p>
+          Choose a Spotify Plan Select the subscription type for a period of
+          <a href="{% url 'offers' slug=product.slug rate_slug=rate.slug  %}">{{ rate  }}</a>
+      </p>
+    {% endfor %}
+  {% else %}
+    {% for rate in rates %}
+      {% if rate.slug == rate_slug %}
+        <b><a href="{% url 'offers' slug=product.slug rate_slug=rate.slug   %}"> {{ rate  }}</a></b>
+      {% else %}
+        <a href="{% url 'offers' slug=product.slug rate_slug=rate.slug   %}">{{ rate }}</a>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  <hr>
+  <div >
+    {% for item in offers %}
+      <div style="display: inline; float: left; margin-right: 20px; text-align: center;">{{ item.name }}<br>
+        <p style="width: 200px;">
+          {% if item.description %}
+            {{ item.description }}
+          {% endif %}
+        </p>
+        <p>
+          {{ item.price }} {{ item.currency }}
+        </p>
+        <a style="color: white; background-color: blue; padding: 10px;" href="{% url 'subscribe' item.id %}">
+          {% trans "Get started" %}
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock%}

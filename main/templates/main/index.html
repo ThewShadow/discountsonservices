@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+
+{% block title %}
+
+    <title>{% trans "Home" %}</title>
+
+{% endblock%}
+
+{% block body %}
+  <h2>
+    {% trans "Choose a subscription" %}
+  </h2>
+
+  <ul>
+    {% for item in products %}
+      <li>
+         <h3>{{ item.name }}</h3>
+         <p style="width: 400px;">
+           {% if item.description %}
+              {{ item.description }}
+           {% endif %}
+         </p><br>
+
+          <a style="color: white; background-color: blue; padding: 10px;" href="{% url 'offers_redirect' item.slug %}">
+              Learn more
+          </a>
+
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock%}

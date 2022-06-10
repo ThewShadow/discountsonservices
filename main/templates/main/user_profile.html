@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+
+
+{% block title %}
+
+    <title>{% trans "Profile" %}</title>
+
+{% endblock%}
+
+{% block body %}
+  <h2>
+    {% trans "MY SUBSCRIPTION" %}
+  </h2>
+
+<style>
+  table, th, td {
+  border: 1px solid;
+}
+</style>
+
+  <table>
+    <tr>
+      <th>{% trans "Product" %}</th>
+      <th>{% trans "Plan" %}</th>
+      <th>{% trans "Term" %}</th>
+      <th>{% trans "Price" %}</th>
+      <th>{% trans "Email" %}</th>
+      <th>{% trans "Status" %}</th>
+    </tr>
+    {% for item in user_subscriptions %}
+      <tr>
+        <td>{{item.offer.product.name}}</td>
+        <td>{{item.offer.name}}</td>
+        <th>{{item.offer.rate}}</th>
+        <td>{{item.offer.price}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.get_status_display }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+
+{% endblock%}

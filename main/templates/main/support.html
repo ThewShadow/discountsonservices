@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+
+{% block title %}
+
+<title>{% trans "Support" %}</title>
+
+{% endblock%}
+
+{% block body %}
+  <h2>
+    {% trans "SUPPORT" %}
+  </h2>
+
+   <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% trans "Send to support" %}</button>
+    </form>
+
+{% endblock%}
