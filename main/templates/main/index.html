@@ -1,33 +1,161 @@
-{% extends 'main/base.html' %}
+{% extends 'ds/base.html' %}
 {% load i18n %}
-
+{% load static %}
 {% block title %}
 
     <title>{% trans "Home" %}</title>
 
 {% endblock%}
 
-{% block body %}
-  <h2>
-    {% trans "Choose a subscription" %}
-  </h2>
+{% block main %}
 
-  <ul>
-    {% for item in products %}
-      <li>
-         <h3>{{ item.name }}</h3>
-         <p style="width: 400px;">
-           {% if item.description %}
-              {{ item.description }}
-           {% endif %}
-         </p><br>
+<section class="main">
+    <div class="container">
+        <div class="main__body">
+            <div class="main__block main__content bg-blue">
+                <h1>Start enjoying a benefit
+                    of up to 50%</h1>
+                <p>You have always wanted to get the same product at a special price for you, without haggling - and it is yours.</p>
+                <a href="##" class="btn btn-wh">Start using</a>
+            </div>
+            <div class="main__block block-img bg-white">
+                <img src="{% static 'img/main-img.jpg' %}" alt="Start enjoying a benefit
+                of up to 50%">
+            </div>
+        </div>
+    </div>
+</section>
 
-          <a style="color: white; background-color: blue; padding: 10px;" href="{% url 'offers_redirect' item.slug %}">
-              Learn more
-          </a>
 
-      </li>
-    {% endfor %}
-  </ul>
+<section class="subscribe">
+    <div class="container">
+        <h2>Choose a subscribe</h2>
+        <div class="subscribe__items">
+            {% for item in products %}
 
+                <div class="subscribe__item bg-white">
+                    <div class="subscribe__item-content">
+                        <h3 subscribe rates>{{ item.name }} subscribe rates</h3>
+                        <p>{{ item.description }}</p>
+                        <a href="{% url 'offers_redirect' item.slug %}" class="btn btn-blue">Learn more</a>
+                    </div>
+                    <div class="subscribe__item-img">
+                        <img src="{% static 'img/netflix.png' %}" alt="netflix">
+                    </div>
+                </div>
+          {% endfor %}
+      </div>
+
+    </div>
+</section>
+
+<section class="works">
+    <div class="container">
+        <h2>How it works?</h2>
+        <div class="works__steps">
+                <div class="works__step bg-white">
+                    <div class="works__step-head">
+                        <h4>Step 1</h4>
+                        <div class="works__icon-wrap">
+                            <span></span>
+                            <div class="works__icon works__icon-1"></div>
+                        </div>
+
+                    </div>
+                    <p>Enter your account information</p>
+                </div>
+                <div class="works__step bg-white">
+                    <div class="works__step-head">
+                        <h4>Step 3</h4>
+                        <div class="works__icon-wrap">
+                            <span></span>
+                            <div class="works__icon works__icon-2"></div>
+                        </div>
+                    </div>
+                    <p>Select the desired subscribe and plan</p>
+                </div>
+                <div class="works__step bg-white">
+                    <div class="works__step-head">
+                        <h4>Step 3</h4>
+                        <div class="works__icon-wrap">
+                            <span></span>
+                            <div class="works__icon works__icon-3"></div>
+                        </div>
+                    </div>
+                    <p>Pay your bill
+                        with PayPal</p>
+                </div>
+        </div>
+        <div class="invite bg-blue">
+            <div class="invite__content">
+                <h3>Invite friends</h3>
+                <p>Starting today up to 50% for NETFLIX, YOUTUBE, SPOTIFY subscriptions with a secure payment from PAYPAL</p>
+            </div>
+            <div class="invite__link-block">
+                <p>Click on the link</p>
+                <div class="invite__link">
+                    <a href="https://t.me/DiscountsOnServices_bot?start=343964809">Discounts On Services</a>
+                    <button></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="about">
+    <div class="container">
+        <h2>About us</h2>
+        <div class="about__body">
+            <div class="about__block bg-white about__content">
+                <img src="{% static 'img/icons/logo.png' %}" alt="logo">
+                <p>We offer you a subscribe to various media services at the best price.</p>
+                <p>We have partnered with several companies to help you find the best prices for your media subscribes and provide you with the best prices for the Premium subscribes you want.</p>
+                <p><strong>It's simple, fast and economical.</strong></p>
+            </div>
+            <div class="about__block bg-white block-img">
+                <img src="{% static 'img/about-img.jpg' %}" alt="It's simple, fast and economical.">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="faq">
+    <div class="container">
+        <h2>FAQ</h2>
+        <div class="faq__items">
+            <details class="bg-white">
+                <summary>The set time has passed, but the invoice has not yet arrived, what should I do?</summary>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae, praesentium?</p>
+            </details>
+            <details class="bg-white">
+                <summary>Can I change my Netflix account email and password after purchase?</summary>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae, praesentium?</p>
+            </details>
+            <details class="bg-white">
+                <summary>Can I add a phone number for password recovery?</summary>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae, praesentium?</p>
+            </details>
+            <details class="bg-white">
+                <summary>How soon will I receive the account information I ordered?</summary>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae, praesentium?</p>
+            </details>
+            <details class="bg-white">
+                <summary>How to pay?</summary>
+                <p>Payment options we currently have: PayPal, Bitcoin.</p>
+            </details>
+        </div>
+        <div class="faq__btn">
+            <a href="##" class="btn btn-black">Support</a>
+        </div>
+    </div>
+</section>
+<section class="more">
+    <div class="container">
+        <div class="more__body bg-blue">
+            <div class="more__contetnt">
+                <h4>Request for an additional subscribe that was not found here</h4>
+                <p>Disney, Amazon Prime, Microsoft Office, Microsoft Windows</p>
+            </div>
+            <a href="##" class="btn-wh">Request</a>
+        </div>
+    </div>
+</section>
 {% endblock%}

@@ -1,11 +1,11 @@
-{% extends 'main/base.html' %}
+{% extends 'ds/base.html' %}
 {% load i18n %}
 
 {% block title %}
     <title>{% trans "Login" %}</title>
 {% endblock%}
 
-{% block body %}
+{% block main %}
 
     <form method="post">
         {% csrf_token %}

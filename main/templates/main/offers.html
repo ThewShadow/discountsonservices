@@ -1,4 +1,4 @@
-{% extends 'main/base.html' %}
+{% extends 'ds/base.html' %}
 {% load i18n %}
 
 {% block title %}
@@ -7,7 +7,7 @@
 
 {% endblock%}
 
-{% block body %}
+{% block main %}
   <h2>
     {% trans "Choose " %} {% trans product.name %} {% trans "plane"%}
   </h2>
@@ -41,11 +41,110 @@
         <p>
           {{ item.price }} {{ item.currency }}
         </p>
+
+          <button onclick="Aplly(this.id)" id="{{ item.id }}">Buy</button>
+
         <a style="color: white; background-color: blue; padding: 10px;" href="{% url 'subscribe' item.id %}">
           {% trans "Get started" %}
         </a>
       </div>
     {% endfor %}
   </div>
+
+  <style>
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+
+
+
+  <!-- The Modal -->
+<div id="myModal" class="modal">
+    <span class="close">close</span>
+    <!-- Modal content -->
+    <div class="modal-content">
+      <form id="current_form" action="POST">
+        <input styel="border: 1px black;" name="name" value="name"><br>
+        <input name="number" value="number"><br>
+        <input name="email" value="email"><br>
+
+      </form>
+      <button onclick="createSubscription()">Aplly</button>
+    </div>
+
+  </div>
+
+
+<script>
+
+function Aplly(click_id) {
+    document.cookie = "sub_id=" + click_id;
+    modal.style.display = "block";
+}
+
+function createSubscription() {
+  var form = document.getElementById('current_form')
+  form_data = $('#current_form').serializeObject()
+  console.log(form_data)
+}
+
+
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementsByClassName("myBtn");
+
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+ </script>
 
 {% endblock%}

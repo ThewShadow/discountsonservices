@@ -4,7 +4,7 @@
 
 {% block title %}
 
-    <title>{% trans "Profile" %}</title>
+<title xmlns="http://www.w3.org/1999/html">{% trans "Profile" %}</title>
 
 {% endblock%}
 
@@ -19,26 +19,32 @@
 }
 </style>
 
-  <table>
-    <tr>
-      <th>{% trans "Product" %}</th>
-      <th>{% trans "Plan" %}</th>
-      <th>{% trans "Term" %}</th>
-      <th>{% trans "Price" %}</th>
-      <th>{% trans "Email" %}</th>
-      <th>{% trans "Status" %}</th>
-    </tr>
-    {% for item in user_subscriptions %}
-      <tr>
-        <td>{{item.offer.product.name}}</td>
-        <td>{{item.offer.name}}</td>
-        <th>{{item.offer.rate}}</th>
-        <td>{{item.offer.price}}</td>
-        <td>{{item.email}}</td>
-        <td>{{item.get_status_display }}</td>
-      </tr>
-    {% endfor %}
-  </table>
+<div style="min-height: 60%; display: block;">
+  <div style="display: inline; float: left; margin: 20px;">
+    <p><a href="{% url 'profile' %}">Profile info</a></p>
+    <p><a href="{% url 'user_subscriptions' %}">My Subscriptions</a></p>
+  </div>
 
+  <div style="display: inline;   margin: 20px; ">
+    <p><b>ID:</b> <input disabled value="{{ object.id }}"></p>
+    <form  method="post">
+      {{ form.errors }}
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save</button>
+      {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+
+                {{ message }}
+
+            {% endfor %}
+        </ul>
+      {% endif %}
+    </form>
+  </div>
+</div>
+
+{% include "main/faq.html" %}
 
 {% endblock%}

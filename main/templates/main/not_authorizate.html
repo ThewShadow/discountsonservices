@@ -1,4 +1,4 @@
-{% extends 'main/base.html' %}
+{% extends 'ds/base.html' %}
 {% load i18n %}
 
 
@@ -6,7 +6,7 @@
     <title>{% trans "not authorizate" %}</title>
 {% endblock%}
 
-{% block body %}
+{% block main %}
   <h2>
     {% trans "Permission denied, user not authorizate." %}
   </h2>

@@ -26,8 +26,9 @@ SECRET_KEY = 'django-insecure-s=%ahjk93t0he#!6by2pv8moi3)9ib5l59oxj@dhqrwgeq-!cm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '54b3-46-118-172-5.eu.ngrok.io']
+ALLOWED_HOSTS = ['localhost', '729d-46-118-172-5.eu.ngrok.io']
 
+CSRF_TRUSTED_ORIGINS = ['https://729d-46-118-172-5.eu.ngrok.io','http://localhost']
 
 # Application definition
 
@@ -42,6 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_registration',
     'main.apps.MainConfig',
+    'phonenumber_field',
+    'paypal.standard.ipn',
+
+
 
 ]
 
@@ -145,6 +150,7 @@ MEDIA_URL = 'media/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -168,9 +174,15 @@ EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '958470774346-f7cqddv03cek23lagl8glkeu3545h1u4.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
+
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'zvichayniy.vick@gmail.com'
 EMAIL_HOST_PASSWORD = 'etjadkyhtddcwgda'
 EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = 'example@gmail.comv'
+MANAGERS_EMAILS = ['zvichayniy.vick@gmail.com', 'futuredevback1@gmail.com']
+
+PAYPAL_RECEIVER_EMAIL = 'sb-twdid17300769@business.example.com'
+
+PAYPAL_TEST = True

@@ -14,6 +14,7 @@ class ProductTranslationOptions(TranslationOptions):
 class CurrencyTranslationOptions(TranslationOptions):
     fields = ('name',)
 
+
 translator.register(Offer, OfferTranslationOptions)
 translator.register(Currency, CurrencyTranslationOptions)
 translator.register(Product, ProductTranslationOptions)

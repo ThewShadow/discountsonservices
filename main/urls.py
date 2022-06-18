@@ -8,6 +8,7 @@ from . import views
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
+    path('profile/subscriptions/', views.UserSubscriptionsView.as_view(), name='user_subscriptions'),
 
     path('accounts/password_reset/', PasswordResetView.as_view(
         template_name='main/password_reset_form.html'),
@@ -42,7 +43,11 @@ urlpatterns = [
     path('support/', views.SupportView.as_view(), name='support'),
     path('about/', views.AboutUsView.as_view(), name='about_us'),
 
-
-
+    path('faq/', views.FAQView.as_view(), name='faq_list'),
+    path('admin_panel/', views.ManagerPanelView.as_view(), name='manager_panel'),
+    path('paypal/', include('paypal.standard.ipn.urls')),
+    path('payment_paypal/', views.PaypalFormView.as_view(), name='paypal_order_create'),
+    path('paypal_return/', views.PayPalPaymentReturnView.as_view(), name='paypal_return'),
+    path('paypal_cancel/', views.PayPalPaymentCancelView.as_view(), name='paypal_cancel'),
 
 ]

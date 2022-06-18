@@ -1,0 +1,10 @@
+{% extends 'ds/base.html'%}
+
+{% block main %}
+<center style="padding: 40px;">
+
+ {% csrf_token %}
+ {{ form.render }}
+</center>
+
+{% endblock %}
