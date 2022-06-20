@@ -2,6 +2,33 @@ from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 
+from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
+from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+from .managers import CustomUserManager
+
+
+
+class CustomUser(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(_('email address'), unique=True)
+    username = models.CharField(max_length=250)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(default=timezone.now)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email
+
+
+
+
+
+
+
 class Rate(models.Model):
     name = models.CharField(max_length=200, default='')
     count = models.IntegerField()
@@ -51,13 +78,13 @@ class PaymentType(models.Model):
         return self.name
 
 class Subscription(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
     offer = models.ForeignKey('Offer', on_delete=models.CASCADE, null=True)
     email = models.EmailField(max_length=250)
     payment_type = models.ForeignKey(PaymentType, on_delete=models.CASCADE, null=True)
     phone_number = PhoneNumberField(null=True)
     order_date = models.DateTimeField(auto_now_add=True, null=True)
-
+    user_name = models.CharField(max_length=250, null=True)
     STATUSES = [
         (1, 'being processed'),
         (2, 'done'),
@@ -114,7 +141,7 @@ class Subscription(models.Model):
 
 
 class SupportTask(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
     text = models.TextField()
     pub_date = models.DateTimeField()

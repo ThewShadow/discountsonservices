@@ -38,16 +38,13 @@
 									<path fill="#333" d="M4 2.586 6.475.111l.707.707L4 4 .818.818l.707-.707L4 2.586Z"/>
 								</svg>
 							</span>
+
 							<ul>
+								{% for item in all_product %}
 								<li>
-									<a href="##" class="menu__link">Netflix</a>
+									<a href="##" class="menu__link">{{ item.name }}</a>
 								</li>
-								<li>
-									<a href="##" class="menu__link">YouTube Premium</a>
-								</li>
-								<li>
-									<a href="##" class="menu__link">Spotify</a>
-								</li>
+								{% endfor %}
 							</ul>
 						</li>
 						<li>

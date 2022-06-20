@@ -144,10 +144,10 @@ LOCALE_PATHS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 MEDIA_URL = 'media/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+#STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
@@ -161,12 +161,15 @@ LOGOUT_REDIRECT_URL = '/site/'
 ACCOUNT_ACTIVATION_DAYS = 3
 AUTH_USER_EMAIL_UNIQUE = True
 
+AUTH_USER_MODEL = 'main.CustomUser'
+
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.google.GoogleOAuth',
-    'django.contrib.auth.backends.ModelBackend',
+    #'django.contrib.auth.backends.ModelBackend',
+    'main.views.EmailBackend',
 )
 
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
@@ -186,3 +189,4 @@ MANAGERS_EMAILS = ['zvichayniy.vick@gmail.com', 'futuredevback1@gmail.com']
 PAYPAL_RECEIVER_EMAIL = 'sb-twdid17300769@business.example.com'
 
 PAYPAL_TEST = True
+

@@ -10,25 +10,29 @@ urlpatterns = [
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('profile/subscriptions/', views.UserSubscriptionsView.as_view(), name='user_subscriptions'),
 
-    path('accounts/password_reset/', PasswordResetView.as_view(
-        template_name='main/password_reset_form.html'),
-        name='password_reset'),
+    path('accounts/login/', views.LoginView.as_view(), name='login'),
+    path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
+    path('accounts/registration/', views.RegistrationView.as_view(), name='registration'),
 
-    path('accounts/reset/done/', PasswordResetCompleteView.as_view(
-        template_name='main/password_reset_done.html'),
-        name='password_reset_complete'),
-
-    path('accounts/reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(
-        template_name='main/password_reset_confirm.html'),
-        name='password_reset_confirm'),
-
-    path('accounts/password_reset/done/', PasswordResetDoneView.as_view(
-        template_name='main/password_reset_complete.html'),
-        name='password_reset_done'),
+    # path('accounts/password_reset/', PasswordResetView.as_view(
+    #     template_name='main/password_reset_form.html'),
+    #     name='password_reset'),
+    #
+    # path('accounts/reset/done/', PasswordResetCompleteView.as_view(
+    #     template_name='main/password_reset_done.html'),
+    #     name='password_reset_complete'),
+    #
+    # path('accounts/reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(
+    #     template_name='main/password_reset_confirm.html'),
+    #     name='password_reset_confirm'),
+    #
+    # path('accounts/password_reset/done/', PasswordResetDoneView.as_view(
+    #     template_name='main/password_reset_complete.html'),
+    #     name='password_reset_done'),
 
     path('social/', include('social_django.urls', namespace='social')),
 
-    path('accounts/', include('django.contrib.auth.urls')),
+    #path('accounts/', include('django.contrib.auth.urls')),
 
     path('accounts/register/', RegistrationView.as_view(form_class=RegistrationFormUniqueEmail),
         name='django_registration_register'),
@@ -46,8 +50,11 @@ urlpatterns = [
     path('faq/', views.FAQView.as_view(), name='faq_list'),
     path('admin_panel/', views.ManagerPanelView.as_view(), name='manager_panel'),
     path('paypal/', include('paypal.standard.ipn.urls')),
-    path('payment_paypal/', views.PaypalFormView.as_view(), name='paypal_order_create'),
     path('paypal_return/', views.PayPalPaymentReturnView.as_view(), name='paypal_return'),
     path('paypal_cancel/', views.PayPalPaymentCancelView.as_view(), name='paypal_cancel'),
+
+    # api methods
+    path('api/v1/subscriptions/create/', views.SubscriptionCreateView.as_view(), name='create_subscription'),
+    path('api/v1/payments/paypal/create/', views.PayPalFormView.as_view(), name='paypal_form_create'),
 
 ]

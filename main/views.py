@@ -1,12 +1,13 @@
 from django.shortcuts import redirect, get_object_or_404, render, HttpResponse
 from django.urls import reverse_lazy
+from django.http import JsonResponse
 from httplib2 import Http
-
+from django.template.loader import render_to_string
 from .models import Offer, Subscription, Product, FAQ
-from django.views.generic import ListView, FormView, CreateView, TemplateView
+from django.views.generic import ListView, FormView, CreateView, TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from .forms import SubscribeForm, SupportCreateTaskForm, ChangeUserInfoForm, ChangeSubscibeStatusForm, SubscribeCreateForm
+from .forms import RegistrationForm, SupportCreateTaskForm, ChangeUserInfoForm, ChangeSubscibeStatusForm, SubscribeCreateForm, VerifyEmailForm
 from datetime import datetime
 from . import service
 from social_django.models import UserSocialAuth
@@ -14,32 +15,129 @@ from django.core.exceptions import PermissionDenied
 from paypal.standard.forms import PayPalPaymentsForm
 from config import settings
 from django.utils.translation import get_language
+from django.contrib.auth import authenticate, login, logout
+from .forms import LoginForm
+from django.contrib.auth import get_user_model
+from django.contrib.auth.backends import ModelBackend
+from .models import CustomUser
 
 
-class PaypalFormView(FormView):
-    template_name = 'payments/paypal_form.html'
-    form_class = PayPalPaymentsForm
 
-    def get(self, request, **kwargs):
 
-        if not self.request.session.get('sub_id', None):
-            return HttpResponse('error', status=406)
+class EmailBackend(ModelBackend):
+    def authenticate(self, request, username=None, password=None, **kwargs):
+        UserModel = get_user_model()
+        try:
+            user = UserModel.objects.get(email=username)
+        except UserModel.DoesNotExist:
+            return None
+        else:
+            if user.check_password(password):
+                return user
+        return None
 
-        form = self.form_class(initial=self.get_initial())
-        return render(request, template_name=self.template_name, context={'form': form})
+class LogoutView(View):
 
-    def get_initial(self):
-        test_url =  'https://729d-46-118-172-5.eu.ngrok.io'
+    def post(self, *args, **kwargs):
+        logout(self.request)
+        return redirect(reverse_lazy('index'))
 
+    def get(self, *args, **kwargs):
+        logout(self.request)
+        return redirect(reverse_lazy('index'))
+
+
+class LoginView(View):
+    form_class = LoginForm
+
+    def post(self, *args, **kwargs):
+        form = LoginForm(self.request.POST)
+        if form.is_valid():
+            user = authenticate(email=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            if user is not None:
+                login(self.request, user)
+                return JsonResponse({'success': True}, status=200)
+
+            return JsonResponse({'success': False, 'error_messages': ['Perrmision Denied']}, status=401)
+
+        return JsonResponse({'success': False, 'error_messages': form.errors}, status=401)
+
+    def get(self):
+        return HttpResponse('<h1>Method Not Allowed</h1>', status=406)
+
+
+
+class RegistrationView(View):
+
+    def post(self, *args, **kwargs):
+        form = RegistrationForm(self.request.POST)
+        if form.is_valid():
+            try:
+                CustomUser.objects.get(email=form.cleaned_data['email'])
+                return JsonResponse({'success': False, 'error_messges': 'User is exist'}, status=406)
+            except:
+                user = User(username=form.cleaned_data['username'],
+                     password=form.cleaned_data['password'],
+                     email=form.cleaned_data['email'])
+                user.save()
+
+                verify_code = 448866
+                self.request.session['verify_email'] = form.cleaned_data['email']
+                self.request.session['verify_code'] = verify_code
+
+                from django.core.mail import EmailMultiAlternatives
+
+                subject, from_email, to = 'Email verify', 'noreplyexample@mail.com', form.cleaned_data['email']
+                html_content = f'<h1>You verify code</h1><p>{verify_code}</p>'
+
+                msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+                msg.content_subtype = "html"
+                msg.send()
+
+                return JsonResponse({'success': True, 'verify_email': form.cleaned_data['email']})
+
+        return JsonResponse({'success': False, 'error_messages': form.errors})
+
+
+class CommonMixin:
+
+    def get_common_data(self, request, **kwargs):
+        kwargs['all_products'] = Product.objects.all()
+        kwargs['login_form'] = LoginForm()
+        kwargs['register_form'] = RegistrationForm()
+        kwargs['verify_email_form'] = VerifyEmailForm()
+
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        common = self.get_common_data(self.request, **kwargs)
+
+        return dict(list(context.items()) + list(common.items()))
+
+
+class PayPalFormView(View):
+
+    def get(self, *args, **kwargs):
+        return HttpResponse('Method Not Allowed', status=406)
+
+    def post(self, *args, **kwargs):
+        context = {'form': PayPalPaymentsForm(initial=self.get_payment_form())}
+        template = render_to_string('main/paypal_form.html', context=context)
+        return JsonResponse({"form": template})
+
+    def get_payment_form(self):
+        test_url = 'https://729d-46-118-172-5.eu.ngrok.io'
+
+        sub_id = self.request.POST.get('sub_id', None)
         lang = get_language().upper()
-        sub_id = self.request.session.get('sub_id', None)
         sub_obj = get_object_or_404(Subscription, id=sub_id)
 
         return {
             "business": settings.PAYPAL_RECEIVER_EMAIL,
             "amount": sub_obj.offer.price,
             "currency_code": sub_obj.offer.currency.code,
-            "item_name": f'{sub_obj.offer.product.name} {sub_obj.offer.name}',
+            "item_name": 'test',
             "invoice": sub_id,
             # "notify_url": self.request.build_absolute_uri(reverse_lazy('paypal-ipn')),
             # "return_url": self.request.build_absolute_uri(reverse_lazy('paypal_return')),
@@ -51,7 +149,8 @@ class PaypalFormView(FormView):
             "no_shipping": '1',
         }
 
-class IndexView(ListView):
+
+class IndexView(CommonMixin, ListView):
     template_name = 'main/index.html'
     model = Product
 
@@ -60,7 +159,7 @@ class IndexView(ListView):
         context['products'] = Product.objects.all()
         return context
 
-class OffersView(ListView):
+class OffersView(CommonMixin, ListView):
     template_name = 'main/offers.html'
     model = Offer
 
@@ -111,35 +210,45 @@ class OffersView(ListView):
         else:
             context['offers'] = Offer.objects.filter(product__slug=product_id)
 
+
         return context
 
 
 
 
-class SubscriptionCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'main/subscribe.html'
-    model = Subscription
-    form_class = SubscribeForm
-    login_url = 'not_authorizate'
-    redirect_field_name = 'redirect_to'
-    #success_url = reverse_lazy('profile')
+#class SubscriptionCreateView(LoginRequiredMixin, CreateView):
+class SubscriptionCreateView(View):
+    #template_name = 'main/subscribe.html'
+    # login_url = 'not_authorizate'
+    # redirect_field_name = 'redirect_to'
+
+    def get(self, *args, **kwargs):
+        return HttpResponse('Method Not Allowed', status=406)
+
+    def post(self, *args, **kwargs):
+        form = SubscribeCreateForm(self.request.POST)
+        if form.is_valid():
+            offer = get_object_or_404(Offer, id=form.cleaned_data['offer_id'])
+            new_subscription = Subscription()
+            new_subscription.email = form.cleaned_data['email']
+            new_subscription.phone_number = form.cleaned_data['phone_number']
+            new_subscription.offer = offer
+            new_subscription.user_name = form.cleaned_data['user_name']
+            try:
+                new_subscription.save()
+            except Exception as e:
+                print(e)
+
+            resp = {'sub_id': new_subscription.id}
+
+            return JsonResponse(resp, status=200)
+        else:
+            return JsonResponse({'error': True}, status=400)
 
 
 
-    def get_initial(self):
-        initial = super().get_initial()
-        initial['user'] = self.request.user
-        initial['email'] = self.request.user.email
-        initial['offer'] = get_object_or_404(Offer, id=self.kwargs.get('offer_id'))
-        return initial
 
-    def form_valid(self, form):
-        subscription = form.save(commit=True)
-        subscription.notify_managers()
-        self.request.session['sub_id'] = subscription.id
-        return redirect(reverse_lazy('paypal_order_create'))
-
-class ProfileView(LoginRequiredMixin, FormView):
+class ProfileView(CommonMixin, LoginRequiredMixin, FormView):
     template_name = 'main/user_profile.html'
     login_url = 'not_authorizate'
     redirect_field_name = 'redirect_to'
@@ -164,10 +273,10 @@ class ProfileView(LoginRequiredMixin, FormView):
     def get_success_url(self):
         return reverse_lazy('profile')
 
-class NotAuthorizate(TemplateView):
+class NotAuthorizate(CommonMixin, TemplateView):
     template_name = 'main/not_authorizate.html'
 
-class SupportView(LoginRequiredMixin, CreateView):
+class SupportView(CommonMixin, LoginRequiredMixin, CreateView):
     template_name = 'main/support.html'
     model = User
     form_class = SupportCreateTaskForm
@@ -186,10 +295,10 @@ class SupportView(LoginRequiredMixin, CreateView):
         service.send_support_task(task_instance.id)
         return redirect(reverse_lazy('index'))
 
-class AboutUsView(TemplateView):
+class AboutUsView(CommonMixin, TemplateView):
     template_name = 'main/about_us.html'
 
-class UserSubscriptionsView(LoginRequiredMixin, ListView):
+class UserSubscriptionsView(CommonMixin, LoginRequiredMixin, ListView):
     login_url = 'not_authorizate'
     redirect_field_name = 'redirect_to'
     model = Subscription
@@ -202,7 +311,7 @@ class UserSubscriptionsView(LoginRequiredMixin, ListView):
             user__id=self.request.user.id)
         return context
 
-class ManagerPanelView(LoginRequiredMixin, TemplateView):
+class ManagerPanelView(CommonMixin, LoginRequiredMixin, TemplateView):
     template_name = 'main/manager_panel.html'
 
     def get(self, request, **kwargs):
@@ -228,16 +337,16 @@ class ManagerPanelView(LoginRequiredMixin, TemplateView):
         context['all_statuses'] = Subscription.STATUSES
         return context
 
-class FAQView(ListView):
+class FAQView(CommonMixin, ListView):
     model = FAQ
     template_name = 'main/faq.html'
     context_object_name = 'questions_list'
 
 
-class PayPalPaymentCancelView(TemplateView):
+class PayPalPaymentCancelView(CommonMixin, TemplateView):
     template_name = 'payments/paypal_cancel.html'
 
-class PayPalPaymentReturnView(TemplateView):
+class PayPalPaymentReturnView(CommonMixin, TemplateView):
     template_name = 'payments/paypal_return.html'
 
     def get_context_data(self, **kwargs):

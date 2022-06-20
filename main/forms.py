@@ -1,7 +1,21 @@
 from .models import Subscription, SupportTask
 from django.forms import ModelForm, DateTimeInput, TextInput, NumberInput, Form
 from django import forms
-from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser
+
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm):
+        model = CustomUser
+        fields = ('email','password')
+
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = CustomUser
+        fields = ('email',)
+
+
 
 class SubscribeForm(ModelForm):
     class Meta:
@@ -49,7 +63,22 @@ class ChangeSubscibeStatusForm(Form):
 
 
 class SubscribeCreateForm(Form):
-    sub_id = forms.IntegerField()
+    offer_id = forms.IntegerField()
     email = forms.EmailField()
-    phone_number = PhoneNumberField()
+    phone_number = forms.CharField(max_length=15)
     user_name = forms.CharField(max_length=250)
+
+
+class LoginForm(Form):
+    username = forms.CharField(max_length=250)
+    password = forms.CharField(max_length=250)
+
+class RegistrationForm(Form):
+    username = forms.CharField(max_length=250)
+    email = forms.CharField(max_length=250)
+    password = forms.CharField(max_length=250)
+
+
+class VerifyEmailForm():
+    verify_code = forms.IntegerField()
+    verify_email = forms.CharField(max_length=250)

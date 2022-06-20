@@ -1,5 +1,6 @@
 {% extends 'ds/base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block title %}
 
@@ -8,143 +9,266 @@
 {% endblock%}
 
 {% block main %}
-  <h2>
-    {% trans "Choose " %} {% trans product.name %} {% trans "plane"%}
-  </h2>
-
-  {% if rates|length == 1 %}
-    {% for rate in rates %}
-      <p>
-          Choose a Spotify Plan Select the subscription type for a period of
-          <a href="{% url 'offers' slug=product.slug rate_slug=rate.slug  %}">{{ rate  }}</a>
-      </p>
-    {% endfor %}
-  {% else %}
-    {% for rate in rates %}
-      {% if rate.slug == rate_slug %}
-        <b><a href="{% url 'offers' slug=product.slug rate_slug=rate.slug   %}"> {{ rate  }}</a></b>
-      {% else %}
-        <a href="{% url 'offers' slug=product.slug rate_slug=rate.slug   %}">{{ rate }}</a>
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-
-  <hr>
-  <div >
-    {% for item in offers %}
-      <div style="display: inline; float: left; margin-right: 20px; text-align: center;">{{ item.name }}<br>
-        <p style="width: 200px;">
-          {% if item.description %}
-            {{ item.description }}
-          {% endif %}
-        </p>
-        <p>
-          {{ item.price }} {{ item.currency }}
-        </p>
-
-          <button onclick="Aplly(this.id)" id="{{ item.id }}">Buy</button>
-
-        <a style="color: white; background-color: blue; padding: 10px;" href="{% url 'subscribe' item.id %}">
-          {% trans "Get started" %}
-        </a>
-      </div>
-    {% endfor %}
-  </div>
-
-  <style>
-    .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
-
-    /* Modal Content/Box */
-    .modal-content {
-      background-color: #fefefe;
-      margin: 15% auto; /* 15% from the top and centered */
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%; /* Could be more or less, depending on screen size */
-    }
-
-    /* The Close Button */
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-  </style>
 
 
+<section class="service">
+    <div class="container">
+        <div class="service__body">
+            <h1 class="service__title">Choose a {{ product.name }} Plan</h1>
+            {% if rates|length == 1 %}
+                {% for rate in rates %}
+                  <p class="service__note">Select the subscription type for a period of <span>{{ rate }}</span>
+                {% endfor %}
+              {% else %}
+              <p class="service__note">Listen without limits at a bargain price</p>
+                <div class="service__period">
+                    {% for rate in rates %}
+                      {% if rate.slug == rate_slug %}
+                        <button  class="active">
+                      {% else %}
+                         <button>
+                       {% endif %}
+                            <a href="{% url 'offers' slug=product.slug rate_slug=rate.slug  %}">
+                                {{ rate }}
+                            </a>
+                        </button>
 
-  <!-- The Modal -->
-<div id="myModal" class="modal">
-    <span class="close">close</span>
-    <!-- Modal content -->
-    <div class="modal-content">
-      <form id="current_form" action="POST">
-        <input styel="border: 1px black;" name="name" value="name"><br>
-        <input name="number" value="number"><br>
-        <input name="email" value="email"><br>
 
-      </form>
-      <button onclick="createSubscription()">Aplly</button>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="service__tariffs">
+
+              {% for item in offers %}
+                <div class="tariff bg-white">
+                    <h2 class="tariff__name">{{ item.name }}</h2>
+                    <ul class="tariff__includes">
+                        <li>Ad-free music listening</li>
+                        <li>Play anywhere - even offline</li>
+                        <li>On-demand playback</li>
+                    </ul>
+                    <div class="tariff__price">$<span>{{ item.price }}</span></div>
+                    <button   onclick="Apply(this.id)" class="tariff__btn-get" id="{{ item.id }}" >
+                        Get started
+                    </button>
+                </div>
+              {% endfor %}
+            </div>
+        </div>
+        <div class="invite bg-blue">
+            <div class="invite__content">
+                <h3>Invite friends</h3>
+                <p>
+                    Starting today up to 50% for NETFLIX, YOUTUBE, SPOTIFY subscriptions with a secure
+                    payment from PAYPAL
+                </p>
+            </div>
+            <div class="invite__link-block">
+                <p>Click on the link</p>
+                <div class="invite__link">
+                    <a href="https://t.me/DiscountsOnServices_bot?start=343964809">Discounts On Services</a>
+                    <button></button>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
 
-  </div>
+<div id="popup_8" class="popup">
+    <div class="popup__body">
+        <div class="popup__overlay"></div>
+        <div class="popup__content">
+            <a href="#header" class="popup__btn-close">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6.99974 5.58574L11.9497 0.635742L13.3637 2.04974L8.41374 6.99974L13.3637 11.9497L11.9497 13.3637L6.99974 8.41374L2.04974 13.3637L0.635742 11.9497L5.58574 6.99974L0.635742 2.04974L2.04974 0.635742L6.99974 5.58574Z"
+                        fill="#3A3A3C" />
+                </svg>
+            </a>
+
+            <div>
+                <h2 class="popup__title">Subscription Application</h2>
+            </div>
+
+            <div class="popup__inputs">
+                <form id="current_form" action="POST">
+                    {% csrf_token %}
+                    <div class="popup__input-block">
+                        <p>Enter your name</p>
+                        {{ sub_create_form.user_name }}
+                    </div>
+                    <div class="popup__input-block">
+                        <p>Email Address</p>
+                        {{ sub_create_form.email }}
+                    </div>
+                    <div class="popup__input-block">
+                        <p>Phone</p>
+                        {{ sub_create_form.phone_number }}
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <button onclick="createSubscription()" class="popup__btn-blue popup__btn-full" tabindex="4">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="popup_9" class="popup">
+    <div class="popup__body">
+        <div class="popup__overlay"></div>
+        <div class="popup__content">
+            <a href="#header" class="popup__btn-close">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6.99974 5.58574L11.9497 0.635742L13.3637 2.04974L8.41374 6.99974L13.3637 11.9497L11.9497 13.3637L6.99974 8.41374L2.04974 13.3637L0.635742 11.9497L5.58574 6.99974L0.635742 2.04974L2.04974 0.635742L6.99974 5.58574Z"
+                        fill="#3A3A3C" />
+                </svg>
+            </a>
+
+            <div>
+                <h3 class="popup__title">Purchase payment</h3>
+            </div>
+
+            <div class="popup__payment-type-row">
+                <button class="popup__btn-gpay"></button>
+                <button class="popup__btn-applepay"></button>
+            </div>
+
+            <div class="popup__inputs">
+                <div class="popup__input-block">
+                    <p class="fz15">Card Number</p>
+                    <input type="text" tabindex="1" placeholder="1234 1234 1234 1234">
+                </div>
+                <div class="popup__inputs-row">
+                    <div class="popup__input-block">
+                        <p class="fz15">Expiration Date</p>
+                        <input type="text" placeholder="MM/ГГ" tabindex="2">
+                    </div>
+                    <div class="popup__input-block">
+                        <p class="fz15">СVC</p>
+                        <input type="number" placeholder="СVC" tabindex="3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup__buttons-col">
+                <button class="popup__btn-blue popup__btn-full">Pay with card</button>
+                <form id="paypal-form" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                  <button type="submit" class="popup__btn-white popup__btn-full" name="submit" alt="Buy it Now"></button>
+                </form>
+                <p>We do not collect information on your cards, everything is safe</p>
+            </div>
+
+            <div class="popup__subtitle">Payment by crypto wallet</div>
+
+            <div class="popup__selects">
+                <div class="popup__select-block">
+                    <p>Select currency</p>
+                    <select name="type-payment" class="select">
+                        <option value="Bitckhain BTC network" selected>Bitckhain BTC network</option>
+                        <option value="value 2">value 2</option>
+                        <option value="value 3">value 3</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button class="popup__btn-blue popup__btn-full">Pay</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script>
 
-function Aplly(click_id) {
-    document.cookie = "sub_id=" + click_id;
-    modal.style.display = "block";
+function Apply(click_id) {
+    document.cookie = "offer_id=" + click_id;
+    const Popup = document.getElementById('popup_8')
+    popupOpen(Popup)
+
 }
 
 function createSubscription() {
-  var form = document.getElementById('current_form')
-  form_data = $('#current_form').serializeObject()
-  console.log(form_data)
-}
+  var form = document.getElementById('current_form');
+  var data_array = $('#current_form').serializeArray();
+  var post_data = {};
 
+  for (let i=0; i < data_array.length; i++) {
+    prop = data_array[i];
+    post_data[prop["name"]] = prop["value"];
+  }
 
-var modal = document.getElementById("myModal");
+  offer_id = getCookie('offer_id');
+  post_data['offer_id'] = offer_id;
 
-var btn = document.getElementsByClassName("myBtn");
+  console.log(post_data);
 
+  if (offer_id.length) {
+    $.post("http://localhost:8222/en/site/api/v1/subscriptions/create/", post_data)
+     .done(function (data) {
+        console.log(data)
 
-var span = document.getElementsByClassName("close")[0];
+        subscription_data = {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            sub_id: data["sub_id"]
+        };
 
-btn.onclick = function() {
-    modal.style.display = "block";
-}
+      $.post("http://localhost:8222/en/site/api/v1/payments/paypal/create/", subscription_data)
+       .done(function (data) {
+            console.log(data)
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+            const paypal_button = document.getElementById("paypal-form")
+            paypal_button.innerHTML = data['form'] + paypal_button.innerHTML
+        });
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+        // closed previus modal window
+        const activePopup = document.getElementById('popup_8')
+        popupClose(activePopup)
+
+        //show payment window
+        const currentPopup = document.getElementById('popup_9')
+        popupOpen(currentPopup)
+    })
+    .fail(function (data) {
+      console.log(data)
+    });
   }
 }
+
+function getCookie(cookieName) {
+  let cookie = {};
+  document.cookie.split(';').forEach(function(el) {
+    let [key,value] = el.split('=');
+    cookie[key.trim()] = value;
+  })
+  return cookie[cookieName];
+}
+
+
+function reset_pass() {
+
+  post_data = {
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      email: "zvichayniy.vick@gmail.com",
+      username: "admin1",
+      password: "123"
+  };
+  $.post("http://localhost:8222/en/site/accounts/login/", post_data)
+  .done(function (data) {
+
+    console.log(data)
+
+  });
+}
+reset_pass()
+console.log('s')
  </script>
+
 
 {% endblock%}
