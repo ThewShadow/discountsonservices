@@ -32,8 +32,6 @@
                                 {{ rate }}
                             </a>
                         </button>
-
-
                     {% endfor %}
                 </div>
             {% endif %}
@@ -48,7 +46,7 @@
                         <li>On-demand playback</li>
                     </ul>
                     <div class="tariff__price">$<span>{{ item.price }}</span></div>
-                    <button   onclick="Apply(this.id)" class="tariff__btn-get" id="{{ item.id }}" >
+                    <button  class="tariff__btn-get get-started-button" id="{{ item.id }}" >
                         Get started
                     </button>
                 </div>
@@ -74,201 +72,7 @@
     </div>
 </section>
 
-<div id="popup_8" class="popup">
-    <div class="popup__body">
-        <div class="popup__overlay"></div>
-        <div class="popup__content">
-            <a href="#header" class="popup__btn-close">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M6.99974 5.58574L11.9497 0.635742L13.3637 2.04974L8.41374 6.99974L13.3637 11.9497L11.9497 13.3637L6.99974 8.41374L2.04974 13.3637L0.635742 11.9497L5.58574 6.99974L0.635742 2.04974L2.04974 0.635742L6.99974 5.58574Z"
-                        fill="#3A3A3C" />
-                </svg>
-            </a>
 
-            <div>
-                <h2 class="popup__title">Subscription Application</h2>
-            </div>
-
-            <div class="popup__inputs">
-                <form id="current_form" action="POST">
-                    {% csrf_token %}
-                    <div class="popup__input-block">
-                        <p>Enter your name</p>
-                        {{ sub_create_form.user_name }}
-                    </div>
-                    <div class="popup__input-block">
-                        <p>Email Address</p>
-                        {{ sub_create_form.email }}
-                    </div>
-                    <div class="popup__input-block">
-                        <p>Phone</p>
-                        {{ sub_create_form.phone_number }}
-                    </div>
-                </form>
-            </div>
-
-            <div>
-                <button onclick="createSubscription()" class="popup__btn-blue popup__btn-full" tabindex="4">Apply</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div id="popup_9" class="popup">
-    <div class="popup__body">
-        <div class="popup__overlay"></div>
-        <div class="popup__content">
-            <a href="#header" class="popup__btn-close">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M6.99974 5.58574L11.9497 0.635742L13.3637 2.04974L8.41374 6.99974L13.3637 11.9497L11.9497 13.3637L6.99974 8.41374L2.04974 13.3637L0.635742 11.9497L5.58574 6.99974L0.635742 2.04974L2.04974 0.635742L6.99974 5.58574Z"
-                        fill="#3A3A3C" />
-                </svg>
-            </a>
-
-            <div>
-                <h3 class="popup__title">Purchase payment</h3>
-            </div>
-
-            <div class="popup__payment-type-row">
-                <button class="popup__btn-gpay"></button>
-                <button class="popup__btn-applepay"></button>
-            </div>
-
-            <div class="popup__inputs">
-                <div class="popup__input-block">
-                    <p class="fz15">Card Number</p>
-                    <input type="text" tabindex="1" placeholder="1234 1234 1234 1234">
-                </div>
-                <div class="popup__inputs-row">
-                    <div class="popup__input-block">
-                        <p class="fz15">Expiration Date</p>
-                        <input type="text" placeholder="MM/ГГ" tabindex="2">
-                    </div>
-                    <div class="popup__input-block">
-                        <p class="fz15">СVC</p>
-                        <input type="number" placeholder="СVC" tabindex="3">
-                    </div>
-                </div>
-            </div>
-
-            <div class="popup__buttons-col">
-                <button class="popup__btn-blue popup__btn-full">Pay with card</button>
-                <form id="paypal-form" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-                  <button type="submit" class="popup__btn-white popup__btn-full" name="submit" alt="Buy it Now"></button>
-                </form>
-                <p>We do not collect information on your cards, everything is safe</p>
-            </div>
-
-            <div class="popup__subtitle">Payment by crypto wallet</div>
-
-            <div class="popup__selects">
-                <div class="popup__select-block">
-                    <p>Select currency</p>
-                    <select name="type-payment" class="select">
-                        <option value="Bitckhain BTC network" selected>Bitckhain BTC network</option>
-                        <option value="value 2">value 2</option>
-                        <option value="value 3">value 3</option>
-                    </select>
-                </div>
-            </div>
-
-            <div>
-                <button class="popup__btn-blue popup__btn-full">Pay</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-
-function Apply(click_id) {
-    document.cookie = "offer_id=" + click_id;
-    const Popup = document.getElementById('popup_8')
-    popupOpen(Popup)
-
-}
-
-function createSubscription() {
-  var form = document.getElementById('current_form');
-  var data_array = $('#current_form').serializeArray();
-  var post_data = {};
-
-  for (let i=0; i < data_array.length; i++) {
-    prop = data_array[i];
-    post_data[prop["name"]] = prop["value"];
-  }
-
-  offer_id = getCookie('offer_id');
-  post_data['offer_id'] = offer_id;
-
-  console.log(post_data);
-
-  if (offer_id.length) {
-    $.post("http://localhost:8222/en/site/api/v1/subscriptions/create/", post_data)
-     .done(function (data) {
-        console.log(data)
-
-        subscription_data = {
-            csrfmiddlewaretoken: '{{ csrf_token }}',
-            sub_id: data["sub_id"]
-        };
-
-      $.post("http://localhost:8222/en/site/api/v1/payments/paypal/create/", subscription_data)
-       .done(function (data) {
-            console.log(data)
-
-            const paypal_button = document.getElementById("paypal-form")
-            paypal_button.innerHTML = data['form'] + paypal_button.innerHTML
-        });
-
-        // closed previus modal window
-        const activePopup = document.getElementById('popup_8')
-        popupClose(activePopup)
-
-        //show payment window
-        const currentPopup = document.getElementById('popup_9')
-        popupOpen(currentPopup)
-    })
-    .fail(function (data) {
-      console.log(data)
-    });
-  }
-}
-
-function getCookie(cookieName) {
-  let cookie = {};
-  document.cookie.split(';').forEach(function(el) {
-    let [key,value] = el.split('=');
-    cookie[key.trim()] = value;
-  })
-  return cookie[cookieName];
-}
-
-
-function reset_pass() {
-
-  post_data = {
-      csrfmiddlewaretoken: '{{ csrf_token }}',
-      email: "zvichayniy.vick@gmail.com",
-      username: "admin1",
-      password: "123"
-  };
-  $.post("http://localhost:8222/en/site/accounts/login/", post_data)
-  .done(function (data) {
-
-    console.log(data)
-
-  });
-}
-reset_pass()
-console.log('s')
- </script>
 
 
 {% endblock%}

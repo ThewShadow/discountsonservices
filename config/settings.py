@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-s=%ahjk93t0he#!6by2pv8moi3)9ib5l59oxj@dhqrwgeq-!cm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '729d-46-118-172-5.eu.ngrok.io']
+ALLOWED_HOSTS = ['localhost', '8548-46-118-172-5.eu.ngrok.io']
 
-CSRF_TRUSTED_ORIGINS = ['https://729d-46-118-172-5.eu.ngrok.io','http://localhost']
+CSRF_TRUSTED_ORIGINS = ['https://8548-46-118-172-5.eu.ngrok.io','http://localhost']
 
 # Application definition
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'social_django',
+
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -50,6 +51,8 @@ INSTALLED_APPS = [
 
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -59,8 +62,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 
+]
+RAISE_EXCEPTIONS= False
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -158,10 +163,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/site/'
 LOGOUT_REDIRECT_URL = '/site/'
+LOGIN_ERROR_URL = 'site/'
 ACCOUNT_ACTIVATION_DAYS = 3
 AUTH_USER_EMAIL_UNIQUE = True
 
 AUTH_USER_MODEL = 'main.CustomUser'
+
 
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
@@ -169,13 +176,13 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.google.GoogleOAuth',
     #'django.contrib.auth.backends.ModelBackend',
-    'main.views.EmailBackend',
+    'main.backends.EmailBackend',
 )
 
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '958470774346-f7cqddv03cek23lagl8glkeu3545h1u4.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '440773133829-pj74k17v0lojfo6j02nk3bsd72852rbm.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'N2ZhTPxZSbwwIwxM_1dJMI7S'
 
 
 EMAIL_HOST = 'smtp.gmail.com'

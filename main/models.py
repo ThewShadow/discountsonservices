@@ -15,6 +15,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=250)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    verified = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -22,11 +23,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-
-
-
-
-
 
 
 class Rate(models.Model):
@@ -62,11 +58,15 @@ class Offer(models.Model):
         return f'{self.product.name} - {self.name} - {self.rate}: {self.price} {self.currency.code}'
 
 
+
 class Product(models.Model):
     name = models.CharField(max_length=200, default='')
     slug = models.SlugField(default='')
     multi_plane = models.BooleanField(default=False)
     description = models.TextField(null=True)
+    background_color = models.CharField(max_length=12)
+    avatar = models.ImageField(upload_to='media/products/', null=True)
+
 
     def __str__(self):
         return self.name

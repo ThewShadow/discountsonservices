@@ -17,11 +17,17 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from django.conf.urls.i18n import i18n_patterns
+
+import config.settings as settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-] + i18n_patterns(
-    path('i18n/', include('django.conf.urls.i18n')),
-    path('site/', include('main.urls')),
-)
+    path('ajax/', include('main.ajax.urls')),
+    path('social/', include('social_django.urls', namespace='social')),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
+  +i18n_patterns(
+        path('i18n/', include('django.conf.urls.i18n')),
+        path('site/', include('main.urls')),
+    )

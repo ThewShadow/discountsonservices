@@ -1,103 +1,33 @@
 from django.shortcuts import redirect, get_object_or_404, render, HttpResponse
 from django.urls import reverse_lazy
 from django.http import JsonResponse
-from httplib2 import Http
 from django.template.loader import render_to_string
-from .models import Offer, Subscription, Product, FAQ
 from django.views.generic import ListView, FormView, CreateView, TemplateView, View
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
-from .forms import RegistrationForm, SupportCreateTaskForm, ChangeUserInfoForm, ChangeSubscibeStatusForm, SubscribeCreateForm, VerifyEmailForm
 from datetime import datetime
 from . import service
 from social_django.models import UserSocialAuth
 from django.core.exceptions import PermissionDenied
 from paypal.standard.forms import PayPalPaymentsForm
-from config import settings
 from django.utils.translation import get_language
-from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm
-from django.contrib.auth import get_user_model
-from django.contrib.auth.backends import ModelBackend
+from config import settings
 from .models import CustomUser
-
-
-
-
-class EmailBackend(ModelBackend):
-    def authenticate(self, request, username=None, password=None, **kwargs):
-        UserModel = get_user_model()
-        try:
-            user = UserModel.objects.get(email=username)
-        except UserModel.DoesNotExist:
-            return None
-        else:
-            if user.check_password(password):
-                return user
-        return None
-
-class LogoutView(View):
-
-    def post(self, *args, **kwargs):
-        logout(self.request)
-        return redirect(reverse_lazy('index'))
-
-    def get(self, *args, **kwargs):
-        logout(self.request)
-        return redirect(reverse_lazy('index'))
-
-
-class LoginView(View):
-    form_class = LoginForm
-
-    def post(self, *args, **kwargs):
-        form = LoginForm(self.request.POST)
-        if form.is_valid():
-            user = authenticate(email=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            if user is not None:
-                login(self.request, user)
-                return JsonResponse({'success': True}, status=200)
-
-            return JsonResponse({'success': False, 'error_messages': ['Perrmision Denied']}, status=401)
-
-        return JsonResponse({'success': False, 'error_messages': form.errors}, status=401)
-
-    def get(self):
-        return HttpResponse('<h1>Method Not Allowed</h1>', status=406)
-
-
-
-class RegistrationView(View):
-
-    def post(self, *args, **kwargs):
-        form = RegistrationForm(self.request.POST)
-        if form.is_valid():
-            try:
-                CustomUser.objects.get(email=form.cleaned_data['email'])
-                return JsonResponse({'success': False, 'error_messges': 'User is exist'}, status=406)
-            except:
-                user = User(username=form.cleaned_data['username'],
-                     password=form.cleaned_data['password'],
-                     email=form.cleaned_data['email'])
-                user.save()
-
-                verify_code = 448866
-                self.request.session['verify_email'] = form.cleaned_data['email']
-                self.request.session['verify_code'] = verify_code
-
-                from django.core.mail import EmailMultiAlternatives
-
-                subject, from_email, to = 'Email verify', 'noreplyexample@mail.com', form.cleaned_data['email']
-                html_content = f'<h1>You verify code</h1><p>{verify_code}</p>'
-
-                msg = EmailMultiAlternatives(subject, html_content, from_email, to)
-                msg.content_subtype = "html"
-                msg.send()
-
-                return JsonResponse({'success': True, 'verify_email': form.cleaned_data['email']})
-
-        return JsonResponse({'success': False, 'error_messages': form.errors})
-
+from .models import Offer
+from .models import Subscription
+from .models import Product
+from .models import FAQ
+from .forms import RegistrationForm
+from .forms import LoginForm
+from .forms import SupportCreateTaskForm
+from .forms import ChangeUserInfoForm
+from .forms import ChangeSubscibeStatusForm
+from .forms import SubscribeCreateForm
+from .forms import VerifyEmailForm
+from .forms import CustomUserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.core.mail import EmailMultiAlternatives
+from django.utils.translation import gettext as _
 
 class CommonMixin:
 
@@ -116,15 +46,98 @@ class CommonMixin:
         return dict(list(context.items()) + list(common.items()))
 
 
-class PayPalFormView(View):
+class IndexView(CommonMixin, ListView):
+    template_name = 'main/index.html'
+    model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['products'] = Product.objects.all()
+        return context
+
+class LogoutView(View):
+
+    def post(self, *args, **kwargs):
+        logout(self.request)
+        return redirect(reverse_lazy('index'))
 
     def get(self, *args, **kwargs):
-        return HttpResponse('Method Not Allowed', status=406)
+        logout(self.request)
+        return redirect(reverse_lazy('index'))
+
+
+class LoginView(View):
+
+    MESSAGES = {
+        'error_verify': _('Email not verified'),
+        'failed_auth': _('Wrong login or password')
+    }
+
+    def post(self, *args, **kwargs):
+
+        form = LoginForm(self.request.POST)
+
+        if not form.is_valid():
+            return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
+
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password']
+
+        user = authenticate(username=email, password=password)
+
+        if user is None:
+            return JsonResponse({'success': False, 'message': LoginView.MESSAGES['failed_auth']}, status=401)
+
+        if not user.verified and not user.is_superuser:
+            return JsonResponse({'success': False, 'message': LoginView.MESSAGES['error_verify']}, status=401)
+
+        login(self.request, user)
+
+        return JsonResponse({'success': True}, status=200)
+
+
+
+class RegistrationView(View):
+    class_form = CustomUserCreationForm
+
+    def post(self, request, **kwargs):
+
+        form = self.class_form(self.request.POST)
+
+        if not form.is_valid():
+            return JsonResponse(
+                {
+                    'success': False,
+                    'error_messages': dict(form.errors)
+                },
+                status=400
+            )
+
+        user = form.save()
+
+        verify_code = 448866
+        request.session['verify_email'] = user.email
+        request.session['verify_code'] = verify_code
+
+        subject, from_email, to = 'Email verify', 'noreplyexample@mail.com', form.cleaned_data['email']
+        html_content = f'<h1>You verify code</h1><p>{verify_code}</p>'
+
+        msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+        msg.content_subtype = "html"
+        msg.send()
+
+        return JsonResponse({'success': True}, status=201)
+
+
+
+
+class PayPalFormView(View):
+
 
     def post(self, *args, **kwargs):
         context = {'form': PayPalPaymentsForm(initial=self.get_payment_form())}
         template = render_to_string('main/paypal_form.html', context=context)
-        return JsonResponse({"form": template})
+        return JsonResponse({"paypal_porm": template})
 
     def get_payment_form(self):
         test_url = 'https://729d-46-118-172-5.eu.ngrok.io'
@@ -136,7 +149,7 @@ class PayPalFormView(View):
         return {
             "business": settings.PAYPAL_RECEIVER_EMAIL,
             "amount": sub_obj.offer.price,
-            "currency_code": sub_obj.offer.currency.code,
+            "currency_code": str(sub_obj.offer.currency.code).upper(),
             "item_name": 'test',
             "invoice": sub_id,
             # "notify_url": self.request.build_absolute_uri(reverse_lazy('paypal-ipn')),
@@ -150,14 +163,32 @@ class PayPalFormView(View):
         }
 
 
-class IndexView(CommonMixin, ListView):
-    template_name = 'main/index.html'
-    model = Product
+class VerifyEmailView(View):
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['products'] = Product.objects.all()
-        return context
+    def post(self, *args, **kwargs):
+        form = VerifyEmailForm(self.request.POST)
+        if not form.is_valid():
+            return JsonResponse({"success": False, 'error_message': 'Incorrect input data'}, status=406)
+
+        verify_code = self.request.session.get('verify_code', None)
+        verify_email = self.request.session.get('verify_email', None)
+
+        if verify_code is None:
+            return JsonResponse({"success": False, 'error_message': 'Timeout session'}, status=406)
+        else:
+            if verify_code == form.cleaned_data['verify_code']:
+                try:
+                    user = CustomUser.objects.get(email=verify_email)
+                except:
+                    return JsonResponse({"success": False, 'error_message': 'User is not found'}, status=406)
+                else:
+                    user.verified = True
+                    user.save()
+                    return JsonResponse({"success": True})
+            else:
+                return JsonResponse({"success": False, 'error_message': 'Incorrect code'}, status=406)
+
+
 
 class OffersView(CommonMixin, ListView):
     template_name = 'main/offers.html'
@@ -169,8 +200,11 @@ class OffersView(CommonMixin, ListView):
             product_slug = self.kwargs.get('slug', None)
             offers = Offer.objects.filter(product__slug=product_slug)
 
-            min_offer = offers.order_by('price').first()
-            rate_slug = min_offer.rate.slug
+
+            if offers.exists():
+                min_offer = offers.order_by('price')
+                min_offer = min_offer.first()
+                rate_slug = min_offer.rate.slug
 
             if rate_slug:
                 kwargs['slug'] = product_slug
@@ -210,7 +244,6 @@ class OffersView(CommonMixin, ListView):
         else:
             context['offers'] = Offer.objects.filter(product__slug=product_id)
 
-
         return context
 
 
@@ -221,9 +254,6 @@ class SubscriptionCreateView(View):
     #template_name = 'main/subscribe.html'
     # login_url = 'not_authorizate'
     # redirect_field_name = 'redirect_to'
-
-    def get(self, *args, **kwargs):
-        return HttpResponse('Method Not Allowed', status=406)
 
     def post(self, *args, **kwargs):
         form = SubscribeCreateForm(self.request.POST)
@@ -239,11 +269,11 @@ class SubscriptionCreateView(View):
             except Exception as e:
                 print(e)
 
-            resp = {'sub_id': new_subscription.id}
+            resp = {'success': True, 'sub_id': new_subscription.id}
 
             return JsonResponse(resp, status=200)
         else:
-            return JsonResponse({'error': True}, status=400)
+            return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
 
 
 
@@ -258,7 +288,7 @@ class ProfileView(CommonMixin, LoginRequiredMixin, FormView):
         context = super().get_context_data()
         user_inst = self.request.user
         initial_data = {'username': user_inst.username, 'email': user_inst.email}
-        context['object'] = get_object_or_404(User, id=self.request.user.id)
+        context['object'] = get_object_or_404(CustomUser, id=self.request.user.id)
         context['form'] = ChangeUserInfoForm(initial=initial_data)
         context['questions_list'] = FAQ.objects.all()
         return context
@@ -273,8 +303,10 @@ class ProfileView(CommonMixin, LoginRequiredMixin, FormView):
     def get_success_url(self):
         return reverse_lazy('profile')
 
+
 class NotAuthorizate(CommonMixin, TemplateView):
     template_name = 'main/not_authorizate.html'
+
 
 class SupportView(CommonMixin, LoginRequiredMixin, CreateView):
     template_name = 'main/support.html'
@@ -295,8 +327,10 @@ class SupportView(CommonMixin, LoginRequiredMixin, CreateView):
         service.send_support_task(task_instance.id)
         return redirect(reverse_lazy('index'))
 
+
 class AboutUsView(CommonMixin, TemplateView):
     template_name = 'main/about_us.html'
+
 
 class UserSubscriptionsView(CommonMixin, LoginRequiredMixin, ListView):
     login_url = 'not_authorizate'
@@ -310,6 +344,7 @@ class UserSubscriptionsView(CommonMixin, LoginRequiredMixin, ListView):
         context['user_subscriptions'] = Subscription.objects.filter(
             user__id=self.request.user.id)
         return context
+
 
 class ManagerPanelView(CommonMixin, LoginRequiredMixin, TemplateView):
     template_name = 'main/manager_panel.html'
@@ -337,6 +372,7 @@ class ManagerPanelView(CommonMixin, LoginRequiredMixin, TemplateView):
         context['all_statuses'] = Subscription.STATUSES
         return context
 
+
 class FAQView(CommonMixin, ListView):
     model = FAQ
     template_name = 'main/faq.html'
@@ -345,6 +381,7 @@ class FAQView(CommonMixin, ListView):
 
 class PayPalPaymentCancelView(CommonMixin, TemplateView):
     template_name = 'payments/paypal_cancel.html'
+
 
 class PayPalPaymentReturnView(CommonMixin, TemplateView):
     template_name = 'payments/paypal_return.html'
@@ -356,9 +393,8 @@ class PayPalPaymentReturnView(CommonMixin, TemplateView):
 
 
 
-
 def user_email_uniq(user, email):
-    return User.objects.exclude(id=user.id).filter(email=email).count() == 0 \
+    return CustomUser.objects.exclude(id=user.id).filter(email=email).count() == 0 \
            and UserSocialAuth.objects.exclude(user=user).filter(uid=email).count() == 0
 
 

@@ -1,14 +1,30 @@
 from .models import Subscription, SupportTask
-from django.forms import ModelForm, DateTimeInput, TextInput, NumberInput, Form
+from django.forms import ModelForm, DateTimeInput, TextInput, NumberInput, Form, EmailInput, PasswordInput
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext as _
 
+class CustomUserCreationForm(ModelForm):
 
-class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser
-        fields = ('email','password')
+        fields = ('email', 'username', 'password')
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if CustomUser.objects.filter(email=email).exists():
+            raise ValidationError(_("Email already exists"))
+        return email
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
+
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
@@ -70,8 +86,20 @@ class SubscribeCreateForm(Form):
 
 
 class LoginForm(Form):
-    username = forms.CharField(max_length=250)
+    email = forms.CharField(max_length=250)
     password = forms.CharField(max_length=250)
+
+    def clean_email(self):
+
+        email = self.cleaned_data['email']
+        users = CustomUser.objects.filter(email=email)
+
+        if not users.exists():
+            raise ValidationError(_("User with this email does not exist"))
+
+        return email
+
+
 
 class RegistrationForm(Form):
     username = forms.CharField(max_length=250)
@@ -79,6 +107,5 @@ class RegistrationForm(Form):
     password = forms.CharField(max_length=250)
 
 
-class VerifyEmailForm():
+class VerifyEmailForm(Form):
     verify_code = forms.IntegerField()
-    verify_email = forms.CharField(max_length=250)

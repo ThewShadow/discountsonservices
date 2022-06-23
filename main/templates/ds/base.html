@@ -164,7 +164,7 @@
 
 				<div class="header__account">
 					{% if not request.user.is_authenticated %}
-					<a  onclick="showLoginModal()" class="header__btn-login btn btn-blue">Log in</a>
+					<a href="#" class="header__btn-login btn btn-blue login-link"">Log in</a>
 					{% else %}
 					<div class="header__btn-profile submenu-block">
 						<div class="submenu-block__head">
@@ -304,26 +304,31 @@
 					<h2 class="popup__title">Log in</h2>
 					<p class="popup__note">
 						<span>New user?</span>
-						<a onclick="showRegisterWindow()">Create an account</a>
+						<a href="#" class="register-link">Create an account</a>
 					</p>
 				</div>
 
 				<div class="popup__inputs">
 					<form id="login-form" method="post">
-					<div class="popup__input-block">
-						<p>Email Address</p>
-						<input id="username_input" type="email" placeholder="Enter your e-mail" tabindex="1">
-					</div>
-					<div class="popup__input-block popup__input-password">
-						<button class="toggle-show hide"></button>
-						<p>Password</p>
-						<input id="password_input" type="password" placeholder="********" tabindex="2">
-					</div>
+						{% csrf_token %}
+						<div class="popup__input-block">
+							<p>Email Address</p>
+							{{ login_form.email }}
+							<div class="email_errors"></div>
+						</div>
+						<div class="popup__input-block popup__input-password">
+							<button class="toggle-show hide"></button>
+							<p>Password</p>
+							{{ login_form.password }}
+							<div class="password_errors"></div>
+						</div>
+						<span class="message"></span>
 					</form>
+
 				</div>
 				<div class="popup__buttons-row">
 					<a href="##" class="popup__forgot-pasw">Forfot password?</a>
-					<a onclick="login()" class="popup__btn-blue popup__btn-login" tabindex="3">Log in</a>
+					<a href="#" class="popup__btn-blue popup__btn-login login-button" tabindex="3">Log in</a>
 				</div>
 				<div class="sign-with">
 					<div class="sign-with__title"> <span>Or sign in with</span></div>
@@ -360,7 +365,7 @@
 					<h2 class="popup__title">Create an account</h2>
 					<p class="popup__note">
 						<span>Already have an account?</span>
-						<a onclick="showLoginModal()" href="##">Sign In</a>
+						<a class="login-link" href="#">Sign In</a>
 					</p>
 				</div>
 
@@ -371,16 +376,20 @@
 						<div class="popup__input-block">
 							<p>User name</p>
 							{{ register_form.username }}
+							<div class="username_errors"></div>
 						</div>
 						<div class="popup__input-block">
 							<p>Email Address</p>
 							{{ register_form.email }}
+							<div class="email_errors"></div>
 						</div>
 						<div class="popup__input-block popup__input-password">
 							<button class="toggle-show hide"></button>
 							<p>Password</p>
 							{{ register_form.password }}
+							<div class="password_errors"></div>
 						</div>
+						<span class="message"></span>
 					</form>
 				</div>
 
@@ -395,7 +404,7 @@
 					</span>
 				</div>
 				<div>
-					<button onclick="register()" class="popup__btn-blue popup__btn-full" tabindex="5">Sing up</button>
+					<button class="popup__btn-blue popup__btn-full register-button" tabindex="5">Sing up</button>
 				</div>
 
 				<div class="sign-with">
@@ -438,18 +447,18 @@
 
 							<div class="popup__inputs popup__flex-block">
 								<div class="popup__input-block popup__input-code">
-									<form id="verify-form">
-										{{ csrf_token }}
+									<form id="verify-email-form">
+										{% csrf_token %}
 										<span>Resent code</span>
 										<p>Email verification code</p>
 										{{ verify_email_form.verify_code }}
-										{{ verify_email_form.user_id }}
 									</form>
+									<span class="message"></span>
 								</div>
 							</div>
 
 							<div>
-								<button class="popup__btn-blue popup__btn-full" tabindex="2">Sing up</button>
+								<button onclick="verify()" class="popup__btn-blue popup__btn-full" tabindex="2">Sing up</button>
 							</div>
 
 							<div>
@@ -461,98 +470,369 @@
 					</div>
 				</div>
 
+				<div id="popup_4" class="popup">
+					<div class="popup__body">
+						<div class="popup__overlay"></div>
+						<div class="popup__content">
+							<a href="#header" class="popup__btn-close">
+								<svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M6.99974 5.58574L11.9497 0.635742L13.3637 2.04974L8.41374 6.99974L13.3637 11.9497L11.9497 13.3637L6.99974 8.41374L2.04974 13.3637L0.635742 11.9497L5.58574 6.99974L0.635742 2.04974L2.04974 0.635742L6.99974 5.58574Z"
+										fill="#3A3A3C" />
+								</svg>
+							</a>
+
+							<div class="popup__flex-block">
+								<h2 class="popup__title">Successful registration</h2>
+								<p class="popup__note">
+									<span>By optimizing our work and using internal tools, we were able to lower the
+										prices
+										while keeping the highest possible.</span>
+								</p>
+							</div>
+
+
+							<div>
+								<button class="popup__btn-blue popup__btn-full" tabindex="2">Continue work</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div id="popup_8" class="popup">
+				    <div class="popup__body">
+				        <div class="popup__overlay"></div>
+				        <div class="popup__content">
+				            <a href="#header" class="popup__btn-close">
+				                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+				                    xmlns="http://www.w3.org/2000/svg">
+				                    <path
+				                        d="M6.99974 5.58574L11.9497 0.635742L13.3637 2.04974L8.41374 6.99974L13.3637 11.9497L11.9497 13.3637L6.99974 8.41374L2.04974 13.3637L0.635742 11.9497L5.58574 6.99974L0.635742 2.04974L2.04974 0.635742L6.99974 5.58574Z"
+				                        fill="#3A3A3C" />
+				                </svg>
+				            </a>
+
+				            <div>
+				                <h2 class="popup__title">Subscription Application</h2>
+				            </div>
+
+				            <div class="popup__inputs">
+				                <form id="subscription_app_form" action="POST">
+				                    {% csrf_token %}
+				                    <div class="popup__input-block">
+				                        <p>Enter your name</p>
+				                        {{ sub_create_form.user_name }}
+																<div class="user_name_errors"></div>
+				                    </div>
+				                    <div class="popup__input-block">
+				                        <p>Email Address</p>
+				                        {{ sub_create_form.email }}
+																<div class="email_errors"></div>
+				                    </div>
+				                    <div class="popup__input-block">
+				                        <p>Phone</p>
+				                        {{ sub_create_form.phone_number }}
+																<div class="phone_number_errors"></div>
+														</div>
+														<p class="message"></p>
+				                </form>
+				            </div>
+
+										<form id ="csrf_ajax_token">
+												{% csrf_token %}
+										</form>
+				            <div>
+				                <button class="popup__btn-blue popup__btn-full apply-button" tabindex="4">Apply</button>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+
+
+				<div id="popup_9" class="popup">
+				    <div class="popup__body">
+				        <div class="popup__overlay"></div>
+				        <div class="popup__content">
+				            <a href="#header" class="popup__btn-close">
+				                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+				                    xmlns="http://www.w3.org/2000/svg">
+				                    <path
+				                        d="M6.99974 5.58574L11.9497 0.635742L13.3637 2.04974L8.41374 6.99974L13.3637 11.9497L11.9497 13.3637L6.99974 8.41374L2.04974 13.3637L0.635742 11.9497L5.58574 6.99974L0.635742 2.04974L2.04974 0.635742L6.99974 5.58574Z"
+				                        fill="#3A3A3C" />
+				                </svg>
+				            </a>
+
+				            <div>
+				                <h3 class="popup__title">Purchase payment</h3>
+				            </div>
+
+				            <div class="popup__payment-type-row">
+				                <button class="popup__btn-gpay"></button>
+				                <button class="popup__btn-applepay"></button>
+				            </div>
+
+				            <div class="popup__inputs">
+				                <div class="popup__input-block">
+				                    <p class="fz15">Card Number</p>
+				                    <input type="text" tabindex="1" placeholder="1234 1234 1234 1234">
+				                </div>
+				                <div class="popup__inputs-row">
+				                    <div class="popup__input-block">
+				                        <p class="fz15">Expiration Date</p>
+				                        <input type="text" placeholder="MM/ГГ" tabindex="2">
+				                    </div>
+				                    <div class="popup__input-block">
+				                        <p class="fz15">СVC</p>
+				                        <input type="number" placeholder="СVC" tabindex="3">
+				                    </div>
+				                </div>
+				            </div>
+
+				            <div class="popup__buttons-col">
+				                <button class="popup__btn-blue popup__btn-full">Pay with card</button>
+				                <form id="paypal-form" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+				                  <button type="submit" class="popup__btn-white popup__btn-full" name="submit" alt="Buy it Now"></button>
+				                </form>
+				                <p>We do not collect information on your cards, everything is safe</p>
+				            </div>
+
+				            <div class="popup__subtitle">Payment by crypto wallet</div>
+
+				            <div class="popup__selects">
+				                <div class="popup__select-block">
+				                    <p>Select currency</p>
+				                    <select name="type-payment" class="select">
+				                        <option value="Bitckhain BTC network" selected>Bitckhain BTC network</option>
+				                        <option value="value 2">value 2</option>
+				                        <option value="value 3">value 3</option>
+				                    </select>
+				                </div>
+				            </div>
+
+				            <div>
+				                <button class="popup__btn-blue popup__btn-full payment-button">Pay</button>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+
+
 	<script src="{% static 'js/script.js' %}"></script>
 	<script src="{% static 'js/faq.js' %}"></script>
 	<script src="{% static 'js/popup.js' %}"></script>
 
 	<script>
 
-		function showLoginModal() {
-			const windowRegistration =  document.getElementById("popup_2")
-			popupClose(windowRegistration)
+		const loginPopUp = document.getElementById('popup_1');
+		const RegistrationPopUp =  document.getElementById("popup_2");
+		const VerifyPopUp =  document.getElementById("popup_3");
+		const VerifySuccessPopUp =  document.getElementById("popup_4");
+		const CreateSubsctiptionPopUp = document.getElementById('popup_8');
+		const PaymentPopUp = document.getElementById('popup_9');
 
-			const loginPopUp = document.getElementById('popup_1')
+		$('.login-link').click(function (event){
+			event.preventDefault();
+			popupClose(RegistrationPopUp);
 			popupOpen(loginPopUp)
+		});
 
+		$('.register-link').click(function (event){
+			event.preventDefault();
+			popupClose(loginPopUp)
+			popupOpen(RegistrationPopUp);
+		});
 
-		}
+		$('.login-button').click(function (event){
+			event.preventDefault();
+			login();
+		});
+
+		$('.register-button').click(function (event){
+			event.preventDefault();
+			register();
+		});
+
+		$(".get-started-button").click(function (event){
+			event.preventDefault();
+			document.cookie = "offer_id=" + this.id;
+			popupOpen(CreateSubsctiptionPopUp);
+		});
+
+		$(".apply-button").click(function (event) {
+			 event.preventDefault()
+			 createSubscription()
+
+		});
 
 		function login() {
-			var username = document.getElementById('username_input').value;
-			var password = document.getElementById('password_input').value;
+			var form_id = "login-form";
+			var register_form = $("#"+form_id).serializeArray();
+			var json = getJson(register_form);
 
-			post_data = {};
-			post_data["csrfmiddlewaretoken"]="{{ csrf_token }}"
-			post_data["username"] = username
-			post_data["password"] = password
+			$("#"+form_id+" .password_errors").empty();
+			$("#"+form_id+" .email_errors").empty();
+			$("#"+form_id+" .message").empty();
 
-			console.log(post_data)
-			$.post("http://localhost:8222/en/site/accounts/login/", post_data)
-			  .done(function (data) {
-				console.log(data)
-				const loginPopUp = document.getElementById('popup_1')
-				popupClose(loginPopUp)
-				window.location.reload()
-			  }).fail(function (data) {
-
-
-
-			    console.log(data['responseJSON'])
+			$.post("accounts/login/", json)
+			 .done(function (resp) {
+				 if (resp['success']) {
+					popupClose(loginPopUp);
+					window.location.reload();
+				}
+				}).fail(function (resp) {
+					showMessages(resp, form_id);
 			  });
 		}
 
-		function showRegisterWindow() {
-
-			const loginPopUp = document.getElementById('popup_1')
-			popupClose(loginPopUp)
-
-			const windowRegistration =  document.getElementById("popup_2")
-			popupOpen(windowRegistration)
-
-		}
-
-
 		function register() {
-			var register_form = $("#registration-form").serializeArray()
-			console.log(register_form)
-			var json = getJson(register_form)
+			var form_id = "registration-form"
+			var register_form = $("#"+form_id).serializeArray();
+			var json = getJson(register_form);
+
+			$("#"+form_id+" .password_errors").empty();
+			$("#"+form_id+" .email_errors").empty();
+			$("#"+form_id+" .username_errors").empty();
+			$("#"+form_id+" .message").empty();
+
 			$.post("accounts/registration/", json)
-			.done(function (resp) {
-				console.log('done');
-				console.log(resp);
-
-				const windowRegistration =  document.getElementById("popup_2")
-				popupClose(windowRegistration)
-
-				const windowVerify =  document.getElementById("popup_3")
-
-				$("#verify_form input[name='verify_email']").val(resp["verify_email"])
-
-				popupOpen(windowVerify)
-
+			 .done(function (resp) {
+				if (resp['success']) {
+					popupClose(RegistrationPopUp);
+					popupOpen(VerifyPopUp);
+				}
 			}).fail(function (resp) {
-				console.log('fail');
-				console.log(resp);
-				console.log(resp["responseJSON"]);
-
-
+				showMessages(resp, form_id);
 			});
-
-
 		}
 
 
-		function getJson(data_array) {
-			var post_data = {};
+		function verify() {
 
-			for (let i=0; i < data_array.length; i++) {
-				prop = data_array[i];
-				post_data[prop["name"]] = prop["value"];
+			var form_id = "verify-email-form"
+			var register_form = $("#"+form_id).serializeArray();
+			var json = getJson(register_form);
+			$("#"+form_id+" .message").empty();
+
+			$.post("accounts/verify_email/", json)
+			 .done(function (resp) {
+					if (resp['success']) {
+						popupClose(VerifyPopUp);
+						popupOpen(VerifySuccessPopUp);
+					}
+			}).fail(function (resp) {
+					showMessages(resp)
+			});
+		}
+
+
+
+
+
+	function createSubscription() {
+
+		var form_id = "subscription_app_form";
+	  var form = $('#subscription_app_form');
+	  var data_array = form.serializeArray();
+	  var json = getJson(data_array);
+
+	  var offer_id = getCookie('offer_id');
+
+		json['offer_id'] = offer_id;
+
+
+		$("#"+form_id+" .email_errors").empty();
+		$("#"+form_id+" .user_name_errors").empty();
+		$("#"+form_id+" .phone_number_errors").empty();
+		$("#"+form_id+" .message").empty();
+
+		if (offer_id.length) {
+	    $.post(
+				"/ajax/subscriptions/create/", json
+			).done(function (reps) {
+
+
+					subscription_data = getJson($('#csrf_ajax_token').serializeArray());
+	        subscription_data["sub_id"] = reps["sub_id"];
+
+
+		      $.post(
+							"/ajax/payments/paypal/create/",
+							subscription_data
+					).done(function (resp) {
+
+							popupClose(CreateSubsctiptionPopUp);
+							popupOpen(PaymentPopUp);
+							
+							$('#paypal-form').prepend(resp['paypal_porm'])
+
+					}).fail(function (resp) {
+							showMessages(resp, form_id);
+					});
+			}).fail(function (resp) {
+				showMessages(resp, form_id);
+			});
+	}
+}
+
+	function showMessages(data, form_id) {
+		var messages= undefined
+		if (typeof data === "string") {
+				 messages = jQuery.parseJSON(data["responseJSON"]);
+		} else if (typeof data === "object") {
+				 messages = data["responseJSON"];
+		}
+
+
+
+		if (messages["error_messages"] != undefined) {
+			showErrorMessages(messages["error_messages"], form_id);
+		}
+
+		if (messages["message"] != undefined) {
+			$("#"+form_id+" .message").append(messages["message"]);
+		}
+	}
+
+	function showErrorMessages(messages, form_id) {
+
+		const keys = Object.keys(messages);
+
+		for (let i = 0; i < keys.length; i++) {
+			const key = keys[i];
+			var message_array= messages[key];
+			$("#"+key+"_errors").empty();
+
+			for (let i=0; i < message_array.length; i++) {
+				let text = message_array[i];
+				$("#"+form_id+" ."+key+"_errors").append(text);
 			}
-			return post_data;
 		}
+	}
 
-	</script>
+
+	function getCookie(cookieName) {
+	  let cookie = {};
+	  document.cookie.split(';').forEach(function(el) {
+	    let [key,value] = el.split('=');
+	    cookie[key.trim()] = value;
+	  })
+	  return cookie[cookieName];
+	}
+
+
+	function getJson(data_array) {
+		var post_data = {};
+
+		for (let i=0; i < data_array.length; i++) {
+			prop = data_array[i];
+			post_data[prop["name"]] = prop["value"];
+		}
+		return post_data;
+	}
+
+</script>
 
 </body>
 
