@@ -13,31 +13,12 @@ urlpatterns = [
 
     path('accounts/login/', views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
-    path('accounts/registration/', views.RegistrationView.as_view(), name='registration'),
+    path('accounts/register/', views.RegistrationView.as_view(), name='registration'),
     path('accounts/verify_email/', views.VerifyEmailView.as_view(), name='verify_email'),
 
-    # path('accounts/password_reset/', PasswordResetView.as_view(
-    #     template_name='main/password_reset_form.html'),
-    #     name='password_reset'),
-    #
-    # path('accounts/reset/done/', PasswordResetCompleteView.as_view(
-    #     template_name='main/password_reset_done.html'),
-    #     name='password_reset_complete'),
-    #
-    # path('accounts/reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(
-    #     template_name='main/password_reset_confirm.html'),
-    #     name='password_reset_confirm'),
-    #
-    # path('accounts/password_reset/done/', PasswordResetDoneView.as_view(
-    #     template_name='main/password_reset_complete.html'),
-    #     name='password_reset_done'),
-
-
-
-    #path('accounts/', include('django.contrib.auth.urls')),
-
-    path('accounts/register/', RegistrationView.as_view(form_class=RegistrationFormUniqueEmail),
-        name='django_registration_register'),
+    path('accounts/reset_password/start/', views.ResetPasswordView.as_view(), name='reset_pass'),
+    path('accounts/reset_password/confirm/', views.ResetPasswordConfirmView.as_view(), name='reset_pass_confirm'),
+    path('accounts/reset_password/complete/', views.ResetPasswordCompleteView.as_view(), name='reset_pass_complete'),
 
     path('accounts/', include('django_registration.backends.one_step.urls')),
 

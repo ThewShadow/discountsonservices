@@ -84,32 +84,7 @@
 					</div>
 				</div>
 			</section>
-<style>
-  table, th, td {
-  border: 1px solid;
-}
-</style>
-<div>
-   <div style="display: inline; float: left; margin: 20px;">
-      <p><a href="{% url 'profile' %}">Profile info</a></p>
-      <p><a href="{% url 'user_subscriptions' %}">My Subscriptions</a></p>
-    </div>
-  <div style="display: inline; float: left; margin: 20px;">
-     {% if user_subscriptions.count == 0 %}
-        {% trans "You don't have active subscriptions yet" %}
-     {% endif %}
-     {% for item in user_subscriptions %}
-        <div style="width: 400px; height: 100px; border: 1px solid; padding: 10px;">
-          <h3>{{ item.offer.product.name }}</h3>
-          <p>
-            <a style="color: white; background-color: blue; padding: 10px;"
-               href="{% url 'offers' slug=item.offer.product.slug rate_slug=item.offer.rate.slug %}"> Change plan</a>
-          </p>
-        </div>
-    <br>
-     {% endfor %}
 
-  </div>
-</div>
+{% include "blocks/faq.html" %}
 
 {% endblock%}

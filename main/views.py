@@ -23,11 +23,16 @@ from .forms import ChangeSubscibeStatusForm
 from .forms import SubscribeCreateForm
 from .forms import VerifyEmailForm
 from .forms import CustomUserCreationForm
+from .forms import ResetPasswordForm
+from .forms import ResetPasswordVerifyForm
+from .forms import NewPasswordForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
 from django.utils.translation import gettext as _
+from django.core.exceptions import ObjectDoesNotExist
+
 
 class CommonMixin:
 
@@ -36,6 +41,10 @@ class CommonMixin:
         kwargs['login_form'] = LoginForm()
         kwargs['register_form'] = RegistrationForm()
         kwargs['verify_email_form'] = VerifyEmailForm()
+        kwargs['questions_list'] = FAQ.objects.all()
+        kwargs['forget_pass_code_form'] = ResetPasswordVerifyForm()
+        kwargs['forget_pass_email_form'] = ResetPasswordForm()
+        kwargs['new_pass_form'] = NewPasswordForm()
 
         return kwargs
 
@@ -44,6 +53,66 @@ class CommonMixin:
         common = self.get_common_data(self.request, **kwargs)
 
         return dict(list(context.items()) + list(common.items()))
+
+class ResetPasswordConfirmView(View):
+
+    def post(self, request, **kwargs):
+        form = ResetPasswordVerifyForm(request.POST)
+        if form.is_valid():
+            verify_code = form.cleaned_data.get('verify_code')
+
+            verify_code_check = request.session.get('reset_pass_verify_code')
+            if not verify_code_check:
+                return JsonResponse({'success': False, 'message': 'Session expired'}, status=400)
+
+            if str(verify_code) == verify_code_check:
+                return JsonResponse({'success': True}, status=200)
+            else:
+                return JsonResponse({'success': False, 'message': 'invalid verification code'}, status=400)
+        else:
+            return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
+
+class ResetPasswordCompleteView(View):
+
+    def post(self, request, **kwargs):
+        form = NewPasswordForm(request.POST)
+        if form.is_valid():
+            reset_pass_email = request.session.get('reset_pass_email')
+            if not reset_pass_email:
+                return JsonResponse({'success': False, 'message': 'Session expired'}, status=400)
+
+            try:
+                user = CustomUser.objects.get(email=reset_pass_email)
+            except ObjectDoesNotExist:
+                return JsonResponse({'success': False, 'message': 'User does not exist'}, status=400)
+            else:
+                user.set_password(form.cleaned_data.get('password1'))
+                user.save()
+                return JsonResponse({'success': True}, status=200)
+        else:
+            return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
+
+class ResetPasswordView(View):
+
+    def post(self, request, **kwargs):
+        form = ResetPasswordForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            reset_code = gen_verify_code()
+
+            request.session['reset_pass_email'] = email
+            request.session['reset_pass_verify_code'] = reset_code
+
+            subject, from_email, to = 'Email verify', 'noreplyexample@mail.com', email
+            html_content = f'<h1>Youre reset password code</h1><p>{reset_code}</p>'
+
+            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+            msg.content_subtype = "html"
+            msg.send()
+
+            return JsonResponse({'success': True}, status=200)
+
+        return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
 
 
 class IndexView(CommonMixin, ListView):
@@ -115,7 +184,7 @@ class RegistrationView(View):
 
         user = form.save()
 
-        verify_code = 448866
+        verify_code = gen_verify_code()
         request.session['verify_email'] = user.email
         request.session['verify_code'] = verify_code
 
@@ -168,25 +237,25 @@ class VerifyEmailView(View):
     def post(self, *args, **kwargs):
         form = VerifyEmailForm(self.request.POST)
         if not form.is_valid():
-            return JsonResponse({"success": False, 'error_message': 'Incorrect input data'}, status=406)
+            return JsonResponse({"success": False, 'message': 'Incorrect input data'}, status=400)
 
         verify_code = self.request.session.get('verify_code', None)
         verify_email = self.request.session.get('verify_email', None)
 
         if verify_code is None:
-            return JsonResponse({"success": False, 'error_message': 'Timeout session'}, status=406)
+            return JsonResponse({"success": False, 'message': 'Session expired'}, status=400)
         else:
-            if verify_code == form.cleaned_data['verify_code']:
+            if str(verify_code) == form.cleaned_data['verify_code']:
                 try:
                     user = CustomUser.objects.get(email=verify_email)
                 except:
-                    return JsonResponse({"success": False, 'error_message': 'User is not found'}, status=406)
+                    return JsonResponse({"success": False, 'message': 'User is not found'}, status=400)
                 else:
                     user.verified = True
                     user.save()
                     return JsonResponse({"success": True})
             else:
-                return JsonResponse({"success": False, 'error_message': 'Incorrect code'}, status=406)
+                return JsonResponse({"success": False, 'message': 'Incorrect code'}, status=400)
 
 
 
@@ -391,6 +460,17 @@ class PayPalPaymentReturnView(CommonMixin, TemplateView):
         context['order_id'] = self.request.session.get('sub_id', None)
         return context
 
+
+
+def gen_verify_code():
+    import random
+
+    default_code_length = 6
+    code_length = default_code_length if 'VERIFY_CODE_LENGTH' not in dir(settings) else settings.VERIFY_CODE_LENGTH
+    result = ''
+    for i in range(code_length):
+        result += str(random.randint(3, 9))
+    return result
 
 
 def user_email_uniq(user, email):

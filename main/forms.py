@@ -86,8 +86,8 @@ class SubscribeCreateForm(Form):
 
 
 class LoginForm(Form):
-    email = forms.CharField(max_length=250)
-    password = forms.CharField(max_length=250)
+    email = forms.CharField(max_length=250, required=True)
+    password = forms.CharField(max_length=250, required=True)
 
     def clean_email(self):
 
@@ -102,10 +102,35 @@ class LoginForm(Form):
 
 
 class RegistrationForm(Form):
-    username = forms.CharField(max_length=250)
-    email = forms.CharField(max_length=250)
-    password = forms.CharField(max_length=250)
+    username = forms.CharField(max_length=250, required=True)
+    email = forms.CharField(max_length=250, required=True)
+    password = forms.CharField(max_length=250, required=True)
 
 
 class VerifyEmailForm(Form):
-    verify_code = forms.IntegerField()
+    verify_code = forms.IntegerField(required=True)
+
+
+class ResetPasswordForm(Form):
+    email = forms.EmailField(required=True)
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if not CustomUser.objects.filter(email=email).exists():
+            raise ValidationError(_('User not exist'))
+        return email
+
+class ResetPasswordVerifyForm(Form):
+    verify_code = forms.CharField(max_length=6, required=True)
+
+class NewPasswordForm(Form):
+    password1 = forms.CharField(max_length=250, required=True)
+    password2 = forms.CharField(max_length=250, required=True)
+
+    def clean(self):
+        super().clean()
+        pass1 = self.cleaned_data.get('password1')
+        pass2 = self.cleaned_data.get('password2')
+        if not pass1 == pass2:
+            self.add_error('password2', _('Passwords do not match'))
+
