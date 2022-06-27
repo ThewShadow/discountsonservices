@@ -20,7 +20,8 @@ urlpatterns = [
     path('accounts/reset_password/confirm/', views.ResetPasswordConfirmView.as_view(), name='reset_pass_confirm'),
     path('accounts/reset_password/complete/', views.ResetPasswordCompleteView.as_view(), name='reset_pass_complete'),
 
-    path('accounts/', include('django_registration.backends.one_step.urls')),
+    path('accounts/social/login_complete/', views.GoogleLoginCompleteView.as_view(), name='google-auth2-complete'),
+    path('accounts/social/login/', views.GoogleLoginView.as_view(), name='google-auth2'),
 
     path('offers/<slug:slug>/<slug:rate_slug>/', views.OffersView.as_view(), name='offers'),
     path('offers/<slug:slug>/', views.OffersView.as_view() , name='offers_redirect'),
@@ -33,7 +34,7 @@ urlpatterns = [
     path('faq/', views.FAQView.as_view(), name='faq_list'),
     path('admin_panel/', views.ManagerPanelView.as_view(), name='manager_panel'),
     path('paypal/', include('paypal.standard.ipn.urls')),
-    path('paypal_return/', views.PayPalPaymentReturnView.as_view(), name='paypal_return'),
+    path('paypal_return/', views.PaidCompleteView.as_view(), name='paypal_return'),
     path('paypal_cancel/', views.PayPalPaymentCancelView.as_view(), name='paypal_cancel'),
 
 

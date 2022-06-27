@@ -3,8 +3,13 @@ from paypal.standard.ipn.signals import valid_ipn_received, invalid_ipn_received
 from django.dispatch import receiver
 from main.models import Subscription
 from config import settings
+from paypal.standard.ipn.models import PayPalIPN
+import logging
 
-@receiver(valid_ipn_received)
+logger = logging.getLogger(__name__)
+
+
+@receiver(valid_ipn_received, sender=PayPalIPN)
 def paypal_payment_received(sender, **kwargs):
 
     ipn_obj = sender
@@ -21,13 +26,26 @@ def paypal_payment_received(sender, **kwargs):
         # received, `custom` etc. are all what you expect or what
         # is allowed.
         try:
-            sub_obj = Subscription.objects.get(id=ipn_obj.invoice)
-            assert ipn_obj.mc_gross == sub_obj.offer.price
-            sub_obj.status = 2
-            sub_obj.save()
-        except Exception:
-            pass
+            subscr_obj = Subscription.objects.get(id=ipn_obj.invoice)
+        except:
+            logger.warning(f'Payment accepted but subscription ({ipn_obj.invoice}) not found')
+
+        try:
+            assert ipn_obj.mc_gross == subscr_obj.offer.price
+        except:
+            logger.warning('Payment amount does not match the offer price.'
+                           f'summ: {ipn_obj.mc_gross}'
+                           f'invoice: {ipn_obj.invoice}')
+
         else:
-            pass
+            subscr_obj.paid = True
+            try:
+                subscr_obj.save()
+            except:
+                logger.error('The subscription is paid, but it was not possible to set the paid flag'
+                             f'invoice: {ipn_obj.invoice}')
+            else:
+                logger.info(f'Subscription ({ipn_obj.invoice}) is paid.')
     else:
-        pass
+        logger.info(f'Subscription ({ipn_obj.invoice}) not paid. status {str(ST_PP_COMPLETED)}')
+

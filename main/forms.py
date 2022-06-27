@@ -134,3 +134,11 @@ class NewPasswordForm(Form):
         if not pass1 == pass2:
             self.add_error('password2', _('Passwords do not match'))
 
+# class BitcoinPaymentForm(Form):
+#     blockchains = [
+#         ('solana', '')
+#     ]
+#
+#     currencies = [
+#         ('bitcoin', 'Bitcoin')
+#     ]

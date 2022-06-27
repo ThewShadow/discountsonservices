@@ -12,5 +12,3 @@ class MainConfig(AppConfig):
     def ready(self):
 
         from main import hooks
-        from paypal.standard.ipn.models import PayPalIPN
-        request_started.connect(hooks.paypal_payment_received, sender=PayPalIPN)

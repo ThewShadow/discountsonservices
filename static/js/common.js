@@ -10,12 +10,23 @@ const PaymentPopUp = document.getElementById('popup_9');
 const ResetPasswordEmailPopUp = document.getElementById('popup_5');
 const ResetPasswordCodePopUp = document.getElementById('popup_6');
 const NewPasswordPopUp = document.getElementById('popup_7');
+const SubscriptionPaidPopUp = document.getElementById("popup_12")
+const LogoutPopUp = document.getElementById('popup_13')
 
 
 $('.login-link').click(function (event){
     event.preventDefault();
     popupClose(RegistrationPopUp);
     popupOpen(loginPopUp)
+});
+
+$('.logout-button').click(function (event) {
+    event.preventDefault();
+    popupOpen(LogoutPopUp);
+});
+$('.popup__logout-cancel').click(function (event) {
+    event.preventDefault();
+    popupClose(LogoutPopUp);
 });
 
 $('.register-link').click(function (event){
@@ -43,7 +54,6 @@ $(".get-started-button").click(function (event){
 $(".apply-button").click(function (event) {
      event.preventDefault()
      createSubscription()
-
 });
 
 $('.forgot-pass-link').click(function (event){
@@ -67,6 +77,11 @@ $(".forget-pass-confirm").click(function (event) {
 $(".forget-pass-complete").click(function (event) {
      event.preventDefault();
      resetPasswordComplete();
+});
+
+
+$("#paid-subscr-ok").click(function () {
+    popupClose(SubscriptionPaidPopUp)
 });
 
 
@@ -295,4 +310,10 @@ function getJson(data_array) {
         post_data[prop["name"]] = prop["value"];
     }
     return post_data;
+}
+
+
+if (getCookie("paid_success") == "True") {
+    document.cookie = "paid_success=null; path=/"
+    popupOpen(SubscriptionPaidPopUp)
 }

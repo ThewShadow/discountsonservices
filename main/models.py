@@ -45,6 +45,9 @@ class FAQ(models.Model):
     title = models.CharField(max_length=200, default='')
     answer = models.TextField(null=True)
 
+    def __str__(self):
+        return self.title
+
 class Offer(models.Model):
     name = models.CharField(max_length=200, default='')
     rate = models.ForeignKey('Rate', on_delete=models.CASCADE, null=True)
@@ -67,7 +70,6 @@ class Product(models.Model):
     background_color = models.CharField(max_length=12)
     avatar = models.ImageField(upload_to='media/products/', null=True)
 
-
     def __str__(self):
         return self.name
 
@@ -85,6 +87,12 @@ class Subscription(models.Model):
     phone_number = PhoneNumberField(null=True)
     order_date = models.DateTimeField(auto_now_add=True, null=True)
     user_name = models.CharField(max_length=250, null=True)
+
+
+    paid = models.BooleanField(default=False)
+
+    is_active = models.BooleanField(default=False)
+
     STATUSES = [
         (1, 'being processed'),
         (2, 'done'),
@@ -104,11 +112,23 @@ class Subscription(models.Model):
         from django.core.mail import EmailMultiAlternatives
 
         subject, from_email, to = 'New subscription', 'noreplyexample@mail.com', MANAGERS_EMAILS
-        html_content = Subscription.generate_message_for_managers(self)
+        html_content = Subscription.generate_message_for_managers_html(self)
 
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.content_subtype = "html"
         msg.send()
+
+
+        self.send_to_telegram()
+
+
+    def send_to_telegram(self):
+        from telebot import TeleBot
+        from config.settings import TELEGRAM_BOT_API_KEY
+        from config.settings import TELEGRAM_GROUP_MANAGERS_ID as chat_id
+        bot = TeleBot(TELEGRAM_BOT_API_KEY)
+        message = Subscription.generate_message_for_managers_telegram(self)
+        bot.send_message(chat_id=chat_id, text=message)
 
     def notify_user(self):
         from django.core.mail import EmailMultiAlternatives
@@ -121,7 +141,7 @@ class Subscription(models.Model):
         msg.send()
 
     @staticmethod
-    def generate_message_for_managers(subscription):
+    def generate_message_for_managers_html(subscription):
         data = [
             f'<h3>You have a new subscription order (id: {subscription.id})</h3>',
             f'<p>Plan: {str(subscription.offer)}</p>',
@@ -134,7 +154,18 @@ class Subscription(models.Model):
         return '\n'.join(data)
 
     @staticmethod
+    def generate_message_for_managers_telegram(subscription):
+        data = [
+            f'You have a new subscription order (id: {subscription.id})',
+            f'Plan: {str(subscription.offer)}',
+            f'User id: {subscription.user.id}',
+            f'User email: {subscription.email}',
+            f'Phone number: {subscription.phone_number}',
+            f'Order date: {subscription.order_date.strftime("%d/%m/%y %H:%M")}'
+        ]
+        return '\n'.join(data)
 
+    @staticmethod
     def generate_message_for_user(subscription):
         pass
 

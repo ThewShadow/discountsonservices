@@ -13,14 +13,14 @@
 	<div class="container">
 		<div class="account__body">
 			<h1 class="account__title">Personal data management</h1>
-			<a href="{% url 'logout' %}" class="account__btn-exit link-icon">
+			<a class="account__btn-exit link-icon logout-button">
 				<svg width="19" height="20" viewBox="0 0 19 20" fill="none"
 					xmlns="http://www.w3.org/2000/svg">
 					<path
 						d="M1 20C0.734784 20 0.48043 19.8946 0.292893 19.7071C0.105357 19.5196 0 19.2652 0 19V1C0 0.734784 0.105357 0.48043 0.292893 0.292893C0.48043 0.105357 0.734784 0 1 0H15C15.2652 0 15.5196 0.105357 15.7071 0.292893C15.8946 0.48043 16 0.734784 16 1V4H14V2H2V18H14V16H16V19C16 19.2652 15.8946 19.5196 15.7071 19.7071C15.5196 19.8946 15.2652 20 15 20H1ZM14 14V11H7V9H14V6L19 10L14 14Z"
 						fill="#333333" />
 				</svg>
-				<span>Exit the office</span>
+				<span >Exit the office</span>
 			</a>
 			<div class="account__content">
 				<div class="account__nav">
@@ -54,7 +54,7 @@
 							<div class="account__info-inputs">
 								<label>
 									<p>ID user</p>
-									<input name="user_id" type="text" id="id_user_pk" value="{{ object.pk }}" >
+									<input disabled name="user_id" type="text" id="id_user_pk" value="{{ object.pk }}" >
 								</label>
 								<label>
 									<p>How can I call you?</p>
@@ -88,23 +88,7 @@
 			</div>
 
 		</div>
-		<div class="invite bg-blue">
-			<div class="invite__content">
-				<h3>Invite friends</h3>
-				<p>
-					Starting today up to 50% for NETFLIX, YOUTUBE, SPOTIFY subscriptions with a secure
-					payment from PAYPAL
-				</p>
-			</div>
-			<div class="invite__link-block">
-				<p>Click on the link</p>
-				<div class="invite__link">
-					<a href="https://t.me/DiscountsOnServices_bot?start=343964809">Discounts On
-						Services</a>
-					<button></button>
-				</div>
-			</div>
-		</div>
+		{% include 'blocks/invite.html' %}
 	</div>
 </section>
 

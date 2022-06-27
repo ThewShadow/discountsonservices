@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-s=%ahjk93t0he#!6by2pv8moi3)9ib5l59oxj@dhqrwgeq-!cm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '8548-46-118-172-5.eu.ngrok.io']
+ALLOWED_HOSTS = ['localhost', '283b-46-118-172-5.eu.ngrok.io']
 
-CSRF_TRUSTED_ORIGINS = ['https://8548-46-118-172-5.eu.ngrok.io','http://localhost']
+CSRF_TRUSTED_ORIGINS = ['https://283b-46-118-172-5.eu.ngrok.io','http://localhost']
 
 # Application definition
 
@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'social_django',
-
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -46,12 +45,10 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'phonenumber_field',
     'paypal.standard.ipn',
-
-
-
+    'django.contrib.sites',
 ]
 
-
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -65,6 +62,7 @@ MIDDLEWARE = [
     'social_django.middleware.SocialAuthExceptionMiddleware',
 
 ]
+
 RAISE_EXCEPTIONS= False
 ROOT_URLCONF = 'config.urls'
 
@@ -134,7 +132,10 @@ USE_TZ = True
 
 LANGUAGES = (
     ('en', _('English')),
-    ('ru', _('Ukraine')),
+    ('ru', _('Russian')),
+    ('es', _('Spain')),
+    ('fr', _('France')),
+    ('he', _('Israel')),
 )
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
@@ -184,7 +185,6 @@ EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '440773133829-pj74k17v0lojfo6j02nk3bsd72852rbm.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'N2ZhTPxZSbwwIwxM_1dJMI7S'
 
-
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'zvichayniy.vick@gmail.com'
@@ -194,6 +194,36 @@ DEFAULT_FROM_EMAIL = 'example@gmail.comv'
 MANAGERS_EMAILS = ['zvichayniy.vick@gmail.com', 'futuredevback1@gmail.com']
 
 PAYPAL_RECEIVER_EMAIL = 'sb-twdid17300769@business.example.com'
-
 PAYPAL_TEST = True
 
+VERIFY_CODE_LENGTH = 6
+
+
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+            'formatter': 'verbose',
+        },
+    },
+    'root': {
+        'handlers': ['file'],
+        'level': 'DEBUG',
+    },
+}
+
+TELEGRAM_BOT_API_KEY = '2041978799:AAGzNh7MLrdbwNg4TBUcBJI_UmSVH9TeXuU'
+TELEGRAM_GROUP_MANAGERS_ID = '-627579064'

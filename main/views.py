@@ -1,8 +1,8 @@
-from django.shortcuts import redirect, get_object_or_404, render, HttpResponse
+from django.shortcuts import redirect, get_object_or_404, render, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.template.loader import render_to_string
-from django.views.generic import ListView, FormView, CreateView, TemplateView, View
+from django.views.generic import ListView, FormView, CreateView, TemplateView, View, RedirectView
 from datetime import datetime
 from . import service
 from social_django.models import UserSocialAuth
@@ -32,7 +32,9 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
 from django.utils.translation import gettext as _
 from django.core.exceptions import ObjectDoesNotExist
+import logging
 
+logger = logging.getLogger(__name__)
 
 class CommonMixin:
 
@@ -51,8 +53,15 @@ class CommonMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         common = self.get_common_data(self.request, **kwargs)
-
         return dict(list(context.items()) + list(common.items()))
+
+
+class PaidCompleteView(View):
+
+    def get(self, request, **kwargs):
+        response = redirect('index')
+        response.set_cookie(key='paid_success', value=True)
+        return response
 
 class ResetPasswordConfirmView(View):
 
@@ -95,6 +104,7 @@ class ResetPasswordCompleteView(View):
 class ResetPasswordView(View):
 
     def post(self, request, **kwargs):
+
         form = ResetPasswordForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
@@ -122,6 +132,8 @@ class IndexView(CommonMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['products'] = Product.objects.all()
+        logger.info('ss')
+
         return context
 
 class LogoutView(View):
@@ -333,10 +345,14 @@ class SubscriptionCreateView(View):
             new_subscription.phone_number = form.cleaned_data['phone_number']
             new_subscription.offer = offer
             new_subscription.user_name = form.cleaned_data['user_name']
+            new_subscription.user = self.request.user
+
             try:
                 new_subscription.save()
             except Exception as e:
                 print(e)
+
+            new_subscription.notify_managers()
 
             resp = {'success': True, 'sub_id': new_subscription.id}
 
@@ -429,6 +445,7 @@ class ManagerPanelView(CommonMixin, LoginRequiredMixin, TemplateView):
         if form.is_valid():
             obj = get_object_or_404(Subscription, id=form.cleaned_data['sub_id'])
             obj.status = form.cleaned_data['status_value']
+            obj.is_active = True
             obj.save()
             obj.notify_user()
 
@@ -480,14 +497,17 @@ def user_email_uniq(user, email):
 
 def change_profile_info(request, form):
     user = request.user
-    user.username = form.cleaned_data.get('username')
+    new_username = form.cleaned_data.get('username')
     new_email = form.cleaned_data.get('email')
+
+    if user.email == new_email and user.username == new_username:
+        return
 
     from django.contrib import messages
 
     if user_email_uniq(user, new_email):
         user.email = new_email
-        user.save()
+        user.username = new_username
         try:
             social_user = UserSocialAuth.objects.get(user__id=request.user.id)
         except:
@@ -495,7 +515,112 @@ def change_profile_info(request, form):
         else:
             social_user.uid = new_email
             social_user.save()
+        finally:
+            user.save()
 
         messages.add_message(request, messages.INFO, 'Profile info is update.')
     else:
         messages.add_message(request, messages.ERROR, 'User with this email is exist! Enter the other email')
+
+def gen_google_auth_url():
+
+    GOOGLE_SCOPES = [
+        'https://www.googleapis.com/auth/userinfo.email',
+        'https://www.googleapis.com/auth/userinfo.profile'
+    ]
+
+    GOOGLE_AUTH_URI = 'https://accounts.google.com/o/oauth2/auth'
+
+    GOOGLE_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
+
+    GOOGLE_USER_INFO_URI = 'https://www.googleapis.com/oauth2/v1/userinfo'
+
+    GOOGLE_CLIENT_ID = '440773133829-avv2r6ff1mv7lbn496vkkovkd6221b2s.apps.googleusercontent.com'
+
+
+    GOOGLE_CLIENT_SECRET = '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'
+
+
+    path = reverse_lazy('google-auth2-complete')
+
+    callback = 'https://283b-46-118-172-5.eu.ngrok.io/he/site/accounts/social/login_complete/'
+
+    print(callback)
+    parameters = {
+        'redirect_uri': callback,
+        'response_type': 'code',
+        'client_id': GOOGLE_CLIENT_ID,
+        'scope': ' '.join(GOOGLE_SCOPES),
+
+    }
+
+    import urllib
+
+    query_string = urllib.parse.urlencode(parameters)
+
+    url = f'{GOOGLE_AUTH_URI}?{query_string}'
+    return url
+
+
+class GoogleLoginView(View):
+
+    def get(self, request, **kwargs):
+        url = gen_google_auth_url()
+        return HttpResponseRedirect(url)
+
+
+class GoogleLoginCompleteView(View):
+
+    def post(self, request, **kwargs):
+        return JsonResponse({'ok': True})
+
+
+    def get(self, request, **kwargs):
+        code = request.GET.get('code')
+        if not code:
+            return redirect(reverse_lazy('index'))
+
+        import requests
+
+        GOOGLE_CLIENT_SECRET = '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'
+        GOOGLE_CLIENT_ID = '440773133829-avv2r6ff1mv7lbn496vkkovkd6221b2s.apps.googleusercontent.com'
+        path = reverse_lazy('google-auth2-token')
+        path = '/he/site/accounts/social/confirm/'
+        path = reverse_lazy('google-auth2-complete')
+
+        callback = 'https://283b-46-118-172-5.eu.ngrok.io/he/site/accounts/social/login_complete/'
+
+        payload = {
+            'client_id': GOOGLE_CLIENT_ID,
+            'client_secret': GOOGLE_CLIENT_SECRET,
+            'redirect_uri': callback,
+            'grant_type': 'authorization_code',
+            'code': code
+        }
+
+        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+        GOOGLE_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
+        response = requests.post(GOOGLE_TOKEN_URI, data=payload, headers=headers)
+
+        import json
+
+        response = json.loads(response.content)
+        access_token = response['access_token']
+
+        GOOGLE_USER_INFO_URI = 'https://www.googleapis.com/oauth2/v1/userinfo'
+        headers = {'Authorization': f'Bearer {access_token}'}
+        resp = requests.get(GOOGLE_USER_INFO_URI, headers=headers)
+        user_data = json.loads(resp.content)
+
+
+        try:
+            user = CustomUser.objects.get(email=user_data['email'])
+        except:
+            user = CustomUser()
+            user.email = user_data['email']
+            user.username = user_data['given_name']
+            user.save()
+        finally:
+            login(self.request, user, backend='main.backends.EmailBackend')
+
+        return redirect(reverse_lazy('profile'))
