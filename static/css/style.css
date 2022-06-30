@@ -1656,6 +1656,10 @@ input.state-ok {
   margin-bottom: 12px;
 }
 
+.popup__selects div:not(:last-child) {
+  margin-bottom: 20px;
+}
+
 .popup__select-block .select {
   width: 100%;
 }
@@ -2051,40 +2055,40 @@ input.state-ok {
 
 .works__step-head h4 {
   color: #171717;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .works__icon-wrap {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
-  max-width: 185px;
+  max-width: 225px;
   position: relative;
 }
 
 .works__icon-wrap span {
-  margin-top: 100%;
+  margin-top: 70%;
   display: block;
 }
 
 .works__icon {
   position: absolute;
   left: 0;
-  top: 0;
-  right: 0;
+  top: 15px;
+  right: 15px;
   bottom: 0;
 }
 
 .works__icon-1 {
-  background: url("../img/icons/step-1.svg") 0 0/contain no-repeat;
+  background: url("../img/icons/step-1.jpg") 0 0/contain no-repeat;
 }
 
 .works__icon-2 {
-  background: url("../img/icons/step-2.svg") 0 0/contain no-repeat;
+  background: url("../img/icons/step-2.jpg") 0 0/contain no-repeat;
 }
 
 .works__icon-3 {
-  background: url("../img/icons/step-3.svg") 0 0/contain no-repeat;
+  background: url("../img/icons/step-3.jpg") 0 0/contain no-repeat;
 }
 
 .invite {
@@ -2577,8 +2581,7 @@ input.state-ok {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: start;
-      grid-template-areas: 'title btn-exit'
- 'content content';
+      grid-template-areas: 'title btn-exit' 'content content';
 }
 
 .account__title {
@@ -3431,6 +3434,11 @@ input.state-ok {
     max-width: 80px;
   }
 
+  .works__icon {
+    top: 0;
+    right: 0;
+  }
+
   .invite__link-block p {
     font-size: 18px;
   }
@@ -3571,9 +3579,7 @@ input.state-ok {
   .account__body {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
-        grid-template-areas: 'title '
- 'content'
- 'btn-exit';
+        grid-template-areas: 'title ' 'content' 'btn-exit';
   }
 
   .account__title {

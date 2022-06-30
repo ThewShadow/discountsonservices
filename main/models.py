@@ -1,13 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
-
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from .managers import CustomUserManager
-
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -33,6 +30,7 @@ class Rate(models.Model):
     def __str__(self):
         return f'{self.count} {self.name}'
 
+
 class Currency(models.Model):
     name = models.CharField(max_length=40, default='')
     code = models.CharField(max_length=4, default='')
@@ -48,6 +46,7 @@ class FAQ(models.Model):
     def __str__(self):
         return self.title
 
+
 class Offer(models.Model):
     name = models.CharField(max_length=200, default='')
     rate = models.ForeignKey('Rate', on_delete=models.CASCADE, null=True)
@@ -56,10 +55,8 @@ class Offer(models.Model):
     currency = models.ForeignKey('Currency', on_delete=models.CASCADE, null=True)
     description = models.TextField(null=True)
 
-
     def __str__(self):
         return f'{self.product.name} - {self.name} - {self.rate}: {self.price} {self.currency.code}'
-
 
 
 class Product(models.Model):
@@ -73,11 +70,13 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+
 class PaymentType(models.Model):
     name = models.CharField(max_length=250)
 
     def __str__(self):
         return self.name
+
 
 class Subscription(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
@@ -87,10 +86,7 @@ class Subscription(models.Model):
     phone_number = PhoneNumberField(null=True)
     order_date = models.DateTimeField(auto_now_add=True, null=True)
     user_name = models.CharField(max_length=250, null=True)
-
-
     paid = models.BooleanField(default=False)
-
     is_active = models.BooleanField(default=False)
 
     STATUSES = [
@@ -106,7 +102,6 @@ class Subscription(models.Model):
     def __str__(self):
         return f'{self.user} - {self.offer}'
 
-
     def notify_managers(self):
         from config.settings import MANAGERS_EMAILS
         from django.core.mail import EmailMultiAlternatives
@@ -118,9 +113,7 @@ class Subscription(models.Model):
         msg.content_subtype = "html"
         msg.send()
 
-
         self.send_to_telegram()
-
 
     def send_to_telegram(self):
         from telebot import TeleBot
@@ -130,11 +123,11 @@ class Subscription(models.Model):
         message = Subscription.generate_message_for_managers_telegram(self)
         bot.send_message(chat_id=chat_id, text=message)
 
-    def notify_user(self):
+    def notify_customer(self):
         from django.core.mail import EmailMultiAlternatives
 
-        subject, from_email, to = 'New subscription', 'noreplyexample@mail.com', [self.user.email]
-        html_content = Subscription.generate_message_for_user(self)
+        subject, from_email, to = 'Subscription activated!', 'noreplyexample@mail.com', [self.email]
+        html_content = Subscription.generate_message_for_customer(self)
 
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.content_subtype = "html"
@@ -148,7 +141,7 @@ class Subscription(models.Model):
             f'<p>User id: {subscription.user.id}</p>',
             f'<p>User email: {subscription.email}</p>',
             f'<p>Phone number: {subscription.phone_number}</p>',
-            f'<p>Paynment type: {subscription.payment_type}</p>',
+            f'<p>Payment type: {subscription.payment_type}</p>',
             f'<p>Order date: {subscription.order_date.strftime("%d/%m/%y %H:%M")}</p>'
         ]
         return '\n'.join(data)
@@ -166,9 +159,12 @@ class Subscription(models.Model):
         return '\n'.join(data)
 
     @staticmethod
-    def generate_message_for_user(subscription):
-        pass
-
+    def generate_message_for_customer(subscription):
+        data = [
+            f'<h3>Your subscription activated ({str(subscription.offer)}</h3>',
+            f'<h4>Enjoy!</h4>',
+        ]
+        return '\n'.join(data)
 
 
 class SupportTask(models.Model):

@@ -29,12 +29,10 @@ from .forms import NewPasswordForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.core.mail import EmailMultiAlternatives
-from django.utils.translation import gettext as _
-from django.core.exceptions import ObjectDoesNotExist
 import logging
 
 logger = logging.getLogger(__name__)
+
 
 class CommonMixin:
 
@@ -63,67 +61,6 @@ class PaidCompleteView(View):
         response.set_cookie(key='paid_success', value=True)
         return response
 
-class ResetPasswordConfirmView(View):
-
-    def post(self, request, **kwargs):
-        form = ResetPasswordVerifyForm(request.POST)
-        if form.is_valid():
-            verify_code = form.cleaned_data.get('verify_code')
-
-            verify_code_check = request.session.get('reset_pass_verify_code')
-            if not verify_code_check:
-                return JsonResponse({'success': False, 'message': 'Session expired'}, status=400)
-
-            if str(verify_code) == verify_code_check:
-                return JsonResponse({'success': True}, status=200)
-            else:
-                return JsonResponse({'success': False, 'message': 'invalid verification code'}, status=400)
-        else:
-            return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
-
-class ResetPasswordCompleteView(View):
-
-    def post(self, request, **kwargs):
-        form = NewPasswordForm(request.POST)
-        if form.is_valid():
-            reset_pass_email = request.session.get('reset_pass_email')
-            if not reset_pass_email:
-                return JsonResponse({'success': False, 'message': 'Session expired'}, status=400)
-
-            try:
-                user = CustomUser.objects.get(email=reset_pass_email)
-            except ObjectDoesNotExist:
-                return JsonResponse({'success': False, 'message': 'User does not exist'}, status=400)
-            else:
-                user.set_password(form.cleaned_data.get('password1'))
-                user.save()
-                return JsonResponse({'success': True}, status=200)
-        else:
-            return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
-
-class ResetPasswordView(View):
-
-    def post(self, request, **kwargs):
-
-        form = ResetPasswordForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            reset_code = gen_verify_code()
-
-            request.session['reset_pass_email'] = email
-            request.session['reset_pass_verify_code'] = reset_code
-
-            subject, from_email, to = 'Email verify', 'noreplyexample@mail.com', email
-            html_content = f'<h1>Youre reset password code</h1><p>{reset_code}</p>'
-
-            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
-            msg.content_subtype = "html"
-            msg.send()
-
-            return JsonResponse({'success': True}, status=200)
-
-        return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
-
 
 class IndexView(CommonMixin, ListView):
     template_name = 'main/index.html'
@@ -136,6 +73,7 @@ class IndexView(CommonMixin, ListView):
 
         return context
 
+
 class LogoutView(View):
 
     def post(self, *args, **kwargs):
@@ -145,130 +83,6 @@ class LogoutView(View):
     def get(self, *args, **kwargs):
         logout(self.request)
         return redirect(reverse_lazy('index'))
-
-
-class LoginView(View):
-
-    MESSAGES = {
-        'error_verify': _('Email not verified'),
-        'failed_auth': _('Wrong login or password')
-    }
-
-    def post(self, *args, **kwargs):
-
-        form = LoginForm(self.request.POST)
-
-        if not form.is_valid():
-            return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
-
-        email = form.cleaned_data['email']
-        password = form.cleaned_data['password']
-
-        user = authenticate(username=email, password=password)
-
-        if user is None:
-            return JsonResponse({'success': False, 'message': LoginView.MESSAGES['failed_auth']}, status=401)
-
-        if not user.verified and not user.is_superuser:
-            return JsonResponse({'success': False, 'message': LoginView.MESSAGES['error_verify']}, status=401)
-
-        login(self.request, user)
-
-        return JsonResponse({'success': True}, status=200)
-
-
-
-class RegistrationView(View):
-    class_form = CustomUserCreationForm
-
-    def post(self, request, **kwargs):
-
-        form = self.class_form(self.request.POST)
-
-        if not form.is_valid():
-            return JsonResponse(
-                {
-                    'success': False,
-                    'error_messages': dict(form.errors)
-                },
-                status=400
-            )
-
-        user = form.save()
-
-        verify_code = gen_verify_code()
-        request.session['verify_email'] = user.email
-        request.session['verify_code'] = verify_code
-
-        subject, from_email, to = 'Email verify', 'noreplyexample@mail.com', form.cleaned_data['email']
-        html_content = f'<h1>You verify code</h1><p>{verify_code}</p>'
-
-        msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
-        msg.content_subtype = "html"
-        msg.send()
-
-        return JsonResponse({'success': True}, status=201)
-
-
-
-
-class PayPalFormView(View):
-
-
-    def post(self, *args, **kwargs):
-        context = {'form': PayPalPaymentsForm(initial=self.get_payment_form())}
-        template = render_to_string('main/paypal_form.html', context=context)
-        return JsonResponse({"paypal_porm": template})
-
-    def get_payment_form(self):
-        test_url = 'https://729d-46-118-172-5.eu.ngrok.io'
-
-        sub_id = self.request.POST.get('sub_id', None)
-        lang = get_language().upper()
-        sub_obj = get_object_or_404(Subscription, id=sub_id)
-
-        return {
-            "business": settings.PAYPAL_RECEIVER_EMAIL,
-            "amount": sub_obj.offer.price,
-            "currency_code": str(sub_obj.offer.currency.code).upper(),
-            "item_name": 'test',
-            "invoice": sub_id,
-            # "notify_url": self.request.build_absolute_uri(reverse_lazy('paypal-ipn')),
-            # "return_url": self.request.build_absolute_uri(reverse_lazy('paypal_return')),
-            # "cancel_return": self.request.build_absolute_uri(reverse_lazy('paypal_cancel')),
-            "notify_url": test_url + reverse_lazy('paypal-ipn'),
-            "return_url": test_url + reverse_lazy('paypal_return'),
-            "cancel_return": test_url + reverse_lazy('paypal_cancel'),
-            "lc": lang,
-            "no_shipping": '1',
-        }
-
-
-class VerifyEmailView(View):
-
-    def post(self, *args, **kwargs):
-        form = VerifyEmailForm(self.request.POST)
-        if not form.is_valid():
-            return JsonResponse({"success": False, 'message': 'Incorrect input data'}, status=400)
-
-        verify_code = self.request.session.get('verify_code', None)
-        verify_email = self.request.session.get('verify_email', None)
-
-        if verify_code is None:
-            return JsonResponse({"success": False, 'message': 'Session expired'}, status=400)
-        else:
-            if str(verify_code) == form.cleaned_data['verify_code']:
-                try:
-                    user = CustomUser.objects.get(email=verify_email)
-                except:
-                    return JsonResponse({"success": False, 'message': 'User is not found'}, status=400)
-                else:
-                    user.verified = True
-                    user.save()
-                    return JsonResponse({"success": True})
-            else:
-                return JsonResponse({"success": False, 'message': 'Incorrect code'}, status=400)
-
 
 
 class OffersView(CommonMixin, ListView):
@@ -326,41 +140,6 @@ class OffersView(CommonMixin, ListView):
             context['offers'] = Offer.objects.filter(product__slug=product_id)
 
         return context
-
-
-
-
-#class SubscriptionCreateView(LoginRequiredMixin, CreateView):
-class SubscriptionCreateView(View):
-    #template_name = 'main/subscribe.html'
-    # login_url = 'not_authorizate'
-    # redirect_field_name = 'redirect_to'
-
-    def post(self, *args, **kwargs):
-        form = SubscribeCreateForm(self.request.POST)
-        if form.is_valid():
-            offer = get_object_or_404(Offer, id=form.cleaned_data['offer_id'])
-            new_subscription = Subscription()
-            new_subscription.email = form.cleaned_data['email']
-            new_subscription.phone_number = form.cleaned_data['phone_number']
-            new_subscription.offer = offer
-            new_subscription.user_name = form.cleaned_data['user_name']
-            new_subscription.user = self.request.user
-
-            try:
-                new_subscription.save()
-            except Exception as e:
-                print(e)
-
-            new_subscription.notify_managers()
-
-            resp = {'success': True, 'sub_id': new_subscription.id}
-
-            return JsonResponse(resp, status=200)
-        else:
-            return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
-
-
 
 
 class ProfileView(CommonMixin, LoginRequiredMixin, FormView):
@@ -443,14 +222,13 @@ class ManagerPanelView(CommonMixin, LoginRequiredMixin, TemplateView):
     def post(self, request, **kwargs):
         form = ChangeSubscibeStatusForm(request.POST)
         if form.is_valid():
-            obj = get_object_or_404(Subscription, id=form.cleaned_data['sub_id'])
-            obj.status = form.cleaned_data['status_value']
-            obj.is_active = True
-            obj.save()
-            obj.notify_user()
+            subscr_obj = get_object_or_404(Subscription, id=form.cleaned_data['sub_id'])
+            subscr_obj.status = form.cleaned_data['status_value']
+            subscr_obj.is_active = True
+            subscr_obj.save()
+            subscr_obj.notify_customer()
 
         return redirect(reverse_lazy('manager_panel'))
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -472,28 +250,20 @@ class PayPalPaymentCancelView(CommonMixin, TemplateView):
 class PayPalPaymentReturnView(CommonMixin, TemplateView):
     template_name = 'payments/paypal_return.html'
 
+    def get(self, request, **kwargs):
+        response = super().get(request, **kwargs)
+        response.set_cookie(key='paid_success', value=True)
+        return response
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['order_id'] = self.request.session.get('sub_id', None)
         return context
 
 
-
-def gen_verify_code():
-    import random
-
-    default_code_length = 6
-    code_length = default_code_length if 'VERIFY_CODE_LENGTH' not in dir(settings) else settings.VERIFY_CODE_LENGTH
-    result = ''
-    for i in range(code_length):
-        result += str(random.randint(3, 9))
-    return result
-
-
 def user_email_uniq(user, email):
     return CustomUser.objects.exclude(id=user.id).filter(email=email).count() == 0 \
            and UserSocialAuth.objects.exclude(user=user).filter(uid=email).count() == 0
-
 
 def change_profile_info(request, form):
     user = request.user
@@ -518,109 +288,5 @@ def change_profile_info(request, form):
         finally:
             user.save()
 
-        messages.add_message(request, messages.INFO, 'Profile info is update.')
-    else:
-        messages.add_message(request, messages.ERROR, 'User with this email is exist! Enter the other email')
-
-def gen_google_auth_url():
-
-    GOOGLE_SCOPES = [
-        'https://www.googleapis.com/auth/userinfo.email',
-        'https://www.googleapis.com/auth/userinfo.profile'
-    ]
-
-    GOOGLE_AUTH_URI = 'https://accounts.google.com/o/oauth2/auth'
-
-    GOOGLE_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
-
-    GOOGLE_USER_INFO_URI = 'https://www.googleapis.com/oauth2/v1/userinfo'
-
-    GOOGLE_CLIENT_ID = '440773133829-avv2r6ff1mv7lbn496vkkovkd6221b2s.apps.googleusercontent.com'
 
 
-    GOOGLE_CLIENT_SECRET = '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'
-
-
-    path = reverse_lazy('google-auth2-complete')
-
-    callback = 'https://283b-46-118-172-5.eu.ngrok.io/he/site/accounts/social/login_complete/'
-
-    print(callback)
-    parameters = {
-        'redirect_uri': callback,
-        'response_type': 'code',
-        'client_id': GOOGLE_CLIENT_ID,
-        'scope': ' '.join(GOOGLE_SCOPES),
-
-    }
-
-    import urllib
-
-    query_string = urllib.parse.urlencode(parameters)
-
-    url = f'{GOOGLE_AUTH_URI}?{query_string}'
-    return url
-
-
-class GoogleLoginView(View):
-
-    def get(self, request, **kwargs):
-        url = gen_google_auth_url()
-        return HttpResponseRedirect(url)
-
-
-class GoogleLoginCompleteView(View):
-
-    def post(self, request, **kwargs):
-        return JsonResponse({'ok': True})
-
-
-    def get(self, request, **kwargs):
-        code = request.GET.get('code')
-        if not code:
-            return redirect(reverse_lazy('index'))
-
-        import requests
-
-        GOOGLE_CLIENT_SECRET = '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'
-        GOOGLE_CLIENT_ID = '440773133829-avv2r6ff1mv7lbn496vkkovkd6221b2s.apps.googleusercontent.com'
-        path = reverse_lazy('google-auth2-token')
-        path = '/he/site/accounts/social/confirm/'
-        path = reverse_lazy('google-auth2-complete')
-
-        callback = 'https://283b-46-118-172-5.eu.ngrok.io/he/site/accounts/social/login_complete/'
-
-        payload = {
-            'client_id': GOOGLE_CLIENT_ID,
-            'client_secret': GOOGLE_CLIENT_SECRET,
-            'redirect_uri': callback,
-            'grant_type': 'authorization_code',
-            'code': code
-        }
-
-        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-        GOOGLE_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
-        response = requests.post(GOOGLE_TOKEN_URI, data=payload, headers=headers)
-
-        import json
-
-        response = json.loads(response.content)
-        access_token = response['access_token']
-
-        GOOGLE_USER_INFO_URI = 'https://www.googleapis.com/oauth2/v1/userinfo'
-        headers = {'Authorization': f'Bearer {access_token}'}
-        resp = requests.get(GOOGLE_USER_INFO_URI, headers=headers)
-        user_data = json.loads(resp.content)
-
-
-        try:
-            user = CustomUser.objects.get(email=user_data['email'])
-        except:
-            user = CustomUser()
-            user.email = user_data['email']
-            user.username = user_data['given_name']
-            user.save()
-        finally:
-            login(self.request, user, backend='main.backends.EmailBackend')
-
-        return redirect(reverse_lazy('profile'))

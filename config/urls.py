@@ -23,11 +23,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ajax/', include('main.ajax.urls')),
-
+    path('service/', include('service.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
-  +i18n_patterns(
+  + i18n_patterns(
         path('i18n/', include('django.conf.urls.i18n')),
-        path('site/', include('main.urls')),
+        path('', include('main.urls')),
     )

@@ -41,7 +41,7 @@ def paypal_payment_received(sender, **kwargs):
             subscr_obj.paid = True
             try:
                 subscr_obj.save()
-            except:
+            except Exception:
                 logger.error('The subscription is paid, but it was not possible to set the paid flag'
                              f'invoice: {ipn_obj.invoice}')
             else:

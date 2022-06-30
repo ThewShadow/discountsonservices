@@ -26,9 +26,12 @@ SECRET_KEY = 'django-insecure-s=%ahjk93t0he#!6by2pv8moi3)9ib5l59oxj@dhqrwgeq-!cm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '283b-46-118-172-5.eu.ngrok.io']
+BASE_URL = ''
+NGROK_DOMAIN = 'https://4e5a-46-118-172-5.eu.ngrok.io'
 
-CSRF_TRUSTED_ORIGINS = ['https://283b-46-118-172-5.eu.ngrok.io','http://localhost']
+ALLOWED_HOSTS = ['localhost', NGROK_DOMAIN.replace('https://', '')]
+
+CSRF_TRUSTED_ORIGINS = [NGROK_DOMAIN, 'http://localhost']
 
 # Application definition
 
@@ -36,7 +39,6 @@ INSTALLED_APPS = [
     'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
-    'social_django',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'paypal.standard.ipn',
     'django.contrib.sites',
+    'service.apps.SocialauthConfig',
 ]
 
 SITE_ID = 1
@@ -63,7 +66,6 @@ MIDDLEWARE = [
 
 ]
 
-RAISE_EXCEPTIONS= False
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -182,8 +184,8 @@ AUTHENTICATION_BACKENDS = (
 
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '440773133829-pj74k17v0lojfo6j02nk3bsd72852rbm.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'N2ZhTPxZSbwwIwxM_1dJMI7S'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '457196766783-gptut90v4j8i23jcb6r45pstsu76tvrm.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
@@ -227,3 +229,4 @@ LOGGING = {
 
 TELEGRAM_BOT_API_KEY = '2041978799:AAGzNh7MLrdbwNg4TBUcBJI_UmSVH9TeXuU'
 TELEGRAM_GROUP_MANAGERS_ID = '-627579064'
+

@@ -11,6 +11,7 @@ const ResetPasswordEmailPopUp = document.getElementById('popup_5');
 const ResetPasswordCodePopUp = document.getElementById('popup_6');
 const NewPasswordPopUp = document.getElementById('popup_7');
 const SubscriptionPaidPopUp = document.getElementById("popup_12")
+const CryptoPaymentPopUp = document.getElementById('popup_11')
 const LogoutPopUp = document.getElementById('popup_13')
 
 
@@ -81,8 +82,44 @@ $(".forget-pass-complete").click(function (event) {
 
 
 $("#paid-subscr-ok").click(function () {
+    event.preventDefault();
     popupClose(SubscriptionPaidPopUp)
 });
+
+
+$("#crypto-pay-button").click(function () {
+    event.preventDefault();
+    generate_crypto_token()
+});
+
+
+
+function generate_crypto_token() {
+    var form_id = "crypto-payment-form";
+    var register_form = $("#"+form_id).serializeArray();
+    var json = getJson(register_form);
+
+    json = getJson($('#csrf_ajax_token').serializeArray());
+    json["type-payment"] = $('.select-currency option:selected'). text();
+    json["type-blockchain"]= $('.select-blockchain option:selected'). text();
+
+
+    $.post("/service/payments/crypto/create/", json)
+    .done(function (resp) {
+              if (resp['success']) {
+
+                popupClose(PaymentPopUp)
+                popupOpen(CryptoPaymentPopUp)
+
+                $("#payment-link").html(resp["payment_link"])
+                $("#amount").html(resp["amount"])
+                $("#blockchain_name").html(resp["blockchain_name"])
+              }
+           })
+     .fail(function (resp) {
+            showMessages(resp, form_id);
+        });
+}
 
 
 function login() {
@@ -94,7 +131,7 @@ function login() {
     $("#"+form_id+" .email_errors").empty();
     $("#"+form_id+" .message").empty();
 
-    $.post("accounts/login/", json)
+    $.post(document.location.origin+"/service/accounts/login/", json)
      .done(function (resp) {
          if (resp['success']) {
             popupClose(loginPopUp);
@@ -115,7 +152,7 @@ function register() {
     $("#"+form_id+" .username_errors").empty();
     $("#"+form_id+" .message").empty();
 
-    $.post("accounts/register/", json)
+    $.post(document.location.origin+"/service/accounts/register/", json)
      .done(function (resp) {
         if (resp['success']) {
             popupClose(RegistrationPopUp);
@@ -134,7 +171,7 @@ function verify() {
     var json = getJson(register_form);
     $("#"+form_id+" .message").empty();
 
-    $.post("accounts/verify_email/", json)
+    $.post(document.location.origin+"/service/accounts/verify_email/", json)
      .done(function (resp) {
             if (resp['success']) {
                 popupClose(VerifyPopUp);
@@ -154,7 +191,7 @@ function resetPasswordStart() {
     $("#"+form_id+" .message").empty();
     $("#"+form_id+" .email_errors").empty();
 
-    $.post("accounts/reset_password/start/", json)
+    $.post(document.location.origin+"/service/accounts/reset_password/start/", json)
      .done(function (resp) {
             if (resp['success']) {
                 popupClose(ResetPasswordEmailPopUp);
@@ -174,7 +211,7 @@ function resetPasswordConfirm() {
     $("#"+form_id+" .verify_code_errors").empty();
 
 
-    $.post("accounts/reset_password/confirm/", json)
+    $.post(document.location.origin+"/service/accounts/reset_password/confirm/", json)
      .done(function (resp) {
             if (resp['success']) {
                 popupClose(ResetPasswordCodePopUp);
@@ -195,7 +232,7 @@ function resetPasswordComplete() {
     $("#"+form_id+" .password2_errors").empty();
 
 
-    $.post("accounts/reset_password/complete/", json)
+    $.post(document.location.origin+"/service/accounts/reset_password/complete/", json)
      .done(function (resp) {
             if (resp['success']) {
                 popupClose(NewPasswordPopUp);
@@ -226,7 +263,7 @@ function createSubscription() {
     $("#"+form_id+" .message").empty();
 
     if (offer_id.length) {
-        $.post("/ajax/subscriptions/create/", json
+        $.post(document.location.origin+"/service/subscriptions/create/", json
         ).done(function (reps) {
 
 
@@ -235,7 +272,7 @@ function createSubscription() {
 
 
             $.post(
-                    "/ajax/payments/paypal/create/",
+                    document.location.origin+"/service/payments/paypal/create/",
                     subscription_data
                 ).done(function (resp) {
 
@@ -274,8 +311,6 @@ function showMessages(data, form_id) {
 }
 
 function showErrorMessages(messages, form_id) {
-
-
 
     const keys = Object.keys(messages);
 
