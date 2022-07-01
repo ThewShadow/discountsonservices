@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.views.generic import ListView, FormView, CreateView, TemplateView, View, RedirectView
 from datetime import datetime
-from . import service
+from service import service
 from social_django.models import UserSocialAuth
 from django.core.exceptions import PermissionDenied
 from paypal.standard.forms import PayPalPaymentsForm
