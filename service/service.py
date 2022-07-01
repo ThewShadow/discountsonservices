@@ -38,10 +38,9 @@ def send_reset_password_code(code, to):
 
 
 def user_email_uniq(user, email):
-    return models.CustomUser.objects\
+    return not models.CustomUser.objects\
         .exclude(id=user.id)\
         .filter(email=email)\
-        .count()\
         .exists()
 
 
