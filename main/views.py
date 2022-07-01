@@ -34,35 +34,30 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class CommonMixin:
-
-    def get_common_data(self, request, **kwargs):
-        kwargs['all_products'] = Product.objects.all()
-        kwargs['login_form'] = LoginForm()
-        kwargs['register_form'] = RegistrationForm()
-        kwargs['verify_email_form'] = VerifyEmailForm()
-        kwargs['questions_list'] = FAQ.objects.all()
-        kwargs['forget_pass_code_form'] = ResetPasswordVerifyForm()
-        kwargs['forget_pass_email_form'] = ResetPasswordForm()
-        kwargs['new_pass_form'] = NewPasswordForm()
-
-        return kwargs
+class BaseContextMixin:
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        common = self.get_common_data(self.request, **kwargs)
-        return dict(list(context.items()) + list(common.items()))
+        common = BaseContextMixin._get_base_context()
+        context.update(common)
+        return context
+
+    @staticmethod
+    def _get_base_context():
+        common_context = dict()
+        common_context['all_products'] = Product.objects.all()
+        common_context['login_form'] = LoginForm()
+        common_context['register_form'] = RegistrationForm()
+        common_context['activation_email_form'] = VerifyEmailForm()
+        common_context['questions_list'] = FAQ.objects.all()
+        common_context['forget_pass_code_form'] = ResetPasswordVerifyForm()
+        common_context['forget_pass_email_form'] = ResetPasswordForm()
+        common_context['new_pass_form'] = NewPasswordForm()
+
+        return common_context
 
 
-class PaidCompleteView(View):
-
-    def get(self, request, **kwargs):
-        response = redirect('index')
-        response.set_cookie(key='paid_success', value=True)
-        return response
-
-
-class IndexView(CommonMixin, ListView):
+class IndexView(BaseContextMixin, ListView):
     template_name = 'main/index.html'
     model = Product
 
@@ -85,7 +80,7 @@ class LogoutView(View):
         return redirect(reverse_lazy('index'))
 
 
-class OffersView(CommonMixin, ListView):
+class OffersView(BaseContextMixin, ListView):
     template_name = 'main/offers.html'
     model = Offer
 
@@ -93,9 +88,8 @@ class OffersView(CommonMixin, ListView):
         rate_slug = self.kwargs.get('rate_slug', None)
         if not rate_slug:
             product_slug = self.kwargs.get('slug', None)
+
             offers = Offer.objects.filter(product__slug=product_slug)
-
-
             if offers.exists():
                 min_offer = offers.order_by('price')
                 min_offer = min_offer.first()
@@ -142,9 +136,9 @@ class OffersView(CommonMixin, ListView):
         return context
 
 
-class ProfileView(CommonMixin, LoginRequiredMixin, FormView):
+class ProfileView(BaseContextMixin, LoginRequiredMixin, FormView):
     template_name = 'main/user_profile.html'
-    login_url = 'not_authorizate'
+    login_url = 'unauthorized'
     redirect_field_name = 'redirect_to'
     form_class = ChangeUserInfoForm
 
@@ -160,7 +154,7 @@ class ProfileView(CommonMixin, LoginRequiredMixin, FormView):
     def post(self, *args, **kwargs):
         form = ChangeUserInfoForm(self.request.POST)
         if form.is_valid():
-            change_profile_info(self.request, form)
+            service.change_profile_info(self.request, form)
 
         return super().post(*args, **kwargs)
 
@@ -168,15 +162,25 @@ class ProfileView(CommonMixin, LoginRequiredMixin, FormView):
         return reverse_lazy('profile')
 
 
-class NotAuthorizate(CommonMixin, TemplateView):
-    template_name = 'main/not_authorizate.html'
+class UserSubscriptionsView(BaseContextMixin, LoginRequiredMixin, ListView):
+    login_url = 'unauthorized'
+    redirect_field_name = 'redirect_to'
+    model = Subscription
+    form_class = ChangeUserInfoForm
+    template_name = 'main/user_subscriptions.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context= super().get_context_data()
+        context['user_subscriptions'] = Subscription.objects.filter(
+            user__id=self.request.user.id)
+        return context
 
 
-class SupportView(CommonMixin, LoginRequiredMixin, CreateView):
+class SupportView(BaseContextMixin, LoginRequiredMixin, CreateView):
     template_name = 'main/support.html'
     model = User
     form_class = SupportCreateTaskForm
-    login_url = 'not_authorizate'
+    login_url = 'unauthorized'
     redirect_field_name = 'redirect_to'
     success_url = reverse_lazy('index')
 
@@ -192,25 +196,25 @@ class SupportView(CommonMixin, LoginRequiredMixin, CreateView):
         return redirect(reverse_lazy('index'))
 
 
-class AboutUsView(CommonMixin, TemplateView):
+class AboutUsView(BaseContextMixin, TemplateView):
     template_name = 'main/about_us.html'
 
 
-class UserSubscriptionsView(CommonMixin, LoginRequiredMixin, ListView):
-    login_url = 'not_authorizate'
-    redirect_field_name = 'redirect_to'
-    model = Subscription
-    form_class = ChangeUserInfoForm
-    template_name = 'main/user_subscriptions.html'
-
-    def get_context_data(self, *args, **kwargs):
-        context= super().get_context_data()
-        context['user_subscriptions'] = Subscription.objects.filter(
-            user__id=self.request.user.id)
-        return context
+class FAQView(BaseContextMixin, ListView):
+    model = FAQ
+    template_name = 'main/faq.html'
+    context_object_name = 'questions_list'
 
 
-class ManagerPanelView(CommonMixin, LoginRequiredMixin, TemplateView):
+class PaidCompleteView(View):
+
+    def get(self, request, **kwargs):
+        response = redirect('index')
+        response.set_cookie(key='paid_success', value=True)
+        return response
+
+
+class ManagerPanelView(BaseContextMixin, LoginRequiredMixin, TemplateView):
     template_name = 'main/manager_panel.html'
 
     def get(self, request, **kwargs):
@@ -237,17 +241,15 @@ class ManagerPanelView(CommonMixin, LoginRequiredMixin, TemplateView):
         return context
 
 
-class FAQView(CommonMixin, ListView):
-    model = FAQ
-    template_name = 'main/faq.html'
-    context_object_name = 'questions_list'
+class Unauthorized(BaseContextMixin, TemplateView):
+    template_name = 'main/unauthorized.html'
 
 
-class PayPalPaymentCancelView(CommonMixin, TemplateView):
+class PayPalPaymentCancelView(BaseContextMixin, TemplateView):
     template_name = 'payments/paypal_cancel.html'
 
 
-class PayPalPaymentReturnView(CommonMixin, TemplateView):
+class PayPalPaymentReturnView(BaseContextMixin, TemplateView):
     template_name = 'payments/paypal_return.html'
 
     def get(self, request, **kwargs):
@@ -259,34 +261,4 @@ class PayPalPaymentReturnView(CommonMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['order_id'] = self.request.session.get('sub_id', None)
         return context
-
-
-def user_email_uniq(user, email):
-    return CustomUser.objects.exclude(id=user.id).filter(email=email).count() == 0 \
-           and UserSocialAuth.objects.exclude(user=user).filter(uid=email).count() == 0
-
-def change_profile_info(request, form):
-    user = request.user
-    new_username = form.cleaned_data.get('username')
-    new_email = form.cleaned_data.get('email')
-
-    if user.email == new_email and user.username == new_username:
-        return
-
-    from django.contrib import messages
-
-    if user_email_uniq(user, new_email):
-        user.email = new_email
-        user.username = new_username
-        try:
-            social_user = UserSocialAuth.objects.get(user__id=request.user.id)
-        except:
-            pass
-        else:
-            social_user.uid = new_email
-            social_user.save()
-        finally:
-            user.save()
-
-
 

@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_registration',
     'main.apps.MainConfig',
     'phonenumber_field',
     'paypal.standard.ipn',
@@ -190,7 +189,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'zvichayniy.vick@gmail.com'
-EMAIL_HOST_PASSWORD = 'etjadkyhtddcwgda'
+EMAIL_HOST_PASSWORD = 'ovkjlmcuwckkicvf'
 EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = 'example@gmail.comv'
 MANAGERS_EMAILS = ['zvichayniy.vick@gmail.com', 'futuredevback1@gmail.com']

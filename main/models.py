@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+
+import config.settings
 from .managers import CustomUserManager
 
 
@@ -104,12 +106,12 @@ class Subscription(models.Model):
 
     def notify_managers(self):
         from config.settings import MANAGERS_EMAILS
-        from django.core.mail import EmailMultiAlternatives
+        from django.core.mail import EmailMessage
 
         subject, from_email, to = 'New subscription', 'noreplyexample@mail.com', MANAGERS_EMAILS
         html_content = Subscription.generate_message_for_managers_html(self)
 
-        msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+        msg = EmailMessage(subject, html_content, from_email, to, headers={'From': 'noreplyexample@mail.com'})
         msg.content_subtype = "html"
         msg.send()
 
@@ -126,10 +128,11 @@ class Subscription(models.Model):
     def notify_customer(self):
         from django.core.mail import EmailMultiAlternatives
 
-        subject, from_email, to = 'Subscription activated!', 'noreplyexample@mail.com', [self.email]
+        subject, to = 'Subscription activated!', [self.email]
         html_content = Subscription.generate_message_for_customer(self)
 
-        msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+        msg = EmailMultiAlternatives(subject, html_content, config.settings.DEFAULT_FROM_EMAIL,
+                                     to=to,  headers={'From': 'noreplyexample@mail.com'})
         msg.content_subtype = "html"
         msg.send()
 

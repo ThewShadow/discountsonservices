@@ -13,9 +13,9 @@ def get_payment_form(request):
     sub_obj = shortcuts.get_object_or_404(models.Subscription, id=sub_id)
 
     if settings.DEBUG and settings.NGROK_DOMAIN:
-        notify_url = test_url + urls.reverse_lazy('paypal-ipn'),
-        return_url = test_url + urls.reverse_lazy('paypal_return'),
-        cancel_return = test_url + urls.reverse_lazy('paypal_cancel'),
+        notify_url = test_url + '/paypal-ipn',
+        return_url = test_url + '/paypal_return',
+        cancel_return = test_url + '/paypal_cancel',
     else:
         notify_url = request.build_absolute_uri(urls.reverse_lazy('paypal-ipn')),
         return_url = request.build_absolute_uri(urls.reverse_lazy('paypal_return')),
@@ -27,9 +27,6 @@ def get_payment_form(request):
         "currency_code": str(sub_obj.offer.currency.code).upper(),
         "item_name": 'test',
         "invoice": sub_id,
-        "notify_url": notify_url,
-        "return_url": return_url,
-        "cancel_return": cancel_return,
         "notify_url": notify_url,
         "return_url": return_url,
         "cancel_return": cancel_return,

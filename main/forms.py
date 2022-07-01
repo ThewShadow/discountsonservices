@@ -108,7 +108,7 @@ class RegistrationForm(Form):
 
 
 class VerifyEmailForm(Form):
-    verify_code = forms.IntegerField(required=True)
+    activation_code = forms.CharField(required=True)
 
 
 class ResetPasswordForm(Form):

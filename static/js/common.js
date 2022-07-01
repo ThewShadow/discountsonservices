@@ -171,7 +171,7 @@ function verify() {
     var json = getJson(register_form);
     $("#"+form_id+" .message").empty();
 
-    $.post(document.location.origin+"/service/accounts/verify_email/", json)
+    $.post(document.location.origin+"/service/accounts/activation_email/", json)
      .done(function (resp) {
             if (resp['success']) {
                 popupClose(VerifyPopUp);

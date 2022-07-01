@@ -15,8 +15,7 @@ from main.forms import CustomUserCreationForm
 from main.forms import ResetPasswordForm
 from main.forms import ResetPasswordVerifyForm
 from main.forms import NewPasswordForm
-from django.contrib.auth import authenticate, login, logout
-from django.core.mail import EmailMultiAlternatives
+from django.contrib.auth import authenticate, login
 from django.utils.translation import gettext as _
 from django.core.exceptions import ObjectDoesNotExist
 import logging
@@ -25,48 +24,52 @@ from service import google
 from service import paypal
 import threading
 
+logger = logging.Logger(__name__)
 
 
 class SubscriptionCreate(View):
 
     def post(self, request, **kwargs):
+
         form = SubscribeCreateForm(self.request.POST)
-        if form.is_valid():
-            offer = get_object_or_404(Offer, id=form.cleaned_data['offer_id'])
+        if not form.is_valid():
+            return JsonResponse({'success': False,
+                                 'error_messages': dict(form.errors)},
+                                status=400)
+
+        offer = get_object_or_404(Offer, id=form.cleaned_data['offer_id'])
+
+        new_subscription = None
+        try:
+            new_subscription = Subscription.objects.get(
+                offer__id=offer.id,
+                user=self.request.user,
+                email=form.cleaned_data['email'],
+                paid=False)
+        except:
+            new_subscription = Subscription()
+            new_subscription.email = form.cleaned_data['email']
+            new_subscription.phone_number = form.cleaned_data['phone_number']
+            new_subscription.offer = offer
+            new_subscription.user_name = form.cleaned_data['user_name']
+            new_subscription.user = self.request.user
 
             try:
-                new_subscription = Subscription.objects.get(
-                    offer__id=offer.id,
-                    user=self.request.user,
-                    email=form.cleaned_data['email'],
-                    paid=False)
+                new_subscription.save()
 
-            except Exception as e:
+                thread = threading.Thread(target=new_subscription.notify_managers)
+                thread.start()
 
-                new_subscription = Subscription()
-                new_subscription.email = form.cleaned_data['email']
-                new_subscription.phone_number = form.cleaned_data['phone_number']
-                new_subscription.offer = offer
-                new_subscription.user_name = form.cleaned_data['user_name']
-                new_subscription.user = self.request.user
+            except Exception as excp:
+                logger.critical(excp)
 
-                try:
-                    new_subscription.save()
-                    thread = threading.Thread(target=new_subscription.notify_managers)
-                    thread.start()
-                    #new_subscription.notify_managers()
-                except Exception as e:
-                    print(e)
+        finally:
+            if not new_subscription:
+                return JsonResponse({'success': False}, status=400)
 
-            finally:
-                if new_subscription:
-                    resp = {'success': True, 'sub_id': new_subscription.id}
-                    request.session['current_offer_id'] = form.cleaned_data['offer_id']
-                    return JsonResponse(resp, status=200)
-                else:
-                    return JsonResponse({'success': False}, status=400)
-        else:
-            return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
+            resp = {'success': True, 'sub_id': new_subscription.id}
+            request.session['current_offer_id'] = form.cleaned_data['offer_id']
+            return JsonResponse(resp, status=200)
 
 
 class CryptoPayCreate(View):
@@ -101,7 +104,9 @@ class CryptoPayCreate(View):
 
             return JsonResponse(response)
         else:
-            return JsonResponse({'success': False, 'message': 'Bad Request'}, status=400)
+            return JsonResponse({'success': False,
+                                 'message': _('Bad Request')},
+                                status=400)
 
 
 class GoogleLogin(View):
@@ -155,7 +160,9 @@ class Login(View):
         form = LoginForm(self.request.POST)
 
         if not form.is_valid():
-            return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
+            return JsonResponse({'success': False,
+                                 'error_messages': dict(form.errors)},
+                                status=400)
 
         email = form.cleaned_data['email']
         password = form.cleaned_data['password']
@@ -163,10 +170,14 @@ class Login(View):
         user = authenticate(username=email, password=password)
 
         if user is None:
-            return JsonResponse({'success': False, 'message': Login.MESSAGES['failed_auth']}, status=401)
+            return JsonResponse({'success': False,
+                                 'message': Login.MESSAGES['failed_auth']},
+                                status=401)
 
         if not user.verified and not user.is_superuser:
-            return JsonResponse({'success': False, 'message': Login.MESSAGES['error_verify']}, status=401)
+            return JsonResponse({'success': False,
+                                 'message': Login.MESSAGES['error_verify']},
+                                status=401)
 
         login(self.request, user)
 
@@ -179,28 +190,23 @@ class Registration(View):
     def post(self, request, **kwargs):
 
         form = self.class_form(self.request.POST)
-
         if not form.is_valid():
-            return JsonResponse(
-                {
-                    'success': False,
-                    'error_messages': dict(form.errors)
-                },
-                status=400
-            )
+            return JsonResponse({'success': False,
+                                'error_messages': dict(form.errors)},
+                                status=400)
 
-        user = form.save()
+        customer_email = form.cleaned_data['email']
+        activation_code = service.gen_verify_code()
 
-        verify_code = service.gen_verify_code()
-        request.session['verify_email'] = user.email
-        request.session['verify_code'] = verify_code
+        send_code = threading.Thread(
+            target=service.send_activation_account_code,
+            args=(activation_code, customer_email))
+        send_code.start()
 
-        subject, from_email, to = 'Email verify', 'noreplyexample@mail.com', form.cleaned_data['email']
-        html_content = f'<h1>You verify code</h1><p>{verify_code}</p>'
+        request.session['activation_code'] = activation_code
+        request.session['activation_email'] = customer_email
 
-        msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
-        msg.content_subtype = "html"
-        msg.send()
+        form.save()
 
         return JsonResponse({'success': True}, status=201)
 
@@ -208,6 +214,7 @@ class Registration(View):
 class ResetPasswordConfirm(View):
 
     def post(self, request, **kwargs):
+
         form = ResetPasswordVerifyForm(request.POST)
         if form.is_valid():
             verify_code = form.cleaned_data.get('verify_code')
@@ -215,35 +222,46 @@ class ResetPasswordConfirm(View):
             verify_code_check = request.session.get('reset_pass_verify_code')
             if not verify_code_check:
                 return JsonResponse(
-                    {'success': False, 'message': 'Session expired'}, status=400)
+                    {'success': False, 'message': _('Session expired')}, status=400)
 
             if str(verify_code) == verify_code_check:
                 return JsonResponse({'success': True}, status=200)
             else:
-                return JsonResponse({'success': False, 'message': 'invalid verification code'}, status=400)
+                return JsonResponse({'success': False,
+                                     'message': _('invalid verification code')},
+                                    status=400)
         else:
-            return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
+            return JsonResponse({'success': False,
+                                 'error_messages': dict(form.errors)},
+                                status=400)
 
 
 class ResetPasswordComplete(View):
 
     def post(self, request, **kwargs):
+
         form = NewPasswordForm(request.POST)
         if form.is_valid():
             reset_pass_email = request.session.get('reset_pass_email')
             if not reset_pass_email:
-                return JsonResponse({'success': False, 'message': 'Session expired'}, status=400)
+                return JsonResponse({'success': False,
+                                     'message': 'Session expired'},
+                                    status=400)
 
             try:
                 user = CustomUser.objects.get(email=reset_pass_email)
             except ObjectDoesNotExist:
-                return JsonResponse({'success': False, 'message': 'User does not exist'}, status=400)
+                return JsonResponse({'success': False,
+                                     'message': 'User does not exist'},
+                                    status=400)
             else:
                 user.set_password(form.cleaned_data.get('password1'))
                 user.save()
                 return JsonResponse({'success': True}, status=200)
         else:
-            return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
+            return JsonResponse({'success': False,
+                                 'error_messages': dict(form.errors)},
+                                status=400)
 
 
 class ResetPassword(View):
@@ -251,49 +269,61 @@ class ResetPassword(View):
     def post(self, request, **kwargs):
 
         form = ResetPasswordForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            reset_code = service.gen_verify_code()
+        if not form.is_valid():
+            return JsonResponse({'success': False,
+                                 'error_messages': dict(form.errors)},
+                                status=400)
 
-            request.session['reset_pass_email'] = email
-            request.session['reset_pass_verify_code'] = reset_code
+        customer_email = form.cleaned_data['email']
+        reset_code = service.gen_verify_code()
 
-            subject, from_email, to = 'Email verify', 'noreplyexample@mail.com', email
-            html_content = f'<h1>Youre reset password code</h1><p>{reset_code}</p>'
+        request.session['reset_pass_email'] = customer_email
+        request.session['reset_pass_verify_code'] = reset_code
 
-            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
-            msg.content_subtype = "html"
-            msg.send()
+        send_reset_code = threading.Thread(
+            target=service.send_reset_password_code,
+            args=(reset_code, customer_email))
+        send_reset_code.start()
 
-            return JsonResponse({'success': True}, status=200)
-
-        return JsonResponse({'success': False, 'error_messages': dict(form.errors)}, status=400)
+        return JsonResponse({'success': True}, status=200)
 
 
-class VerifyEmail(View):
+class ActivationEmail(View):
 
     def post(self, *args, **kwargs):
         form = VerifyEmailForm(self.request.POST)
         if not form.is_valid():
-            return JsonResponse({"success": False, 'message': 'Incorrect input data'}, status=400)
+            return JsonResponse({"success": False,
+                                 'message': _('Incorrect input data')},
+                                status=400)
 
-        verify_code = self.request.session.get('verify_code', None)
-        verify_email = self.request.session.get('verify_email', None)
+        original_code = self.request.session.get('activation_code', None)
+        activation_email = self.request.session.get('activation_email', None)
+        verifiable_code = form.cleaned_data.get('activation_code')
 
-        if verify_code is None:
-            return JsonResponse({"success": False, 'message': 'Session expired'}, status=400)
-        else:
-            if str(verify_code) == str(form.cleaned_data['verify_code']):
-                try:
-                    user = CustomUser.objects.get(email=verify_email)
-                except ObjectDoesNotExist:
-                    return JsonResponse({"success": False, 'message': 'User is not found'}, status=400)
-                else:
-                    user.verified = True
-                    user.save()
-                    return JsonResponse({"success": True})
-            else:
-                return JsonResponse({"success": False, 'message': 'Incorrect code'}, status=400)
+        if original_code is None or activation_email is None:
+            return JsonResponse({"success": False,
+                                 'message': _('Session expired')},
+                                status=400)
+
+        if str(verifiable_code) != str(original_code):
+            return JsonResponse({"success": False,
+                                 'message': _('Incorrect code')},
+                                status=400)
+
+        try:
+            user = CustomUser.objects.get(email=activation_email)
+            user.verified = True
+            user.save()
+        except ObjectDoesNotExist:
+            return JsonResponse({"success": False,
+                                 'message': _('User is not found')},
+                                status=400)
+
+        return JsonResponse({"success": True})
+
+
+
 
 
 
