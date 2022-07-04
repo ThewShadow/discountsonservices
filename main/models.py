@@ -4,9 +4,10 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-
+from django.template.loader import render_to_string
 import config.settings
 from .managers import CustomUserManager
+from django.core.mail import EmailMultiAlternatives
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -105,69 +106,22 @@ class Subscription(models.Model):
         return f'{self.user} - {self.offer}'
 
     def notify_managers(self):
-        from config.settings import MANAGERS_EMAILS
-        from django.core.mail import EmailMessage
-
-        subject, from_email, to = 'New subscription', 'noreplyexample@mail.com', MANAGERS_EMAILS
-        html_content = Subscription.generate_message_for_managers_html(self)
-
-        msg = EmailMessage(subject, html_content, from_email, to, headers={'From': 'noreplyexample@mail.com'})
-        msg.content_subtype = "html"
-        msg.send()
-
-        self.send_to_telegram()
-
-    def send_to_telegram(self):
-        from telebot import TeleBot
-        from config.settings import TELEGRAM_BOT_API_KEY
-        from config.settings import TELEGRAM_GROUP_MANAGERS_ID as chat_id
-        bot = TeleBot(TELEGRAM_BOT_API_KEY)
-        message = Subscription.generate_message_for_managers_telegram(self)
-        bot.send_message(chat_id=chat_id, text=message)
+        message = render_to_string(
+            'messages_templates/telegram/new_subscription_manager.html',
+            {'subscription': self,
+             'order_date': self.order_date.strftime("%d/%m/%y %H:%M")})
+        send_to_telegram(message)
 
     def notify_customer(self):
-        from django.core.mail import EmailMultiAlternatives
-
         subject, to = 'Subscription activated!', [self.email]
-        html_content = Subscription.generate_message_for_customer(self)
+        html_content = render_to_string(
+            'email_templates/subscription_activated.html',
+            {'subscription': self})
 
         msg = EmailMultiAlternatives(subject, html_content, config.settings.DEFAULT_FROM_EMAIL,
                                      to=to,  headers={'From': 'noreplyexample@mail.com'})
         msg.content_subtype = "html"
         msg.send()
-
-    @staticmethod
-    def generate_message_for_managers_html(subscription):
-        data = [
-            f'<h3>You have a new subscription order (id: {subscription.id})</h3>',
-            f'<p>Plan: {str(subscription.offer)}</p>',
-            f'<p>User id: {subscription.user.id}</p>',
-            f'<p>User email: {subscription.email}</p>',
-            f'<p>Phone number: {subscription.phone_number}</p>',
-            f'<p>Payment type: {subscription.payment_type}</p>',
-            f'<p>Order date: {subscription.order_date.strftime("%d/%m/%y %H:%M")}</p>'
-        ]
-        return '\n'.join(data)
-
-    @staticmethod
-    def generate_message_for_managers_telegram(subscription):
-        data = [
-            f'You have a new subscription order (id: {subscription.id})',
-            f'Plan: {str(subscription.offer)}',
-            f'User id: {subscription.user.id}',
-            f'User email: {subscription.email}',
-            f'Phone number: {subscription.phone_number}',
-            f'Order date: {subscription.order_date.strftime("%d/%m/%y %H:%M")}'
-        ]
-        return '\n'.join(data)
-
-    @staticmethod
-    def generate_message_for_customer(subscription):
-        data = [
-            f'<h3>Your subscription activated ({str(subscription.offer)}</h3>',
-            f'<h4>Enjoy!</h4>',
-        ]
-        return '\n'.join(data)
 
 
 class SupportTask(models.Model):
@@ -180,5 +134,25 @@ class SupportTask(models.Model):
     def __str__(self):
         return f'{self.pub_date} {self.user} {self.title}'
 
+
+class Transaction(models.Model):
+    transaction_id = models.CharField(max_length=250, null=True)
+    date_create = models.DateTimeField()
+    subscription = models.ForeignKey('Subscription', on_delete=models.CASCADE)
+
+    def notify_managers(self):
+        message = render_to_string(
+            'messages_templates/telegram/paid_subscription_manager.html',
+            {'subscription': self.subscription,
+             'transaction': self})
+        send_to_telegram(message)
+
+
+def send_to_telegram(message):
+    from telebot import TeleBot
+    from config.settings import TELEGRAM_BOT_API_KEY
+    from config.settings import TELEGRAM_GROUP_MANAGERS_ID as chat_id
+    bot = TeleBot(TELEGRAM_BOT_API_KEY)
+    bot.send_message(chat_id=chat_id, text=message)
 
 

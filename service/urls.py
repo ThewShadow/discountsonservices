@@ -24,7 +24,14 @@ urlpatterns = [
          name='cryptogen'),
     path('subscriptions/create/', views.SubscriptionCreate.as_view(),
          name='create_subscription'),
-    path('payments/paypal/create/', views.PayPalCreate.as_view(),
+    path('paypal/receiving_payment/', views.PayPalPaymentReceiving.as_view(),
          name='paypal_form_create'),
+
+    # paypal payment callbacks
+    path('paypal_error/', views.PayPalErrorView.as_view(),
+         name='paypal_error'),
+    # paypal payment callbacks
+    path('paypal_return/', views.PayPalPaymentReturnView.as_view(),
+         name='paypal_return'),
 
 ]

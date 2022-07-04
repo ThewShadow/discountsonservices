@@ -27,11 +27,13 @@ SECRET_KEY = 'django-insecure-s=%ahjk93t0he#!6by2pv8moi3)9ib5l59oxj@dhqrwgeq-!cm
 DEBUG = True
 
 BASE_URL = ''
-NGROK_DOMAIN = 'https://4e5a-46-118-172-5.eu.ngrok.io'
+NGROK_DOMAIN = 'https://c41c-46-118-172-5.eu.ngrok.io'
 
 ALLOWED_HOSTS = ['localhost', NGROK_DOMAIN.replace('https://', '')]
 
-CSRF_TRUSTED_ORIGINS = [NGROK_DOMAIN, 'http://localhost']
+CSRF_TRUSTED_ORIGINS = [NGROK_DOMAIN, 'http://localhost', 'https://www.paypalobjects.com', 'http://127.0.0.1']
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
 
 # Application definition
 
@@ -45,9 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'phonenumber_field',
-    'paypal.standard.ipn',
-    'django.contrib.sites',
-    'service.apps.SocialauthConfig',
+    'service.apps.ServiceConfig',
 ]
 
 SITE_ID = 1
@@ -71,7 +71,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            'main/templates'
+            'main/templates',
+            'service/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -82,7 +83,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
+                'main.context_processors.base_context',
             ],
+
         },
     },
 ]
@@ -194,7 +197,7 @@ EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = 'example@gmail.comv'
 MANAGERS_EMAILS = ['zvichayniy.vick@gmail.com', 'futuredevback1@gmail.com']
 
-PAYPAL_RECEIVER_EMAIL = 'sb-twdid17300769@business.example.com'
+PAYPAL_RECEIVER_EMAIL = 'sb-cdl0418110295@business.example.com'
 PAYPAL_TEST = True
 
 VERIFY_CODE_LENGTH = 6
@@ -227,5 +230,7 @@ LOGGING = {
 }
 
 TELEGRAM_BOT_API_KEY = '2041978799:AAGzNh7MLrdbwNg4TBUcBJI_UmSVH9TeXuU'
-TELEGRAM_GROUP_MANAGERS_ID = '-627579064'
+TELEGRAM_GROUP_MANAGERS_ID = '-757413350'
+
+PAYPAL_CLIENT_ID = 'Aa8PaxYQyyYIvzISVFbZ6PJbZlc_DRFl0QtTH7IcwYpTJz9lggiHR9Co4n4qgi4secbvd8zeDpq30-Zd'
 

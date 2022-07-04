@@ -108,7 +108,7 @@ function setPayment() {
 			selectOption = $this.find('option'),
 			selectOptionLength = selectOption.length,
 			selectedOption = selectOption.filter(':selected'),
-			selectedOptionValue = selectedOption.attr('value');
+			selectedOptionValue = selectedOption.attr('value').toUpperCase();
 		dur = 500;
 
 		$this.hide();
@@ -133,7 +133,7 @@ function setPayment() {
 			$('<li>', {
 				class: 'select__item',
 				html: $('<span>', {
-					text: selectOption.eq(i).text(),
+					text: selectOption.eq(i).text().toUpperCase(),
 				}),
 			})
 				.attr('data-value', selectOption.eq(i).val())
@@ -156,6 +156,7 @@ function setPayment() {
 
 					selectList.slideUp(dur);
 					selectGap.removeClass('on');
+					selectGap.parent().parent().submit()
 				});
 			} else {
 				$(this).removeClass('on');

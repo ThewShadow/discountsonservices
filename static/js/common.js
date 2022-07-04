@@ -48,7 +48,7 @@ $('.register-button').click(function (event){
 
 $(".get-started-button").click(function (event){
     event.preventDefault();
-    document.cookie = "offer_id=" + this.id;
+    document.cookie = "offer_id="+ this.id +"; path=/";
     popupOpen(CreateSubsctiptionPopUp);
 });
 
@@ -264,26 +264,12 @@ function createSubscription() {
 
     if (offer_id.length) {
         $.post(document.location.origin+"/service/subscriptions/create/", json
-        ).done(function (reps) {
+        ).done(function (resp) {
 
-
-            subscription_data = getJson($('#csrf_ajax_token').serializeArray());
-            subscription_data["sub_id"] = reps["sub_id"];
-
-
-            $.post(
-                    document.location.origin+"/service/payments/paypal/create/",
-                    subscription_data
-                ).done(function (resp) {
-
-                    popupClose(CreateSubsctiptionPopUp);
-                    popupOpen(PaymentPopUp);
-
-                    $('#paypal-form').prepend(resp['paypal_porm'])
-
-                }).fail(function (resp) {
-                        showMessages(resp, form_id);
-                });
+            document.cookie = "sub_id="+resp.sub_id+"; path=/"
+            document.cookie = "offer_price="+resp.offer_price+"; path=/"
+            popupClose(CreateSubsctiptionPopUp);
+            popupOpen(PaymentPopUp);
         }).fail(function (resp) {
             showMessages(resp, form_id);
         });

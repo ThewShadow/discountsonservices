@@ -1,13 +1,13 @@
+import datetime
 import service.service as service
 from django.shortcuts import redirect, get_object_or_404, render, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.views.generic import View
-from paypal.standard.forms import PayPalPaymentsForm
 from main.models import CustomUser
 from main.models import Offer
-from main.models import Subscription
+from main.models import Subscription, Transaction
 from main.forms import LoginForm
 from main.forms import SubscribeCreateForm
 from main.forms import VerifyEmailForm
@@ -21,8 +21,12 @@ from django.core.exceptions import ObjectDoesNotExist
 import logging
 from service import crypto
 from service import google
-from service import paypal
 import threading
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView
+from main.mixins import BaseContextMixin
+
 
 logger = logging.Logger(__name__)
 
@@ -67,7 +71,7 @@ class SubscriptionCreate(View):
             if not new_subscription:
                 return JsonResponse({'success': False}, status=400)
 
-            resp = {'success': True, 'sub_id': new_subscription.id}
+            resp = {'success': True, 'sub_id': new_subscription.id, 'offer_price': offer.price}
             request.session['current_offer_id'] = form.cleaned_data['offer_id']
             return JsonResponse(resp, status=200)
 
@@ -140,12 +144,42 @@ class GoogleLoginComplete(View):
         return redirect(reverse_lazy('profile'))
 
 
-class PayPalCreate(View):
+@method_decorator(csrf_exempt, name='dispatch')
+class PayPalPaymentReceiving(View):
 
     def post(self, request, **kwargs):
-        context = {'form': PayPalPaymentsForm(initial=paypal.get_payment_form(request))}
-        template = render_to_string('main/paypal_form.html', context=context)
-        return JsonResponse({"paypal_porm": template})
+        from main.forms import TransactionForm
+        import json
+        payment_data = json.loads(request.body)
+
+        if 'purchase_units' not in payment_data:
+            return JsonResponse({'success': False}, status=400)
+
+        for data in payment_data['purchase_units']:
+            sub_id = data['custom_id']
+            if not sub_id:
+                return JsonResponse({'success': False}, status=400)
+
+            customer_subscription = Subscription.objects.filter(id=sub_id).first()
+
+            init = {
+                'transaction_id': payment_data['id'],
+                'date_create': datetime.datetime.now(),
+                'subscription': customer_subscription
+            }
+
+            form = TransactionForm(init)
+
+            if form.is_valid():
+                transaction = form.save()
+                transaction.notify_managers()
+
+                customer_subscription.paid = True
+                customer_subscription.save()
+
+                return JsonResponse({'success': True}, status=200)
+            else:
+                return JsonResponse({'success': False}, status=400)
 
 
 class Login(View):
@@ -321,6 +355,20 @@ class ActivationEmail(View):
                                 status=400)
 
         return JsonResponse({"success": True})
+
+
+class PayPalErrorView(TemplateView):
+    template_name = 'service/paypal_error.html'
+
+
+class PayPalPaymentReturnView(View):
+
+    def get(self, request, **kwargs):
+        response = HttpResponseRedirect(reverse_lazy('index'))
+        response.set_cookie(key='paid_success', value=True)
+        return response
+
+
 
 
 

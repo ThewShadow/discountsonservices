@@ -28,14 +28,4 @@ urlpatterns = [
     path('admin_panel/', views.ManagerPanelView.as_view(),
          name='manager_panel'),
 
-    # external libraries
-    path('paypal/', include('paypal.standard.ipn.urls')),
-
-    # paypal payment callbacks
-    path('paypal_return/', views.PaidCompleteView.as_view(),
-         name='paypal_return'),
-    path('paypal_cancel/', views.PayPalPaymentCancelView.as_view(),
-         name='paypal_cancel'),
-
-
 ]

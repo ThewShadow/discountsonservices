@@ -5,6 +5,8 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
+from .models import Transaction
+
 
 class CustomUserCreationForm(ModelForm):
 
@@ -134,11 +136,9 @@ class NewPasswordForm(Form):
         if not pass1 == pass2:
             self.add_error('password2', _('Passwords do not match'))
 
-# class BitcoinPaymentForm(Form):
-#     blockchains = [
-#         ('solana', '')
-#     ]
-#
-#     currencies = [
-#         ('bitcoin', 'Bitcoin')
-#     ]
+
+class TransactionForm(ModelForm):
+
+    class Meta:
+        model = Transaction
+        fields = ('transaction_id', 'date_create', 'subscription',)

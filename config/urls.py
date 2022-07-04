@@ -20,12 +20,13 @@ from django.conf.urls.i18n import i18n_patterns
 
 import config.settings as settings
 from django.conf.urls.static import static
+from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('service/', include('service.urls')),
-    # external libraries
-    #path('paypal/', include('paypal.standard.ipn.urls')),
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
   + i18n_patterns(
         path('i18n/', include('django.conf.urls.i18n')),

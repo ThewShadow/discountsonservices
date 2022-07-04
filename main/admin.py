@@ -3,7 +3,7 @@ from .models import Product, Rate, Subscription, Offer, Currency, SupportTask, P
 from modeltranslation.admin import TranslationAdmin
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
+from .models import CustomUser, Transaction
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
@@ -41,6 +41,8 @@ class CurrencyAdmin(TranslationAdmin):
 class ProductAdmin(TranslationAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
+
+
 admin.site.register(Rate, RateAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Currency, CurrencyAdmin)
@@ -50,5 +52,6 @@ admin.site.register(Subscription, SubscriptionAdmin)
 admin.site.register(PaymentType)
 admin.site.register(FAQ)
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Transaction)
 
 

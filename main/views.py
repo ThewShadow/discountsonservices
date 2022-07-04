@@ -30,34 +30,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 import logging
+from main.mixins import BaseContextMixin
 
 logger = logging.getLogger(__name__)
 
 
-class BaseContextMixin:
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        common = BaseContextMixin._get_base_context()
-        context.update(common)
-        return context
-
-    @staticmethod
-    def _get_base_context():
-        common_context = dict()
-        common_context['all_products'] = Product.objects.all()
-        common_context['login_form'] = LoginForm()
-        common_context['register_form'] = RegistrationForm()
-        common_context['activation_email_form'] = VerifyEmailForm()
-        common_context['questions_list'] = FAQ.objects.all()
-        common_context['forget_pass_code_form'] = ResetPasswordVerifyForm()
-        common_context['forget_pass_email_form'] = ResetPasswordForm()
-        common_context['new_pass_form'] = NewPasswordForm()
-
-        return common_context
-
-
-class IndexView(BaseContextMixin, ListView):
+class IndexView(ListView):
     template_name = 'main/index.html'
     model = Product
 
@@ -80,7 +58,7 @@ class LogoutView(View):
         return redirect(reverse_lazy('index'))
 
 
-class OffersView(BaseContextMixin, ListView):
+class OffersView(ListView):
     template_name = 'main/offers.html'
     model = Offer
 
@@ -136,7 +114,7 @@ class OffersView(BaseContextMixin, ListView):
         return context
 
 
-class ProfileView(BaseContextMixin, LoginRequiredMixin, FormView):
+class ProfileView(LoginRequiredMixin, FormView):
     template_name = 'main/user_profile.html'
     login_url = 'unauthorized'
     redirect_field_name = 'redirect_to'
@@ -162,7 +140,7 @@ class ProfileView(BaseContextMixin, LoginRequiredMixin, FormView):
         return reverse_lazy('profile')
 
 
-class UserSubscriptionsView(BaseContextMixin, LoginRequiredMixin, ListView):
+class UserSubscriptionsView(LoginRequiredMixin, ListView):
     login_url = 'unauthorized'
     redirect_field_name = 'redirect_to'
     model = Subscription
@@ -214,7 +192,7 @@ class PaidCompleteView(View):
         return response
 
 
-class ManagerPanelView(BaseContextMixin, LoginRequiredMixin, TemplateView):
+class ManagerPanelView(LoginRequiredMixin, TemplateView):
     template_name = 'main/manager_panel.html'
 
     def get(self, request, **kwargs):
@@ -241,24 +219,6 @@ class ManagerPanelView(BaseContextMixin, LoginRequiredMixin, TemplateView):
         return context
 
 
-class Unauthorized(BaseContextMixin, TemplateView):
+class Unauthorized(TemplateView):
     template_name = 'main/unauthorized.html'
-
-
-class PayPalPaymentCancelView(BaseContextMixin, TemplateView):
-    template_name = 'payments/paypal_cancel.html'
-
-
-class PayPalPaymentReturnView(BaseContextMixin, TemplateView):
-    template_name = 'payments/paypal_return.html'
-
-    def get(self, request, **kwargs):
-        response = super().get(request, **kwargs)
-        response.set_cookie(key='paid_success', value=True)
-        return response
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['order_id'] = self.request.session.get('sub_id', None)
-        return context
 
