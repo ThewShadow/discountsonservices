@@ -26,7 +26,7 @@ class CustomUserAdmin(UserAdmin):
 
 
 class RateAdmin(TranslationAdmin):
-    pass
+    prepopulated_fields = {'slug': ('count', 'name',)}
 
 class SubscriptionAdmin(admin.ModelAdmin):
     readonly_fields = ('order_date',)

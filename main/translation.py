@@ -6,7 +6,7 @@ class RateTranslationOptions(TranslationOptions):
     fields = ('name',)
 
 class OfferTranslationOptions(TranslationOptions):
-    fields = ('name',)
+    fields = ('name', 'description')
 
 class ProductTranslationOptions(TranslationOptions):
     fields = ('name',)
@@ -18,4 +18,4 @@ class CurrencyTranslationOptions(TranslationOptions):
 translator.register(Offer, OfferTranslationOptions)
 translator.register(Currency, CurrencyTranslationOptions)
 translator.register(Product, ProductTranslationOptions)
-translator.register(Rate, OfferTranslationOptions)
+translator.register(Rate, RateTranslationOptions)
