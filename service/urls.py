@@ -28,9 +28,6 @@ urlpatterns = [
          name='paypal_form_create'),
 
     # paypal payment callbacks
-    path('paypal_error/', views.PayPalErrorView.as_view(),
-         name='paypal_error'),
-    # paypal payment callbacks
     path('paypal_return/', views.PayPalPaymentReturnView.as_view(),
          name='paypal_return'),
 

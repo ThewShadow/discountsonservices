@@ -31,7 +31,7 @@ def send_activation_account_code(code, to):
 def send_reset_password_code(code, to):
     from_email = settings.EMAIL_HOST_USER
     subject = _('Password reset code',)
-    html_content = render_to_string('reset_password_code.html',
+    html_content = render_to_string('email_templates/reset_password_code.html',
                                     {'code': code})
     msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
     msg.content_subtype = "html"

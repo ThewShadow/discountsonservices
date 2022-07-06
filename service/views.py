@@ -184,33 +184,26 @@ class PayPalPaymentReceiving(View):
 
 class Login(View):
 
-    MESSAGES = {
-        'error_verify': _('Email not verified'),
-        'failed_auth': _('Wrong login or password')
-    }
-
     def post(self, *args, **kwargs):
 
         form = LoginForm(self.request.POST)
-
         if not form.is_valid():
             return JsonResponse({'success': False,
                                  'error_messages': dict(form.errors)},
                                 status=400)
 
-        email = form.cleaned_data['email']
-        password = form.cleaned_data['password']
-
-        user = authenticate(username=email, password=password)
+        user = authenticate(
+            username=form.cleaned_data['email'],
+            password=form.cleaned_data['password'])
 
         if user is None:
             return JsonResponse({'success': False,
-                                 'message': Login.MESSAGES['failed_auth']},
+                                 'message': _('Wrong login or password')},
                                 status=401)
 
         if not user.verified and not user.is_superuser:
             return JsonResponse({'success': False,
-                                 'message': Login.MESSAGES['error_verify']},
+                                 'message': _('Email not verified')},
                                 status=401)
 
         login(self.request, user)
@@ -357,8 +350,6 @@ class ActivationEmail(View):
         return JsonResponse({"success": True})
 
 
-class PayPalErrorView(TemplateView):
-    template_name = 'service/paypal_error.html'
 
 
 class PayPalPaymentReturnView(View):

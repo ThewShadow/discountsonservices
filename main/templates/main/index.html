@@ -13,9 +13,8 @@
     <div class="container">
         <div class="main__body">
             <div class="main__block main__content bg-blue">
-                <h1>Start enjoying a benefit
-                    of up to 50%</h1>
-                <p>You have always wanted to get the same product at a special price for you, without haggling - and it is yours.</p>
+                <h1>{% trans 'Start enjoying a benefit of up to 50%' %} </h1>
+                <p>{% trans 'You have always wanted to get the same product at a special price for you, without haggling - and it is yours.' %}</p>
                 <a href="##" class="btn btn-wh">Start using</a>
             </div>
             <div class="main__block block-img bg-white">
@@ -29,7 +28,7 @@
 
 <section class="subscribe">
     <div class="container">
-        <h2>Choose a subscribe</h2>
+        <h2>{% trans 'Choose a subscribe' %}</h2>
         <div class="subscribe__items">
             {% for item in products %}
 
@@ -37,7 +36,7 @@
                     <div class="subscribe__item-content">
                         <h3 style="background: {{ item.offer.product.background_color}}">{{ item.name }} subscribe rates</h3>
                         <p>{{ item.description }}</p>
-                        <a href="{% url 'offers_redirect' item.slug %}" class="btn btn-blue">Learn more</a>
+                        <a href="{% url 'offers_redirect' item.slug %}" class="btn btn-blue">{% trans 'Learn more' %}</a>
                     </div>
                     <div class="subscribe__item-img">
                          {% if item.avatar %}
@@ -53,7 +52,7 @@
 
 <section class="works">
     <div class="container">
-        <h2>How it works?</h2>
+        <h2>{% trans 'How it works?' %}</h2>
         <div class="works__steps">
                 <div class="works__step bg-white">
                     <div class="works__step-head">
@@ -64,28 +63,27 @@
                         </div>
 
                     </div>
-                    <p>Enter your account information</p>
+                    <p>{% trans 'Enter your account information' %}</p>
                 </div>
                 <div class="works__step bg-white">
                     <div class="works__step-head">
-                        <h4>Step 3</h4>
+                        <h4>{% trans 'Step 3' %}</h4>
                         <div class="works__icon-wrap">
                             <span></span>
                             <div class="works__icon works__icon-2"></div>
                         </div>
                     </div>
-                    <p>Select the desired subscribe and plan</p>
+                    <p>{% trans 'Select the desired subscribe and plan' %}</p>
                 </div>
                 <div class="works__step bg-white">
                     <div class="works__step-head">
-                        <h4>Step 3</h4>
+                        <h4>{% trans 'Step 3' %}</h4>
                         <div class="works__icon-wrap">
                             <span></span>
                             <div class="works__icon works__icon-3"></div>
                         </div>
                     </div>
-                    <p>Pay your bill
-                        with PayPal</p>
+                    <p>{% trans 'Pay your bill with PayPal' %}</p>
                 </div>
         </div>
         {% include 'blocks/invite.html' %}
@@ -93,13 +91,13 @@
 </section>
 <section class="about">
     <div class="container">
-        <h2>About us</h2>
+        <h2>{% trans 'About us' %}</h2>
         <div class="about__body">
             <div class="about__block bg-white about__content">
                 <img src="{% static 'img/icons/logo.png' %}" alt="logo">
-                <p>We offer you a subscribe to various media services at the best price.</p>
-                <p>We have partnered with several companies to help you find the best prices for your media subscribes and provide you with the best prices for the Premium subscribes you want.</p>
-                <p><strong>It's simple, fast and economical.</strong></p>
+                <p>{% trans 'We offer you a subscribe to various media services at the best price.' %}</p>
+                <p>{% trans 'We have partnered with several companies to help you find the best prices for your media subscribes and provide you with the best prices for the Premium subscribes you want.' %}</p>
+                <p><strong>{% trans "It's simple, fast and economical." %}</strong></p>
             </div>
             <div class="about__block bg-white block-img">
                 <img src="{% static 'img/about-img.jpg' %}" alt="It's simple, fast and economical.">
@@ -114,10 +112,10 @@
     <div class="container">
         <div class="more__body bg-blue">
             <div class="more__contetnt">
-                <h4>Request for an additional subscribe that was not found here</h4>
-                <p>Disney, Amazon Prime, Microsoft Office, Microsoft Windows</p>
+                <h4>{% trans 'Request for an additional subscribe that was not found here' %}</h4>
+                <p>{% trans 'Disney, Amazon Prime, Microsoft Office, Microsoft Windows' %}</p>
             </div>
-            <a href="##" class="btn-wh">Request</a>
+            <a href="##" class="btn-wh">{% trans 'Request' %}</a>
         </div>
     </div>
 </section>

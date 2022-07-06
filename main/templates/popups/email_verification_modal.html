@@ -1,3 +1,4 @@
+{% load i18n %}
 <div id="popup_3" class="popup">
     <div class="popup__body">
         <div class="popup__overlay"></div>
@@ -12,13 +13,17 @@
             </a>
 
             <div>
-                <h2 class="popup__title">Email verification</h2>
+                <h2 class="popup__title">{% trans 'Email verification' %}</h2>
                 <p class="popup__note">
-                    <span>Please enter the 6-digit verification code that was sent to name@gmail,com.
-                        The
-                        code
-                        is
-                        valid for 30 minutes.</span>
+                    <span>
+                        {% blocktranslate %}
+                            Please enter the 6-digit verification code that was sent to name@gmail,com.
+                            The
+                            code
+                            is
+                            valid for 30 minutes.
+                        {% endblocktranslate %}
+                    </span>
 
                 </p>
             </div>
@@ -27,8 +32,8 @@
                 <div class="popup__input-block popup__input-code">
                     <form id="verify-email-form">
                         {% csrf_token %}
-                        <span>Resent code</span>
-                        <p>Email verification code</p>
+                        <span>{% trans 'Resent code' %}</span>
+                        <p>{% trans 'Email verification code' %}</p>
                         {{ activation_email_form.activation_code }}
                         <div class="message"></div>
                     </form>
@@ -37,13 +42,12 @@
             </div>
 
             <div>
-                <button onclick="verify()" class="popup__btn-blue popup__btn-full" tabindex="2">Sing up</button>
+                <button onclick="verify()" class="popup__btn-blue popup__btn-full" tabindex="2">{% trans 'Sing up' %}</button>
             </div>
 
             <div>
-                <a href="##" class="popup__not-code">Didn’t receive the code?</a>
+                <a href="##" class="popup__not-code">{% trans 'Didn’t receive the code?' %}</a>
             </div>
-
 
         </div>
     </div>
