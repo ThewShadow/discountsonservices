@@ -1649,3 +1649,63 @@ INFO 2022-07-06 18:09:57,922 views 16308 140303486936832 ss
 INFO 2022-07-06 18:12:23,786 views 16308 140303870801664 ss
 INFO 2022-07-06 18:14:59,378 views 16308 140303870801664 ss
 INFO 2022-07-06 18:18:12,222 views 16308 140303870801664 ss
+INFO 2022-07-06 19:01:52,352 autoreload 25274 140016144967488 Watching for file changes with StatReloader
+INFO 2022-07-06 19:02:14,584 views 25274 140016088499968 ss
+ERROR 2022-07-06 19:02:16,363 log 25274 140016088499968 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 968, in do_if
+    nodelist = parser.parse(("endif",))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 518, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 581, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 272: 'if'. Looking for one of: endif.
+WARNING 2022-07-06 19:02:19,522 log 25274 140016088499968 Not Found: /favicon.ico
+INFO 2022-07-06 19:39:56,533 views 25274 140016080107264 ss
+INFO 2022-07-06 19:43:26,609 views 25274 140016080107264 ss
+INFO 2022-07-06 19:46:44,736 views 25274 140016080107264 ss
+INFO 2022-07-06 19:49:12,942 views 25274 140016080107264 ss
+INFO 2022-07-06 19:55:17,034 views 25274 140016080107264 ss
+INFO 2022-07-06 19:55:43,978 views 25274 140015866738432 ss
+INFO 2022-07-06 19:58:15,633 views 25274 140015866738432 ss
+INFO 2022-07-06 19:59:47,095 views 25274 140015866738432 ss
+INFO 2022-07-06 20:05:51,453 views 25274 140015866738432 ss
+INFO 2022-07-06 20:06:21,937 views 25274 140015866738432 ss
