@@ -214,11 +214,18 @@ class ManagerPanelView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['new_subscriptions'] = Subscription.objects.filter(status=1).order_by('-order_date')
         context['all_statuses'] = Subscription.STATUSES
+        new_subs = Subscription.objects\
+                               .filter(status=1)\
+                               .order_by('-order_date')
+
+        context['new_subscriptions'] = new_subs
         return context
 
 
 class Unauthorized(TemplateView):
     template_name = 'main/unauthorized.html'
 
+
+class PayPalErrorView(TemplateView):
+    template_name = 'main/paypal_error.html'

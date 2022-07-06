@@ -4,7 +4,7 @@
 
 {% block title %}
 
-    <title>{% trans "Home" %}</title>
+    <title>{% trans "Offers" %}</title>
 
 {% endblock%}
 
@@ -14,13 +14,13 @@
 <section class="service">
     <div class="container">
         <div class="service__body">
-            <h1 class="service__title">Choose a {{ product.name }} Plan</h1>
+            <h1 class="service__title">{% trans 'Choose a' %} {{ product.name }} {% trans 'Plan' %}</h1>
             {% if rates|length == 1 %}
                 {% for rate in rates %}
-                  <p class="service__note">Select the subscription type for a period of <span>{{ rate }}</span>
+                  <p class="service__note">{% trans 'Select the subscription type for a period of' %} <span>{{ rate }}</span>
                 {% endfor %}
               {% else %}
-              <p class="service__note">Listen without limits at a bargain price</p>
+              <p class="service__note">{% trans 'Listen without limits at a bargain price' %}</p>
                 <div class="service__period">
                     {% for rate in rates %}
                       {% if rate.slug == rate_slug %}
@@ -47,32 +47,14 @@
                     </ul>
                     <div class="tariff__price">$<span>{{ item.price }}</span></div>
                     <button  class="tariff__btn-get get-started-button" id="{{ item.id }}" >
-                        Get started
+                        {% trans 'Get started' %}
                     </button>
                 </div>
               {% endfor %}
             </div>
         </div>
-        <div class="invite bg-blue">
-            <div class="invite__content">
-                <h3>Invite friends</h3>
-                <p>
-                    Starting today up to 50% for NETFLIX, YOUTUBE, SPOTIFY subscriptions with a secure
-                    payment from PAYPAL
-                </p>
-            </div>
-            <div class="invite__link-block">
-                <p>Click on the link</p>
-                <div class="invite__link">
-                    <a href="https://t.me/DiscountsOnServices_bot?start=343964809">Discounts On Services</a>
-                    <button></button>
-                </div>
-            </div>
-        </div>
+        {% include 'blocks/invite.html' %}
     </div>
 </section>
-
-
-
 
 {% endblock%}

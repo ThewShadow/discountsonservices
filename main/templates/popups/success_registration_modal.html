@@ -1,3 +1,4 @@
+{% load i18n %}
 <div id="popup_4" class="popup">
     <div class="popup__body">
         <div class="popup__overlay"></div>
@@ -12,17 +13,21 @@
             </a>
 
             <div class="popup__flex-block">
-                <h2 class="popup__title">Successful registration</h2>
+                <h2 class="popup__title">{% trans 'Successful registration' %}</h2>
                 <p class="popup__note">
-                    <span>By optimizing our work and using internal tools, we were able to lower the
-                        prices
-                        while keeping the highest possible.</span>
+                    <span>
+                        {% blocktranslate %}
+                            By optimizing our work and using internal tools, we were able to lower the
+                            prices
+                            while keeping the highest possible.
+                        {% endblocktranslate %}
+                    </span>
                 </p>
             </div>
 
 
             <div>
-                <button class="popup__btn-blue popup__btn-full" tabindex="2">Continue work</button>
+                <button class="popup__btn-blue popup__btn-full" tabindex="2">{% trans 'Continue work' %}</button>
             </div>
         </div>
     </div>

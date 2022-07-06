@@ -1,3 +1,4 @@
+{% load i18n %}
 <div id="popup_1" class="popup">
     <div class="popup__body">
         <div class="popup__overlay"></div>
@@ -14,8 +15,8 @@
             <div>
                 <h2 class="popup__title">Log in</h2>
                 <p class="popup__note">
-                    <span>New user?</span>
-                    <a href="#" class="register-link">Create an account</a>
+                    <span>{% trans 'New user?' %}</span>
+                    <a href="#" class="register-link">{% trans 'Create an account' %}</a>
                 </p>
             </div>
 
@@ -23,13 +24,13 @@
                 <form id="login-form" method="post">
                     {% csrf_token %}
                     <div class="popup__input-block">
-                        <p>Email Address</p>
+                        <p>{% trans 'Email Address' %}</p>
                         {{ login_form.email }}
                         <div class="email_errors"></div>
                     </div>
                     <div class="popup__input-block popup__input-password">
                         <button class="toggle-show hide"></button>
-                        <p>Password</p>
+                        <p>{% trans 'Password' %}</p>
                         {{ login_form.password }}
                         <div class="password_errors"></div>
                     </div>
@@ -38,11 +39,11 @@
 
             </div>
             <div class="popup__buttons-row">
-                <a href="#" class="popup__forgot-pasw forgot-pass-link">Forfot password?</a>
-                <a href="#" class="popup__btn-blue popup__btn-login login-button" tabindex="3">Log in</a>
+                <a href="#" class="popup__forgot-pasw forgot-pass-link">{% trans 'Forfot password?' %}</a>
+                <a href="#" class="popup__btn-blue popup__btn-login login-button" tabindex="3">{% trans 'Log in' %}</a>
             </div>
             <div class="sign-with">
-                <div class="sign-with__title"> <span>Or sign in with</span></div>
+                <div class="sign-with__title"> <span>{% trans 'Or sign in with' %}</span></div>
                 <div class="sign-with__socials">
                     <a class="sign-with__elem" href="{% url 'service:google-auth2'  %}"></a>
                     <div class="sign-with__elem"></div>
@@ -51,8 +52,8 @@
                 </div>
             </div>
             <div class="popup__captcha">
-                Protected by reCAPTCHA and subject to the Google <a href="##">Privacy Policy</a> and
-                <a href="##">Terms of Service</a>
+                {% trans 'Protected by reCAPTCHA and subject to the Google' %} <a href="##">{% trans 'Privacy Policy' %}</a> and
+                <a href="##">{% trans 'Terms of Service' %}</a>
             </div>
         </div>
     </div>

@@ -1,3 +1,4 @@
+{% load i18n %}
 <div id="popup_8" class="popup">
 	<div class="popup__body">
 		<div class="popup__overlay"></div>
@@ -12,24 +13,24 @@
 			</a>
 
 			<div>
-				<h2 class="popup__title">Subscription Application</h2>
+				<h2 class="popup__title">{% trans 'Subscription Application' %}</h2>
 			</div>
 
 			<div class="popup__inputs">
 				<form id="subscription_app_form" action="POST">
 					{% csrf_token %}
 					<div class="popup__input-block">
-						<p>Enter your name</p>
+						<p>{% trans 'Enter your name' %}</p>
 						{{ sub_create_form.user_name }}
 												<div class="user_name_errors"></div>
 					</div>
 					<div class="popup__input-block">
-						<p>Email Address</p>
+						<p>{% trans 'Email Address' %}</p>
 						{{ sub_create_form.email }}
 												<div class="email_errors"></div>
 					</div>
 					<div class="popup__input-block">
-						<p>Phone</p>
+						<p>{% trans 'Phone' %}</p>
 						{{ sub_create_form.phone_number }}
 												<div class="phone_number_errors"></div>
 										</div>
@@ -41,7 +42,7 @@
 								{% csrf_token %}
 						</form>
 			<div>
-				<button class="popup__btn-blue popup__btn-full apply-button" tabindex="4">Apply</button>
+				<button class="popup__btn-blue popup__btn-full apply-button" tabindex="4">{% trans 'Apply' %}</button>
 			</div>
 		</div>
 	</div>

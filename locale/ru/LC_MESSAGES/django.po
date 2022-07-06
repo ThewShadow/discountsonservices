@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-08 15:27+0000\n"
+"POT-Creation-Date: 2022-07-06 16:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,229 +16,592 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: config/settings.py:126
+#: config/settings.py:138
 msgid "English"
-msgstr "Английский"
+msgstr "English"
 
-#: config/settings.py:127
-msgid "Ukraine"
-msgstr "Украинский"
+#: config/settings.py:139
+msgid "Russian"
+msgstr "Русский"
 
-#: main/templates/django_registration/activation_email_subject.txt:1
-msgid "Account activation on"
-msgstr "Аккаун активирован"
+#: config/settings.py:140
+msgid "Spain"
+msgstr ""
 
-#: main/templates/django_registration/registration_complete.html:4
-#, fuzzy
-#| msgid "Account activation on"
-msgid "Account activate"
-msgstr "Аккаун активирован"
+#: config/settings.py:141
+msgid "France"
+msgstr ""
 
-#: main/templates/django_registration/registration_complete.html:6
-msgid "Hello"
-msgstr "Привет"
+#: config/settings.py:142
+msgid "Israel"
+msgstr ""
 
-#: main/templates/django_registration/registration_complete.html:7
-msgid "You account activate succsessfuly."
-msgstr "Ваш аккаунт успешно активирован."
+#: main/forms.py:20
+msgid "Email already exists"
+msgstr "Электронная почта уже существует"
 
-#: main/templates/django_registration/registration_complete.html:7
-msgid "visite"
-msgstr "заходите"
+#: main/forms.py:100
+msgid "User with this email does not exist"
+msgstr "Пользователь с таким электронным адресом не существует"
 
-#: main/templates/django_registration/registration_complete.html:7
-msgid "the site."
-msgstr "на сайт"
+#: main/forms.py:121
+msgid "User not exist"
+msgstr "Пользователь не существует"
 
-#: main/templates/django_registration/registration_form.html:5
-#: main/templates/django_registration/registration_form.html:13
-msgid "Registration"
-msgstr "Регистрация"
+#: main/forms.py:136
+msgid "Passwords do not match"
+msgstr "Пароли не совпадают"
 
-#: main/templates/main/base.html:17
-msgid "home"
-msgstr "Главная"
+#: main/managers.py:15
+msgid "The Email must be set"
+msgstr "Электронная почта должна быть установлена"
 
-#: main/templates/main/base.html:18
-msgid "support"
-msgstr "Служба поддержки"
+#: main/managers.py:30
+msgid "Superuser must have is_staff=True."
+msgstr "Суперпользователь должен иметь is_staff=True."
 
-#: main/templates/main/base.html:21
-msgid "logout"
-msgstr "Выход"
+#: main/managers.py:32
+msgid "Superuser must have is_superuser=True."
+msgstr "Суперпользователь должен иметь is_superuser=True."
 
-#: main/templates/main/base.html:23
-msgid "login"
-msgstr "Вход"
+#: main/models.py:14
+msgid "email address"
+msgstr "Адрес электронной почты"
 
-#: main/templates/main/base.html:24
-msgid "register"
-msgstr "Регистрация"
+#: main/templates/blocks/faq.html:4 main/templates/main/faq.html:12
+msgid "How can we help you?"
+msgstr "Как мы можем вам помочь?"
 
-#: main/templates/main/base.html:40
-msgid "Change"
-msgstr "Изменить"
+#: main/templates/blocks/faq.html:14 main/templates/main/base.html:86
+#: main/templates/main/base.html:236 main/templates/main/faq.html:22
+msgid "Support"
+msgstr "Поддержка"
 
-#: main/templates/main/index.html:6 main/templates/main/offers.html:6
+#: main/templates/blocks/invite.html:4
+msgid "Invite friends"
+msgstr "Пригласить друзей"
+
+#: main/templates/blocks/invite.html:5
+#, python-format
+msgid ""
+"Starting today up to 50%% for NETFLIX, YOUTUBE, SPOTIFY subscriptions with a "
+"secure payment from PAYPAL"
+msgstr ""
+"С сегодняшнего дня скидки до 50%% на подписки NETFLIX, YOUTUBE, SPOTIFY с "
+"безопасный платеж через PAYPAL"
+
+#: main/templates/blocks/invite.html:8
+msgid "Click on the link"
+msgstr "Нажмите на ссылку"
+
+#: main/templates/email_templates/activation_account_code.html:10
+msgid "You activation account code:"
+msgstr "Активация аккаунта на"
+
+#: main/templates/email_templates/reset_password_code.html:9
+msgid "You code for reset password:"
+msgstr "Сброс пароля"
+
+#: main/templates/main/base.html:39
+msgid "Account"
+msgstr "Профиль"
+
+#: main/templates/main/base.html:46 main/templates/main/base.html:227
+msgid "Subscriptions"
+msgstr "Подписки"
+
+#: main/templates/main/base.html:67 main/templates/main/index.html:6
 msgid "Home"
 msgstr "Главная"
 
-#: main/templates/main/index.html:12
-msgid "Prise"
-msgstr "Товары"
+#: main/templates/main/base.html:77 main/templates/main/base.html:235
+#: main/templates/main/faq.html:4
+msgid "FAQ"
+msgstr ""
 
-#: main/templates/main/not_authorizate.html:11
-msgid "Permission denied, user not authorizate."
-msgstr "Доступ запрещен. Пользователь не авторизован!"
+#: main/templates/main/base.html:96 main/templates/main/base.html:234
+msgid "About"
+msgstr "О сайте"
 
-#: main/templates/main/not_authorizate.html:15
-msgid "Please, register or login to your personal account:"
-msgstr "Пожалуйста зарегистрируйтесь или войдите в личний аккаунт"
-
-#: main/templates/main/not_authorizate.html:19
-msgid "Register"
-msgstr "Регистрация"
-
-#: main/templates/main/not_authorizate.html:21
-#: main/templates/registration/login.html:5
-#: main/templates/registration/login.html:13
+#: main/templates/main/base.html:116
 msgid "Login"
+msgstr "Вход в систему"
+
+#: main/templates/main/base.html:117
+msgid "Sign up"
+msgstr "Войти"
+
+#: main/templates/main/base.html:124
+msgid "Log out"
+msgstr "Выход из системы"
+
+#: main/templates/main/base.html:165 main/templates/popups/login_modal.html:43
+msgid "Log in"
 msgstr "Вход"
 
-#: main/templates/main/offers.html:12
-msgid "Offers"
-msgstr "Предложения"
-
-#: main/templates/main/offers.html:16
-msgid "Buy"
-msgstr "Купить"
-
-#: main/templates/main/password_reset_complete.html:5
-#: main/templates/main/password_reset_confirm.html:5
-msgid "Change password"
-msgstr "Изменить пароль"
-
-#: main/templates/main/password_reset_complete.html:9
-msgid "Password reset sent"
-msgstr "Пароль сброшен"
-
-#: main/templates/main/password_reset_complete.html:11
-msgid ""
-"\n"
-"      We’ve emailed you instructions for setting your password,<br>\n"
-"      if an account exists with the email you entered. You should receive "
-"them shortly.<br>\n"
-"      If you don’t receive an email, please make sure you’ve entered the "
-"address you registered with,<br>\n"
-"      and check your spam folder.\n"
-"    "
-msgstr ""
-"\n"
-"Мы отправили вам инструкции по установке пароля по электронной почте,<br>\n"
-" если существует учетная запись с введенным вами адресом электронной почты. "
-"Вы должны получить скоро их.<br>\n"
-" Если вы не получили электронное письмо, убедитесь, что вы ввели адрес, с "
-"которым вы зарегистрировались,<br>\n"
-" и проверьте папку со спамом.\n"
-" "
-
-#: main/templates/main/password_reset_confirm.html:9
-msgid "Change youre password"
-msgstr "Забыли свой пароль?"
-
-#: main/templates/main/password_reset_confirm.html:15
-msgid "Confirm!"
-msgstr "Подтвердить"
-
-#: main/templates/main/password_reset_done.html:5
-#: main/templates/main/password_reset_done.html:9
-msgid "Password reset complete"
-msgstr "Пароль сброшен"
-
-#: main/templates/main/password_reset_done.html:10
-msgid "Your password has been set. You may go ahead and log in now."
-msgstr "Ваш пароль установлен. Вы можете продолжить и войти в систему сейчас."
-
-#: main/templates/main/password_reset_form.html:5
-msgid "Forgot Your Password?"
-msgstr "Забыли свой пароль?"
-
-#: main/templates/main/password_reset_form.html:9
-msgid "Forgot your password?"
-msgstr "Забыли свой пароль?"
-
-#: main/templates/main/password_reset_form.html:10
-msgid ""
-"Enter your email address below, and we'll email instructions for setting a "
-"new one."
-msgstr ""
-"Введите свой адрес электронной почты ниже, и мы вышлем инструкции по "
-"настройке."
-
-#: main/templates/main/password_reset_form.html:21
-msgid "Send me instructions"
-msgstr "Отправить инструкции"
-
-#: main/templates/main/subscribe.html:6
-msgid "Subscribe"
-msgstr "Оформление"
-
-#: main/templates/main/subscribe.html:12
-msgid "Subscriptions order"
-msgstr "Заказ подписки"
-
-#: main/templates/main/subscribe.html:20
-msgid "Order"
-msgstr "Заказ"
-
-#: main/templates/main/support.html:6
-msgid "Support"
-msgstr "Служба поддержки"
-
-#: main/templates/main/support.html:12
-msgid "SUPPORT"
-msgstr "Служба поддержки"
-
-#: main/templates/main/support.html:18
-msgid "Send to support"
-msgstr "Отправить в службу поддержки"
-
-#: main/templates/main/user_profile.html:7
+#: main/templates/main/base.html:169 main/templates/main/user_profile.html:7
+#: main/templates/main/user_subscriptions.html:7
 msgid "Profile"
 msgstr "Профиль"
 
-#: main/templates/main/user_profile.html:13
-msgid "MY SUBSCRIPTION"
+#: main/templates/main/base.html:184
+msgid "My profile"
+msgstr "Профиль"
+
+#: main/templates/main/base.html:196
+msgid "Logout"
+msgstr "Выход из системы"
+
+#: main/templates/main/base.html:223
+msgid "It's simple, fast and economical"
+msgstr "Это просто, быстро и экономично"
+
+#: main/templates/main/base.html:233
+msgid "Site navigation"
+msgstr "Навигация по сайту"
+
+#: main/templates/main/index.html:16
+#, python-format
+msgid "Start enjoying a benefit of up to 50%%"
+msgstr "Начните пользоваться выгодой до 50%%"
+
+#: main/templates/main/index.html:17
+msgid ""
+"You have always wanted to get the same product at a special price for you, "
+"without haggling - and it is yours."
+msgstr ""
+"Вы всегда хотели получить один и тот же товар по специальной для вас цене,не "
+"торгуясь - и она твоя."
+
+#: main/templates/main/index.html:31
+msgid "Choose a subscribe"
+msgstr "Выберите подписку"
+
+#: main/templates/main/index.html:39
+msgid "Learn more"
+msgstr "Узнать больше"
+
+#: main/templates/main/index.html:55
+msgid "How it works?"
+msgstr "Как это работает?"
+
+#: main/templates/main/index.html:66
+msgid "Enter your account information"
+msgstr "Введите данные своей учетной записи"
+
+#: main/templates/main/index.html:70 main/templates/main/index.html:80
+msgid "Step 3"
+msgstr "Шаг 3"
+
+#: main/templates/main/index.html:76
+msgid "Select the desired subscribe and plan"
+msgstr "Выберите желаемую подписку и план"
+
+#: main/templates/main/index.html:86
+msgid "Pay your bill with PayPal"
+msgstr "Оплатите счет с помощью PayPal"
+
+#: main/templates/main/index.html:94
+msgid "About us"
+msgstr "О нас"
+
+#: main/templates/main/index.html:98
+msgid "We offer you a subscribe to various media services at the best price."
+msgstr "Мы предлагаем вам подписку на различные медиа-сервисы по лучшей цене."
+
+#: main/templates/main/index.html:99
+msgid ""
+"We have partnered with several companies to help you find the best prices "
+"for your media subscribes and provide you with the best prices for the "
+"Premium subscribes you want."
+msgstr ""
+"Мы сотрудничаем с несколькими компаниями, чтобы помочь вам найти лучшие цены."
+"для подписки на ваши СМИ и предоставим вам лучшие цены наПремиум-подписки, "
+"которые вы хотите."
+
+#: main/templates/main/index.html:100
+msgid "It's simple, fast and economical."
+msgstr "Это просто, быстро и экономично."
+
+#: main/templates/main/index.html:115
+msgid "Request for an additional subscribe that was not found here"
+msgstr "Запрос на дополнительную подписку, которую здесь не нашел"
+
+#: main/templates/main/index.html:116
+msgid "Disney, Amazon Prime, Microsoft Office, Microsoft Windows"
+msgstr ""
+
+#: main/templates/main/index.html:118
+msgid "Request"
+msgstr "Запрос"
+
+#: main/templates/main/manager_panel.html:7
+msgid "Manager Panel"
+msgstr "Панель управления"
+
+#: main/templates/main/manager_panel.html:13
+msgid "Manager panel"
+msgstr "Панель управления"
+
+#: main/templates/main/offers.html:7
+msgid "Offers"
+msgstr "Предложения"
+
+#: main/templates/main/offers.html:17
+msgid "Choose a"
+msgstr "Выберите"
+
+#: main/templates/main/offers.html:17
+msgid "Plan"
+msgstr "План"
+
+#: main/templates/main/offers.html:20
+msgid "Select the subscription type for a period of"
+msgstr "Выберите тип подписки на период"
+
+#: main/templates/main/offers.html:23
+msgid "Listen without limits at a bargain price"
+msgstr "Слушайте без ограничений по выгодной цене"
+
+#: main/templates/main/offers.html:50
+msgid "Get started"
+msgstr "Начать"
+
+#: main/templates/main/unauthorized.html:6
+msgid "Unauthorized"
+msgstr "Не разрешено"
+
+#: main/templates/main/unauthorized.html:11
+msgid "Permission denied, user not authorized."
+msgstr "В разрешении отказано, пользователь не авторизован."
+
+#: main/templates/main/unauthorized.html:16
+msgid "Please, register or login to your personal account:"
+msgstr "Пожалуйста, зарегистрируйтесь или войдите в свой личный кабинет:"
+
+#: main/templates/main/user_profile.html:15
+#: main/templates/main/user_subscriptions.html:15
+msgid "Personal data management"
+msgstr "Управление личными данными"
+
+#: main/templates/main/user_profile.html:23
+#: main/templates/main/user_subscriptions.html:23
+msgid "Exit the office"
+msgstr "Выйти из кабинета"
+
+#: main/templates/main/user_profile.html:35
+#: main/templates/main/user_profile.html:51
+#: main/templates/main/user_subscriptions.html:35
+msgid "Account info"
+msgstr "Информация об аккаунте"
+
+#: main/templates/main/user_profile.html:45
+#: main/templates/main/user_subscriptions.html:45
+msgid "My Subscriptions"
 msgstr "Мои подписки"
 
-#: main/templates/main/user_profile.html:24
-msgid "Product"
-msgstr "Товар"
+#: main/templates/main/user_profile.html:60
+msgid "How can I call you?"
+msgstr "Как к вам обращаться?"
 
-#: main/templates/main/user_profile.html:25
-msgid "Rate"
-msgstr "Ставка"
+#: main/templates/main/user_profile.html:68
+msgid "Save changes"
+msgstr "Сохранить изменения"
 
-#: main/templates/main/user_profile.html:26
-msgid "Price"
-msgstr "Цена"
+#: main/templates/popups/crypto_payment_modal.html:16
+#: main/templates/popups/payment_modal.html:16
+msgid "Purchase payment"
+msgstr "Оплата"
 
-#: main/templates/main/user_profile.html:27
-msgid "Email"
-msgstr "Почта"
+#: main/templates/popups/crypto_payment_modal.html:19
+#: main/templates/popups/payment_modal.html:47
+msgid "Payment by crypto wallet"
+msgstr "Оплата крипто кошельком"
 
-#: main/templates/main/user_profile.html:28
-msgid "Status"
-msgstr "Статус"
+#: main/templates/popups/crypto_payment_modal.html:23
+msgid "The amount to be paid:"
+msgstr "Сумма к оплате:"
 
-#: main/templates/registration/login.html:18
-msgid "Reset password"
-msgstr "Изменить пароль"
+#: main/templates/popups/crypto_payment_modal.html:27
+msgid "Blockchain:"
+msgstr "Блокчейн:"
 
-#: main/templates/registration/login.html:22
-msgid "Login with"
-msgstr "Вход через"
+#: main/templates/popups/crypto_payment_modal.html:33
+msgid "You can copy the address:"
+msgstr "Вы можете скопировать адрес:"
+
+#: main/templates/popups/crypto_payment_modal.html:41
+msgid "ok"
+msgstr ""
+
+#: main/templates/popups/email_verification_modal.html:16
+#, fuzzy
+#| msgid "Email not verified"
+msgid "Email verification"
+msgstr "Электронная почта не подтверждена"
+
+#: main/templates/popups/email_verification_modal.html:19
+msgid ""
+"\n"
+"                            Please enter the 6-digit verification code that "
+"was sent to name@gmail,com.\n"
+"                            The\n"
+"                            code\n"
+"                            is\n"
+"                            valid for 30 minutes.\n"
+"                        "
+msgstr ""
+"\n"
+" Пожалуйста, введите 6-значный проверочный код, который было отправлено на "
+"имя@gmail,com.\n"
+"                            Затемкод\n"
+"является\n"
+"действителен в течение 30 минут.\n"
+" "
+
+#: main/templates/popups/email_verification_modal.html:35
+#: main/templates/popups/forget_password_code_modal.html:26
+msgid "Resent code"
+msgstr "Сброс пароля завершен"
+
+#: main/templates/popups/email_verification_modal.html:36
+#: main/templates/popups/forget_password_code_modal.html:27
+msgid "Email verification code"
+msgstr "Код подтверждения электронной почты"
+
+#: main/templates/popups/email_verification_modal.html:45
+#: main/templates/popups/registration_modal.html:58
+msgid "Sing up"
+msgstr "Войти"
+
+#: main/templates/popups/email_verification_modal.html:49
+msgid "Didn’t receive the code?"
+msgstr "Не получили код?"
+
+#: main/templates/popups/forget_password_code_modal.html:16
+#: main/templates/popups/forget_password_email_modal.html:16
+#: main/templates/popups/new_password_modal.html:16
+msgid "Forget Password"
+msgstr "Забыли пароль?"
+
+#: main/templates/popups/forget_password_code_modal.html:18
+msgid "We will send reset code in this email."
+msgstr "Мы отправим код сброса в этом письме."
+
+#: main/templates/popups/forget_password_code_modal.html:36
+#: main/templates/popups/forget_password_email_modal.html:35
+msgid "Submit"
+msgstr "Подтвердить"
+
+#: main/templates/popups/forget_password_email_modal.html:18
+msgid "We will send reset code in this emaill."
+msgstr "Мы отправим код сброса в этом письме."
+
+#: main/templates/popups/forget_password_email_modal.html:26
+#: main/templates/popups/login_modal.html:27
+#: main/templates/popups/registration_modal.html:33
+#: main/templates/popups/subscription_app.html:28
+msgid "Email Address"
+msgstr "Адрес электронной почты"
+
+#: main/templates/popups/login_modal.html:18
+msgid "New user?"
+msgstr "Новый пользователь?"
+
+#: main/templates/popups/login_modal.html:19
+#: main/templates/popups/registration_modal.html:16
+msgid "Create an account"
+msgstr "Создать аккаунт"
+
+#: main/templates/popups/login_modal.html:33
+#: main/templates/popups/new_password_modal.html:27
+#: main/templates/popups/registration_modal.html:39
+msgid "Password"
+msgstr "Пароль"
+
+#: main/templates/popups/login_modal.html:42
+#, fuzzy
+#| msgid "Forgot your password?"
+msgid "Forfot password?"
+msgstr "Забыли пароль?"
+
+#: main/templates/popups/login_modal.html:46
+#: main/templates/popups/registration_modal.html:62
+msgid "Or sign in with"
+msgstr "Войти с"
+
+#: main/templates/popups/login_modal.html:55
+msgid "Protected by reCAPTCHA and subject to the Google"
+msgstr "Защищено reCAPTCHA и подлежит Google"
+
+#: main/templates/popups/login_modal.html:55
+#: main/templates/popups/registration_modal.html:53
+msgid "Privacy Policy"
+msgstr "Политика конфиденциальности"
+
+#: main/templates/popups/login_modal.html:56
+msgid "Terms of Service"
+msgstr "условия обслуживания"
+
+#: main/templates/popups/logout.html:16
+msgid "Are you sure want to logout?"
+msgstr "Вы уверены, что хотите выйти?"
+
+#: main/templates/popups/logout.html:21
+msgid "Cancel"
+msgstr "Отмена"
+
+#: main/templates/popups/logout.html:22
+msgid "Yes, Logout"
+msgstr "Выход из системы"
+
+#: main/templates/popups/new_password_modal.html:18
+msgid "Enter a new password."
+msgstr "Введите новый пароль."
+
+#: main/templates/popups/new_password_modal.html:33
+msgid "Confirm Password"
+msgstr "Подтвердить пароль"
+
+#: main/templates/popups/new_password_modal.html:42
+msgid "Restore Password"
+msgstr "Восстановить пароль"
+
+#: main/templates/popups/payment_modal.html:26
+msgid "Card Number"
+msgstr "Номер карты"
+
+#: main/templates/popups/payment_modal.html:31
+msgid "Expiration Date"
+msgstr "Срок годности"
+
+#: main/templates/popups/payment_modal.html:42
+msgid "Pay with card"
+msgstr "Оплатить картой"
+
+#: main/templates/popups/payment_modal.html:44
+msgid "We do not collect information on your cards, everything is safe"
+msgstr "Мы не собираем информацию по вашим картам, все в безопасности"
+
+#: main/templates/popups/payment_modal.html:53
+msgid "Select currency"
+msgstr "Выберите валюту"
+
+#: main/templates/popups/payment_modal.html:62
+msgid "Select Blockchain"
+msgstr "Выберите Блокчейн"
+
+#: main/templates/popups/payment_modal.html:73
+msgid "Pay"
+msgstr "Оплатить"
+
+#: main/templates/popups/registration_modal.html:18
+msgid "Already have an account?"
+msgstr "У вас уже есть аккаунт?"
+
+#: main/templates/popups/registration_modal.html:19
+msgid "Sign In"
+msgstr "Войти"
+
+#: main/templates/popups/registration_modal.html:28
+msgid "User name"
+msgstr "Имя пользователя"
+
+#: main/templates/popups/registration_modal.html:53
+msgid "By creating an account you agree to our"
+msgstr "Создавая учетную запись, вы соглашаетесь с нашими"
+
+#: main/templates/popups/registration_modal.html:53
+msgid "and"
+msgstr "и"
+
+#: main/templates/popups/registration_modal.html:54
+msgid "Terms of Service."
+msgstr "Условия обслуживания."
+
+#: main/templates/popups/subscription_app.html:16
+msgid "Subscription Application"
+msgstr "Заявка на подписку"
+
+#: main/templates/popups/subscription_app.html:23
+msgid "Enter your name"
+msgstr "Введите ваше имя"
+
+#: main/templates/popups/subscription_app.html:33
+msgid "Phone"
+msgstr "Телефон"
+
+#: main/templates/popups/subscription_app.html:45
+msgid "Apply"
+msgstr "Подтвердить"
+
+#: main/templates/popups/subscription_paid_modal.html:20
+msgid "Subscription paid"
+msgstr "Подписка оплачена"
+
+#: main/templates/popups/subscription_paid_modal.html:24
+#: main/templates/popups/success_registration_modal.html:30
+msgid "Continue work"
+msgstr "Продолжить работу"
+
+#: main/templates/popups/success_registration_modal.html:16
+msgid "Successful registration"
+msgstr "Успешная регистрация"
+
+#: main/templates/popups/success_registration_modal.html:19
+msgid ""
+"\n"
+"                            By optimizing our work and using internal tools, "
+"we were able to lower the\n"
+"                            prices\n"
+"                            while keeping the highest possible.\n"
+"                        "
+msgstr ""
+"\n"
+" Оптимизируя нашу работу и используя внутренние инструменты, мы смогли "
+"снизить\n"
+"цены\n"
+" при сохранении максимально возможного.\n"
+" "
+
+#: service/service.py:23
+msgid "Activation email"
+msgstr "Электронная почта для активации"
+
+#: service/service.py:33
+msgid "Password reset code"
+msgstr "Код сброса пароля"
+
+#: service/views.py:112
+msgid "Bad Request"
+msgstr ""
+
+#: service/views.py:201
+msgid "Wrong login or password"
+msgstr "Неправильный логин или пароль"
+
+#: service/views.py:206
+msgid "Email not verified"
+msgstr "Электронная почта не проверена"
+
+#: service/views.py:252 service/views.py:333
+msgid "Session expired"
+msgstr "Сессия истекла"
+
+#: service/views.py:258
+msgid "invalid verification code"
+msgstr "неверный код подтверждения"
+
+#: service/views.py:324
+msgid "Incorrect input data"
+msgstr "Неверные входные данные"
+
+#: service/views.py:338
+msgid "Incorrect code"
+msgstr "неверный код"
+
+#: service/views.py:347
+msgid "User is not found"
+msgstr "Пользователь не найден"

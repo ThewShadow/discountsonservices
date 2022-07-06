@@ -19,13 +19,14 @@ urlpatterns = [
          name='offers_redirect'),
     path('unauthorized/', views.Unauthorized.as_view(),
          name='unauthorized'),
-    path('support/', views.SupportView.as_view(),
-         name='support'),
-    path('about/', views.AboutUsView.as_view(),
-         name='about_us'),
+
     path('faq/', views.FAQView.as_view(),
          name='faq_list'),
+
     path('admin_panel/', views.ManagerPanelView.as_view(),
          name='manager_panel'),
+
+    path('paypal_error/', views.PayPalErrorView.as_view(),
+         name='paypal_error'),
 
 ]

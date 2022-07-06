@@ -34,7 +34,6 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('email',)
 
 
-
 class SubscribeForm(ModelForm):
     class Meta:
         model = Subscription
@@ -63,6 +62,7 @@ class SupportCreateTaskForm(ModelForm):
                 'type': 'hidden'
             }),
         }
+
 
 class ChangeUserInfoForm(Form):
     username = forms.CharField(max_length=250, label='Your name')
@@ -100,7 +100,6 @@ class LoginForm(Form):
             raise ValidationError(_("User with this email does not exist"))
 
         return email
-
 
 
 class RegistrationForm(Form):
