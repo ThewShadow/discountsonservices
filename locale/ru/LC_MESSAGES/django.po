@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-06 22:29+0300\n"
+"POT-Creation-Date: 2022-07-06 23:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,7 +75,7 @@ msgid "How can we help you?"
 msgstr "Как мы можем вам помочь?"
 
 #: main/templates/blocks/faq.html:14 main/templates/main/base.html:86
-#: main/templates/main/base.html:236 main/templates/main/faq.html:22
+#: main/templates/main/base.html:233 main/templates/main/faq.html:22
 msgid "Support"
 msgstr "Поддержка"
 
@@ -108,7 +108,7 @@ msgstr "Сброс пароля"
 msgid "Account"
 msgstr "Профиль"
 
-#: main/templates/main/base.html:46 main/templates/main/base.html:227
+#: main/templates/main/base.html:46 main/templates/main/base.html:224
 msgid "Subscriptions"
 msgstr "Подписки"
 
@@ -116,49 +116,50 @@ msgstr "Подписки"
 msgid "Home"
 msgstr "Главная"
 
-#: main/templates/main/base.html:77 main/templates/main/base.html:235
+#: main/templates/main/base.html:77 main/templates/main/base.html:232
 #: main/templates/main/faq.html:4
 msgid "FAQ"
 msgstr ""
 
-#: main/templates/main/base.html:96 main/templates/main/base.html:234
+#: main/templates/main/base.html:96 main/templates/main/base.html:231
 msgid "About"
 msgstr "О сайте"
 
-#: main/templates/main/base.html:116
+#: main/templates/main/base.html:113
 msgid "Login"
 msgstr "Вход в систему"
 
-#: main/templates/main/base.html:117
+#: main/templates/main/base.html:114
 msgid "Sign up"
 msgstr "Войти"
 
-#: main/templates/main/base.html:124
+#: main/templates/main/base.html:121
 msgid "Log out"
 msgstr "Выход из системы"
 
-#: main/templates/main/base.html:165 main/templates/popups/login_modal.html:43
+#: main/templates/main/base.html:162 main/templates/popups/login_modal.html:16
+#: main/templates/popups/login_modal.html:43
 msgid "Log in"
 msgstr "Вход"
 
-#: main/templates/main/base.html:169 main/templates/main/user_profile.html:7
+#: main/templates/main/base.html:166 main/templates/main/user_profile.html:7
 #: main/templates/main/user_subscriptions.html:7
 msgid "Profile"
 msgstr "Профиль"
 
-#: main/templates/main/base.html:184
+#: main/templates/main/base.html:181
 msgid "My profile"
 msgstr "Профиль"
 
-#: main/templates/main/base.html:196
+#: main/templates/main/base.html:193
 msgid "Logout"
 msgstr "Выход из системы"
 
-#: main/templates/main/base.html:223
+#: main/templates/main/base.html:220
 msgid "It's simple, fast and economical"
 msgstr "Это просто, быстро и экономично"
 
-#: main/templates/main/base.html:233
+#: main/templates/main/base.html:230
 msgid "Site navigation"
 msgstr "Навигация по сайту"
 
