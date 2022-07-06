@@ -53,7 +53,9 @@
 							<h3 style="background: {{ item.offer.product.background_color}}">{{ item.offer.product.name }}</h3>
 							<div class="account__subscr-item-body">
 								<p>{{ item.offer.product.name }}</p>
-								<a href="{% url 'offers' slug=item.offer.product.slug rate_slug=item.offer.rate.slug %}">Change plan</a>
+								<a href="{% url 'offers' slug=item.offer.product.slug rate_slug=item.offer.rate.slug %}">
+									{% trans 'Change plan' %}
+								</a>
 							</div>
 						</div>
 						{% endfor %}

@@ -32,3 +32,6 @@ urlpatterns = [
          name='paypal_return'),
 
 ]
+
+
+s = "sdsd\"sdsdsd"

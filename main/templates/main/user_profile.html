@@ -53,7 +53,7 @@
 							{% csrf_token %}
 							<div class="account__info-inputs">
 								<label>
-									<p>ID user</p>
+									<p>{% trans 'ID user' %}</p>
 									<input disabled name="user_id" type="text" id="id_user_pk" value="{{ object.pk }}" >
 								</label>
 								<label>
@@ -61,7 +61,7 @@
 									{{ form.username }}
 								</label>
 								<label>
-									<p>E-mail</p>
+									<p>{% trans 'E-mail' %}</p>
 									{{ form.email }}
 								</label>
 							</div>
