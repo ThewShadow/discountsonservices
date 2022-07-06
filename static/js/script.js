@@ -215,3 +215,39 @@ function setPayment() {
 	}
 }
 
+
+//^ toggle services 
+
+const sudscribeWrap = document.querySelector('.subscribe__items')
+let sudscribeItems = document.querySelectorAll('.subscribe__item')
+const preview = document.querySelector('.subscribe__preview')
+const previewImage = document.querySelector('.subscribe__preview img')
+
+
+
+sudscribeWrap.addEventListener('click', (e) => {
+	let widthWindow = document.body.clientWidth;
+	if (widthWindow > 768) {
+		let current = e.target.closest('.subscribe__item')
+		if (current) {
+			toggleClass(current, sudscribeItems, 'active')
+			togglePreview(current)
+		}
+	}
+})
+
+
+
+function toggleClass(current, list, cssClass) {
+	list.forEach((el) => el.classList.remove(cssClass));
+	current.classList.add(cssClass);
+}
+
+function togglePreview(current) {
+	let color = current.querySelector('.subscribe__item-img').style.background;
+	let logo = current.querySelector('.subscribe__item-img img').src
+
+	preview.style.backgroundColor = color;
+	previewImage.src = logo;
+
+}

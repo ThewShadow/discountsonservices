@@ -3,122 +3,155 @@
 {% load static %}
 {% block title %}
 
-    <title>{% trans "Home" %}</title>
+<title>{% trans "Home" %}</title>
 
 {% endblock%}
 
 {% block main %}
 
-<section class="main">
-    <div class="container">
-        <div class="main__body">
-            <div class="main__block main__content bg-blue">
-                <h1>Start enjoying a benefit
-                    of up to 50%</h1>
-                <p>You have always wanted to get the same product at a special price for you, without haggling - and it is yours.</p>
-                <a href="##" class="btn btn-wh">Start using</a>
-            </div>
-            <div class="main__block block-img bg-white">
-                <img src="{% static 'img/main-img.jpg' %}" alt="Start enjoying a benefit
-                of up to 50%">
-            </div>
-        </div>
-    </div>
-</section>
-
-
 <section class="subscribe">
-    <div class="container">
-        <h2>Choose a subscribe</h2>
-        <div class="subscribe__items">
-            {% for item in products %}
+	<div class="container">
+		
+		<div class="subscribe__body">
+			<div class="subscribe__items">
 
-                <div class="subscribe__item bg-white">
-                    <div class="subscribe__item-content">
-                        <h3 style="background: {{ item.offer.product.background_color}}">{{ item.name }} subscribe rates</h3>
-                        <p>{{ item.description }}</p>
-                        <a href="{% url 'offers_redirect' item.slug %}" class="btn btn-blue">Learn more</a>
-                    </div>
-                    <div class="subscribe__item-img">
-                         {% if item.avatar %}
-                            <img src="{{ item.avatar.url }}" alt="name">
-                        {% endif %}
-                    </div>
-                </div>
-          {% endfor %}
-      </div>
+				<div class="subscribe__item active" id="sub-netflix">
+					<div class="subscribe__item-content">
+						<h3>Netflix</h3>
+						<p>
+							Unlimited movies, TV shows, and more. Watch anywhere. Cancel anytime.
+						</p>
+						<a href="##">Read more</a>
+					</div>
+					<div class="subscribe__item-img" style="background: #000;">
+						<img src="{% static 'img/netflix_logo.svg' %}" alt="netflix" />
+					</div>
+				</div>
 
-    </div>
+				<div class="subscribe__item" id="sub-spotify">
+					<div class="subscribe__item-content">
+						<h3>Spotify Premium</h3>
+						<p>
+							Premium lets you play any song, anytime. You can even listen when you’re
+							offline. No restrictions. Ad-free music listening.
+						</p>
+						<a href="##">Read more</a>
+					</div>
+					<div class="subscribe__item-img" style="background: #1ed760">
+						<img src="{% static 'img/spotify_logo.svg' %}" alt="netflix" />
+					</div>
+				</div>
+
+				<div class="subscribe__item" id="sub-youtube">
+					<div class="subscribe__item-content">
+						<h3>Youtube Premium</h3>
+						<p>
+							YouTube and YouTube Music without ads, in the background and offline.
+						</p>
+						<a href="##">Read more</a>
+					</div>
+					<div class="subscribe__item-img" style="background: #ff0000;">
+						<img src="{% static 'img/youtube_logo.svg' %}" alt="netflix" />
+					</div>
+				</div>
+
+			</div>
+			<div class="subscribe__preview">
+				<img src="{% static 'img/netflix_logo.svg' %}" alt="preview services">
+			</div>
+		</div>
+	</div>
 </section>
 
 <section class="works">
-    <div class="container">
-        <h2>How it works?</h2>
-        <div class="works__steps">
-                <div class="works__step bg-white">
-                    <div class="works__step-head">
-                        <h4>Step 1</h4>
-                        <div class="works__icon-wrap">
-                            <span></span>
-                            <div class="works__icon works__icon-1"></div>
-                        </div>
+	<div class="container">
+		<h2>How it works?</h2>
+		<div class="works__steps">
 
-                    </div>
-                    <p>Enter your account information</p>
-                </div>
-                <div class="works__step bg-white">
-                    <div class="works__step-head">
-                        <h4>Step 3</h4>
-                        <div class="works__icon-wrap">
-                            <span></span>
-                            <div class="works__icon works__icon-2"></div>
-                        </div>
-                    </div>
-                    <p>Select the desired subscribe and plan</p>
-                </div>
-                <div class="works__step bg-white">
-                    <div class="works__step-head">
-                        <h4>Step 3</h4>
-                        <div class="works__icon-wrap">
-                            <span></span>
-                            <div class="works__icon works__icon-3"></div>
-                        </div>
-                    </div>
-                    <p>Pay your bill
-                        with PayPal</p>
-                </div>
-        </div>
-        {% include 'blocks/invite.html' %}
-    </div>
+			<div class="works__step bg-white">
+				<div class="works__step-text">Entering information, registering on the site and filling in personal data.</div>
+				<div class="works__step-img">
+					<img src="{% static 'img/step-1.png' %}" alt="step 1">
+				</div>
+			</div>
+
+			<div class="works__step bg-white">
+				<div class="works__step-text">Choice of subscription, subscription type and subscription period.</div>
+				<div class="works__step-img">
+					<img src="{% static 'img/step-2.png' %}" alt="step 2">
+				</div>
+			</div>
+
+			<div class="works__step bg-white">
+				<div class="works__step-text">Payment stage, payment is made securely via PayPal or bank card.</div>
+				<div class="works__step-img">
+					<img src="{% static 'img/step-3.png' %}" alt="step 3">
+				</div>
+			</div>
+
+			<div class="works__step bg-white">
+				<div class="works__step-text">Receipt of the selected subscription by the subscriber.</div>
+				<div class="works__step-img">
+					<img src="{% static 'img/step-4.png' %}" alt="step 4">
+				</div>
+			</div>
+
+		</div>
+
+		{% include 'blocks/invite.html' %}
+	</div>
 </section>
+
+<!-- <section class="main">
+	<div class="container">
+		<div class="main__body">
+			<div class="main__block main__content bg-blue">
+				<h1>Start enjoying a benefit
+					of up to 50%</h1>
+				<p>You have always wanted to get the same product at a special price for you, without haggling - and it
+					is yours.</p>
+				<a href="##" class="btn btn-wh">Start using</a>
+			</div>
+			<div class="main__block block-img bg-white">
+				<img src="{% static 'img/main-img.jpg' %}" alt="Start enjoying a benefit
+                of up to 50%">
+			</div>
+		</div>
+	</div>
+</section> -->
+
+
 <section class="about">
-    <div class="container">
-        <h2>About us</h2>
-        <div class="about__body">
-            <div class="about__block bg-white about__content">
-                <img src="{% static 'img/icons/logo.png' %}" alt="logo">
-                <p>We offer you a subscribe to various media services at the best price.</p>
-                <p>We have partnered with several companies to help you find the best prices for your media subscribes and provide you with the best prices for the Premium subscribes you want.</p>
-                <p><strong>It's simple, fast and economical.</strong></p>
-            </div>
-            <div class="about__block bg-white block-img">
-                <img src="{% static 'img/about-img.jpg' %}" alt="It's simple, fast and economical.">
-            </div>
-        </div>
-    </div>
+	<div class="about__anchor" id="about"></div>
+	<div class="container">
+		<h2>About us</h2>
+		<div class="about__body">
+			<div class="about__block bg-white about__content">
+				<img src="{% static 'img/icons/logo.png' %}" alt="logo">
+				<p>We offer you a subscribe to various media services at the best price.</p>
+				<p>We have partnered with several companies to help you find the best prices for your media subscribes
+					and provide you with the best prices for the Premium subscribes you want.</p>
+				<p><strong>It's simple, fast and economical.</strong></p>
+			</div>
+			<div class="about__block bg-white block-img">
+				<img src="{% static 'img/about-img.jpg' %}" alt="It's simple, fast and economical.">
+			</div>
+		</div>
+	</div>
 </section>
 
 {% include "blocks/faq.html" %}
 
 <section class="more">
-    <div class="container">
-        <div class="more__body bg-blue">
-            <div class="more__contetnt">
-                <h4>Request for an additional subscribe that was not found here</h4>
-                <p>Disney, Amazon Prime, Microsoft Office, Microsoft Windows</p>
-            </div>
-            <a href="##" class="btn-wh">Request</a>
-        </div>
-    </div>
+	<div class="container">
+		<div class="more__body bg-blue">
+			<div class="more__contetnt">
+				<h4>Request for an additional subscribe that was not found here</h4>
+				<p>Disney, Amazon Prime, Microsoft Office, Microsoft Windows</p>
+			</div>
+			<a href="##" class="btn-wh">Request</a>
+		</div>
+	</div>
 </section>
+
 {% endblock%}
