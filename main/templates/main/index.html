@@ -1,95 +1,100 @@
 {% extends 'main/base.html' %}
 {% load i18n %}
 {% load static %}
+
 {% block title %}
-
-    <title>{% trans "Home" %}</title>
-
+	<title>{% trans "Home" %}</title>
 {% endblock%}
 
 {% block main %}
 
-<section class="main">
-    <div class="container">
-        <div class="main__body">
-            <div class="main__block main__content bg-blue">
-                <h1>{% trans 'Start enjoying a benefit of up to 50%' %} </h1>
-                <p>{% trans 'You have always wanted to get the same product at a special price for you, without haggling - and it is yours.' %}</p>
-                <a href="##" class="btn btn-wh">{% trans 'Start using' %}</a>
-            </div>
-            <div class="main__block block-img bg-white">
-                <img src="{% static 'img/main-img.jpg' %}" alt="Start enjoying a benefit
-                of up to 50%">
-            </div>
-        </div>
-    </div>
-</section>
-
-
 <section class="subscribe">
-    <div class="container">
-        <h2>{% trans 'Choose a subscribe' %}</h2>
-        <div class="subscribe__items">
-            {% for item in products %}
+	<div class="container">
 
-                <div class="subscribe__item bg-white">
-                    <div class="subscribe__item-content">
-                        <h3 style="background: {{ item.offer.product.background_color}}">{{ item.name }} {% trans 'subscribe rates' %}</h3>
-                        <p>{{ item.description }}</p>
-                        <a href="{% url 'offers_redirect' item.slug %}" class="btn btn-blue">{% trans 'Learn more' %}</a>
-                    </div>
-                    <div class="subscribe__item-img">
-                         {% if item.avatar %}
-                            <img src="{{ item.avatar.url }}" alt="name">
-                        {% endif %}
-                    </div>
-                </div>
-          {% endfor %}
-      </div>
+		<div class="subscribe__body">
+			<div class="subscribe__items">
 
-    </div>
+				{% for item in all_products %}
+
+				<div class="subscribe__item {% if all_products.0.id == item.id %}active{% endif %}" id="sub-netflix">
+					<div class="subscribe__item-content">
+						<h3>{{ item.name }}</h3>
+						<p>
+							{{ item.description }}
+						</p>
+						<a href="{% url 'offers_redirect' item.slug %}">{% trans 'Read more' %}</a>
+					</div>
+					<div class="subscribe__item-img" style="background: #000;">
+						{% if item.icon %}
+						<img src="{{ item.icon.url }}" alt="netflix" />
+						{% endif %}
+					</div>
+				</div>
+				{% endfor %}
+
+			</div>
+			<div class="subscribe__preview">
+				{% if all_products %}
+					{% if all_products.0.icon %}
+						<img src="{{ all_products.0.icon.url }}" alt="preview services">
+					{% endif %}
+				{% else %}
+					<img src="" alt="preview services">
+				{% endif %}
+			</div>
+		</div>
+	</div>
 </section>
 
 <section class="works">
-    <div class="container">
-        <h2>{% trans 'How it works?' %}</h2>
-        <div class="works__steps">
-                <div class="works__step bg-white">
-                    <div class="works__step-head">
-                        <h4>Step 1</h4>
-                        <div class="works__icon-wrap">
-                            <span></span>
-                            <div class="works__icon works__icon-1"></div>
-                        </div>
+	<div class="container">
+		<h2>{% trans 'How it works?' %}</h2>
+		<div class="works__steps">
 
-                    </div>
-                    <p>{% trans 'Enter your account information' %}</p>
-                </div>
-                <div class="works__step bg-white">
-                    <div class="works__step-head">
-                        <h4>{% trans 'Step 3' %}</h4>
-                        <div class="works__icon-wrap">
-                            <span></span>
-                            <div class="works__icon works__icon-2"></div>
-                        </div>
-                    </div>
-                    <p>{% trans 'Select the desired subscribe and plan' %}</p>
-                </div>
-                <div class="works__step bg-white">
-                    <div class="works__step-head">
-                        <h4>{% trans 'Step 3' %}</h4>
-                        <div class="works__icon-wrap">
-                            <span></span>
-                            <div class="works__icon works__icon-3"></div>
-                        </div>
-                    </div>
-                    <p>{% trans 'Pay your bill with PayPal' %}</p>
-                </div>
-        </div>
-        {% include 'blocks/invite.html' %}
-    </div>
+			<div class="works__step bg-white">
+				<div class="works__step-text">
+					{% trans 'We work with the media subscriptions of: <br>Netflix <br>Spotify <br>Premium YouTube-Premium' %}
+				</div>
+				<div class="works__step-img">
+					<img src="{% static 'img/step-1.png' %}" alt="step 1">
+				</div>
+			</div>
+
+			<div class="works__step bg-white">
+				<div class="works__step-text">
+					{% trans 'You choose the subscription you want On our Telegram Channel then you will receive a link that will direct you to our specialized bot that will provide you with the subscription.' %}
+				</div>
+				<div class="works__step-img">
+					<img src="{% static 'img/step-2.png' %}" alt="step 2">
+				</div>
+			</div>
+
+			<div class="works__step bg-white">
+				<div class="works__step-text">
+					{% trans 'You will choose the desired language, And you will receive the gray tariff. Pay you by PayPal secure payment fill in your account information and we will create the subscription for you. ' %}
+				</div>
+				<div class="works__step-img">
+					<img src="{% static 'img/step-3.png' %}" alt="step 3">
+				</div>
+			</div>
+
+			<div class="works__step bg-white">
+				<div class="works__step-text">
+					{% trans "It's simple, fast and economical!" %}
+				</div>
+				<div class="works__step-img">
+					<img src="{% static 'img/step-4.png' %}" alt="step 4">
+				</div>
+			</div>
+
+		</div>
+
+		{% include 'blocks/invite.html' %}
+	</div>
 </section>
-<section class="about">
+
+<section class="about">'
+	<div class="about__anchor" id="about"></div>
     <div class="container">
         <h2>{% trans 'About us' %}</h2>
         <div class="about__body">
@@ -119,4 +124,5 @@
         </div>
     </div>
 </section>
+
 {% endblock%}

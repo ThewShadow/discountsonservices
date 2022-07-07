@@ -68,7 +68,7 @@ class Product(models.Model):
     multi_plane = models.BooleanField(default=False)
     description = models.TextField(null=True)
     background_color = models.CharField(max_length=12)
-    avatar = models.ImageField(upload_to='media/products/', null=True)
+    icon = models.FileField(upload_to='media/products/', null=True, blank=True, default=None)
 
     def __str__(self):
         return self.name

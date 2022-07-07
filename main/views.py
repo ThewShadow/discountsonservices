@@ -204,7 +204,10 @@ class ManagerPanelView(LoginRequiredMixin, TemplateView):
     def post(self, request, **kwargs):
         form = ChangeSubscibeStatusForm(request.POST)
         if form.is_valid():
-            subscr_obj = get_object_or_404(Subscription, id=form.cleaned_data['sub_id'])
+            subscr_obj = get_object_or_404(
+                Subscription,
+                id=form.cleaned_data['sub_id'])
+
             subscr_obj.status = form.cleaned_data['status_value']
             subscr_obj.is_active = True
             subscr_obj.save()

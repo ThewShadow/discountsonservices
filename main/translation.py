@@ -9,7 +9,7 @@ class OfferTranslationOptions(TranslationOptions):
     fields = ('name', 'description')
 
 class ProductTranslationOptions(TranslationOptions):
-    fields = ('name',)
+    fields = ('name', 'description')
 
 class CurrencyTranslationOptions(TranslationOptions):
     fields = ('name',)
