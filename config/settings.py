@@ -137,9 +137,9 @@ USE_TZ = True
 LANGUAGES = (
     ('en', _('English')),
     ('ru', _('Russian')),
-    ('es', _('Spain')),
+    ('es', _('Spanish')),
     ('fr', _('France')),
-    ('he', _('Israel')),
+    ('he', _('Hebrew')),
 )
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
