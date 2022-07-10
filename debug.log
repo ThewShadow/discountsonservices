@@ -1,0 +1,1713 @@
+INFO 2022-07-05 12:56:54,020 autoreload 48289 139666678163264 Watching for file changes with StatReloader
+INFO 2022-07-05 12:57:31,154 views 48289 139666546157312 ss
+INFO 2022-07-05 12:58:35,138 views 48289 139666554550016 ss
+INFO 2022-07-05 13:45:52,728 views 48289 139666554550016 ss
+ERROR 2022-07-05 13:45:54,055 log 48289 139666554550016 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+WARNING 2022-07-05 13:45:57,233 log 48289 139666554550016 Not Found: /favicon.ico
+INFO 2022-07-05 13:46:21,535 views 48289 139666554550016 ss
+ERROR 2022-07-05 13:46:21,817 log 48289 139666554550016 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 13:47:00,278 views 48289 139666554550016 ss
+ERROR 2022-07-05 13:48:42,985 log 48289 139666519033600 Internal Server Error: /ru/about/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+ERROR 2022-07-05 13:52:12,596 log 48289 139666519033600 Internal Server Error: /ru/about/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+ERROR 2022-07-05 13:52:54,596 log 48289 139666519033600 Internal Server Error: /ru/about/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+ERROR 2022-07-05 13:53:01,159 log 48289 139666519033600 Internal Server Error: /ru/about/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+ERROR 2022-07-05 13:55:18,287 log 48289 139666519033600 Internal Server Error: /ru/about/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+ERROR 2022-07-05 14:05:34,817 log 48289 139666535819008 Internal Server Error: /ru/about/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+ERROR 2022-07-05 14:07:13,003 log 48289 139666535819008 Internal Server Error: /ru/about/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:07:26,322 views 48289 139666535819008 ss
+ERROR 2022-07-05 14:07:26,687 log 48289 139666535819008 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:13:54,032 views 48289 139666519033600 ss
+ERROR 2022-07-05 14:13:54,310 log 48289 139666519033600 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:13:55,972 views 48289 139666519033600 ss
+ERROR 2022-07-05 14:13:56,235 log 48289 139666519033600 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:14:19,214 views 48289 139666519033600 ss
+ERROR 2022-07-05 14:14:19,492 log 48289 139666519033600 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:14:29,869 views 48289 139666535819008 ss
+ERROR 2022-07-05 14:14:30,694 log 48289 139666535819008 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:16:07,000 views 48289 139666535819008 ss
+ERROR 2022-07-05 14:16:07,239 log 48289 139666535819008 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:17:02,423 views 48289 139666535819008 ss
+ERROR 2022-07-05 14:17:02,994 log 48289 139666535819008 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:17:07,692 views 48289 139666546157312 ss
+ERROR 2022-07-05 14:17:08,364 log 48289 139666546157312 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:17:12,665 views 48289 139666546157312 ss
+ERROR 2022-07-05 14:17:13,144 log 48289 139666546157312 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:26:23,871 views 48289 139666546157312 ss
+ERROR 2022-07-05 14:26:24,311 log 48289 139666546157312 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:26:29,730 views 48289 139666546157312 ss
+ERROR 2022-07-05 14:26:30,128 log 48289 139666546157312 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:26:35,876 views 48289 139666535819008 ss
+ERROR 2022-07-05 14:26:36,368 log 48289 139666535819008 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+KeyError: 'language.code==LANGUAGE_CODE'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 886, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/smartif.py", line 181, in translate_token
+    return self.create_var(token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 889, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==LANGUAGE_CODE' from 'language.code==LANGUAGE_CODE'
+INFO 2022-07-05 14:27:17,921 views 48289 139666535819008 ss
+INFO 2022-07-05 14:28:39,431 views 48289 139666546157312 ss
+WARNING 2022-07-05 14:28:45,551 log 48289 139666554550016 Not Found: /ru/index.html
+WARNING 2022-07-05 14:29:43,112 log 48289 139666554550016 Not Found: /ru/index.html
+INFO 2022-07-05 14:29:50,078 views 48289 139666554550016 ss
+WARNING 2022-07-05 14:29:54,659 log 48289 139666519033600 Not Found: /ru/index
+WARNING 2022-07-05 14:31:05,901 log 48289 139666519033600 Not Found: /ru/index
+INFO 2022-07-05 14:31:12,062 views 48289 139666519033600 ss
+INFO 2022-07-05 14:31:22,975 views 48289 139666554550016 ss
+INFO 2022-07-05 14:31:40,773 views 48289 139666554550016 ss
+ERROR 2022-07-05 14:31:41,090 log 48289 139666554550016 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 472, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/urls/resolvers.py", line 802, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'index#about' not found. 'index#about' is not a valid view function or pattern name.
+INFO 2022-07-05 14:32:26,144 views 48289 139666554550016 ss
+WARNING 2022-07-05 14:32:30,951 log 48289 139666519033600 Not Found: /ru/get-netflix.html
+INFO 2022-07-05 14:33:47,432 views 48289 139666519033600 ss
+WARNING 2022-07-05 14:33:53,041 log 48289 139666554550016 Not Found: /ru/index.html
+INFO 2022-07-05 14:41:04,591 views 48289 139666554550016 ss
+WARNING 2022-07-05 14:41:09,661 log 48289 139666535819008 Not Found: /ru/index.html
+WARNING 2022-07-05 14:41:22,530 log 48289 139666535819008 Not Found: /ru/index.html
+WARNING 2022-07-05 14:41:27,156 log 48289 139666535819008 Not Found: /ru/index.html
+INFO 2022-07-05 14:41:36,301 views 48289 139666535819008 ss
+WARNING 2022-07-05 14:41:39,416 log 48289 139666519033600 Not Found: /ru/index.html
+INFO 2022-07-05 14:47:55,323 views 48289 139666154055424 ss
+ERROR 2022-07-05 14:47:56,117 log 48289 139666154055424 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 472, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/urls/resolvers.py", line 802, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '/' not found. '/' is not a valid view function or pattern name.
+INFO 2022-07-05 14:47:57,224 views 48289 139666145662720 ss
+ERROR 2022-07-05 14:47:58,007 log 48289 139666145662720 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 472, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/urls/resolvers.py", line 802, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '/' not found. '/' is not a valid view function or pattern name.
+INFO 2022-07-05 14:48:14,554 views 48289 139666145662720 ss
+INFO 2022-07-05 14:48:35,828 views 48289 139666154055424 ss
+INFO 2022-07-05 14:52:33,474 views 48289 139666154055424 ss
+INFO 2022-07-05 14:54:22,145 views 48289 139666554550016 ss
+INFO 2022-07-05 14:54:34,204 views 48289 139666145662720 ss
+INFO 2022-07-05 14:55:55,644 views 48289 139666154055424 ss
+INFO 2022-07-05 14:57:03,227 views 48289 139666154055424 ss
+INFO 2022-07-05 14:57:33,921 views 48289 139666554550016 ss
+INFO 2022-07-05 14:58:38,780 views 48289 139666546157312 ss
+INFO 2022-07-05 15:00:50,329 views 48289 139666162448128 ss
+INFO 2022-07-05 15:01:20,438 views 48289 139666554550016 ss
+INFO 2022-07-05 15:01:55,996 views 48289 139666554550016 ss
+INFO 2022-07-05 15:02:10,558 views 48289 139666535819008 ss
+INFO 2022-07-05 15:02:17,333 views 48289 139666145662720 ss
+INFO 2022-07-05 15:02:37,014 views 48289 139666154055424 ss
+INFO 2022-07-05 15:03:25,664 views 48289 139666145662720 ss
+INFO 2022-07-05 15:03:34,496 views 48289 139666546157312 ss
+INFO 2022-07-05 15:06:05,961 views 48289 139666535819008 ss
+INFO 2022-07-05 15:06:46,937 views 48289 139666525591296 ss
+INFO 2022-07-05 15:06:55,854 views 48289 139666154055424 ss
+INFO 2022-07-05 15:12:07,400 views 48289 139666154055424 ss
+INFO 2022-07-05 15:13:09,238 views 48289 139666535819008 ss
+INFO 2022-07-05 15:13:19,385 views 48289 139666546157312 ss
+INFO 2022-07-05 15:20:44,752 views 48289 139666535819008 ss
+INFO 2022-07-05 15:21:37,431 views 48289 139666535819008 ss
+INFO 2022-07-05 17:27:43,606 views 48289 139666554550016 ss
+INFO 2022-07-06 08:36:14,069 autoreload 66541 140438253721408 Watching for file changes with StatReloader
+INFO 2022-07-06 08:37:39,922 views 66541 140438197253888 ss
+INFO 2022-07-06 08:39:27,042 views 66541 140438098925312 ss
+INFO 2022-07-06 08:40:23,857 views 66541 140438098925312 ss
+INFO 2022-07-06 08:42:44,216 views 66541 140438197253888 ss
+INFO 2022-07-06 08:47:16,839 views 66541 140438090532608 ss
+INFO 2022-07-06 17:16:32,418 autoreload 16308 140303927269184 Watching for file changes with StatReloader
+INFO 2022-07-06 17:17:23,705 views 16308 140303870801664 ss
+WARNING 2022-07-06 17:17:26,960 log 16308 140303862408960 Not Found: /ru/img/netflix_logo.svg
+WARNING 2022-07-06 17:17:26,963 log 16308 140303870801664 Not Found: /ru/img/spotify_logo.svg
+WARNING 2022-07-06 17:17:27,126 log 16308 140303870801664 Not Found: /ru/img/youtube_logo.svg
+INFO 2022-07-06 17:18:55,035 views 16308 140303870801664 ss
+WARNING 2022-07-06 17:18:55,863 log 16308 140303870801664 Not Found: /ru/img/netflix_logo.svg
+WARNING 2022-07-06 17:18:56,034 log 16308 140303862408960 Not Found: /ru/img/spotify_logo.svg
+WARNING 2022-07-06 17:18:56,114 log 16308 140303870801664 Not Found: /ru/img/youtube_logo.svg
+WARNING 2022-07-06 17:19:09,822 log 16308 140303862408960 Not Found: /ru/img/spotify_logo.svg
+WARNING 2022-07-06 17:19:11,109 log 16308 140303862408960 Not Found: /ru/img/youtube_logo.svg
+WARNING 2022-07-06 17:19:11,739 log 16308 140303862408960 Not Found: /ru/img/spotify_logo.svg
+WARNING 2022-07-06 17:19:13,349 log 16308 140303862408960 Not Found: /ru/img/netflix_logo.svg
+INFO 2022-07-06 17:21:48,229 views 16308 140303862408960 ss
+WARNING 2022-07-06 17:21:49,041 log 16308 140303862408960 Not Found: /ru/img/spotify_logo.svg
+WARNING 2022-07-06 17:21:49,077 log 16308 140303852181248 Not Found: /ru/img/youtube_logo.svg
+WARNING 2022-07-06 17:21:49,183 log 16308 140303870801664 Not Found: /ru/img/netflix_logo.svg
+WARNING 2022-07-06 17:21:51,557 log 16308 140303862408960 Not Found: /ru/img/spotify_logo.svg
+WARNING 2022-07-06 17:21:52,605 log 16308 140303862408960 Not Found: /ru/img/youtube_logo.svg
+WARNING 2022-07-06 17:21:53,612 log 16308 140303862408960 Not Found: /ru/img/spotify_logo.svg
+INFO 2022-07-06 17:23:46,247 views 16308 140303862408960 ss
+INFO 2022-07-06 17:31:05,422 views 16308 140303862408960 ss
+INFO 2022-07-06 17:32:54,192 views 16308 140303862408960 ss
+INFO 2022-07-06 17:44:36,743 views 16308 140303852181248 ss
+INFO 2022-07-06 17:48:08,057 views 16308 140303870801664 ss
+INFO 2022-07-06 17:53:50,326 views 16308 140303870801664 ss
+INFO 2022-07-06 17:54:49,170 views 16308 140303852181248 ss
+INFO 2022-07-06 18:03:33,562 views 16308 140303862408960 ss
+INFO 2022-07-06 18:04:39,425 views 16308 140303870801664 ss
+INFO 2022-07-06 18:09:57,922 views 16308 140303486936832 ss
+INFO 2022-07-06 18:12:23,786 views 16308 140303870801664 ss
+INFO 2022-07-06 18:14:59,378 views 16308 140303870801664 ss
+INFO 2022-07-06 18:18:12,222 views 16308 140303870801664 ss
+INFO 2022-07-06 19:01:52,352 autoreload 25274 140016144967488 Watching for file changes with StatReloader
+INFO 2022-07-06 19:02:14,584 views 25274 140016088499968 ss
+ERROR 2022-07-06 19:02:16,363 log 25274 140016088499968 Internal Server Error: /ru/
+Traceback (most recent call last):
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 968, in do_if
+    nodelist = parser.parse(("endif",))
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 518, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/home/sergio/Документы/Web Dev/M.O.N.E.Y./2022/git_services/discountsonservices/venv/lib/python3.8/site-packages/django/template/base.py", line 581, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 272: 'if'. Looking for one of: endif.
+WARNING 2022-07-06 19:02:19,522 log 25274 140016088499968 Not Found: /favicon.ico
+INFO 2022-07-06 19:39:56,533 views 25274 140016080107264 ss
+INFO 2022-07-06 19:43:26,609 views 25274 140016080107264 ss
+INFO 2022-07-06 19:46:44,736 views 25274 140016080107264 ss
+INFO 2022-07-06 19:49:12,942 views 25274 140016080107264 ss
+INFO 2022-07-06 19:55:17,034 views 25274 140016080107264 ss
+INFO 2022-07-06 19:55:43,978 views 25274 140015866738432 ss
+INFO 2022-07-06 19:58:15,633 views 25274 140015866738432 ss
+INFO 2022-07-06 19:59:47,095 views 25274 140015866738432 ss
+INFO 2022-07-06 20:05:51,453 views 25274 140015866738432 ss
+INFO 2022-07-06 20:06:21,937 views 25274 140015866738432 ss
+INFO 2022-07-06 20:25:39,749 autoreload 30604 140651427346240 Watching for file changes with StatReloader
+INFO 2022-07-06 20:26:09,905 views 30604 140651370878720 ss

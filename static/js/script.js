@@ -216,7 +216,11 @@ function setPayment() {
 }
 
 
+<<<<<<< HEAD
 //^ toggle services
+=======
+//^ toggle services 
+>>>>>>> 8e2b9e4314c90c97338ab7afde5f4cd94eaa869d
 
 const sudscribeWrap = document.querySelector('.subscribe__items')
 let sudscribeItems = document.querySelectorAll('.subscribe__item')

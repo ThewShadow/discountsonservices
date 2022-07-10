@@ -1,6 +1,12 @@
 {% extends 'main/base.html' %}
 {% load i18n %}
 {% load static %}
+<<<<<<< HEAD
+=======
+{% block title %}
+
+<title>{% trans "Home" %}</title>
+>>>>>>> 8e2b9e4314c90c97338ab7afde5f4cd94eaa869d
 
 {% block title %}
 	<title>{% trans "Home" %}</title>
@@ -10,6 +16,7 @@
 
 <section class="subscribe">
 	<div class="container">
+<<<<<<< HEAD
 
 		<div class="subscribe__body">
 			<div class="subscribe__items">
@@ -41,6 +48,55 @@
 				{% else %}
 					<img src="" alt="preview services">
 				{% endif %}
+=======
+		
+		<div class="subscribe__body">
+			<div class="subscribe__items">
+
+				<div class="subscribe__item active" id="sub-netflix">
+					<div class="subscribe__item-content">
+						<h3>Netflix</h3>
+						<p>
+							Unlimited movies, TV shows, and more. Watch anywhere. Cancel anytime.
+						</p>
+						<a href="##">Read more</a>
+					</div>
+					<div class="subscribe__item-img" style="background: #000;">
+						<img src="{% static 'img/netflix_logo.svg' %}" alt="netflix" />
+					</div>
+				</div>
+
+				<div class="subscribe__item" id="sub-spotify">
+					<div class="subscribe__item-content">
+						<h3>Spotify Premium</h3>
+						<p>
+							Premium lets you play any song, anytime. You can even listen when you’re
+							offline. No restrictions. Ad-free music listening.
+						</p>
+						<a href="##">Read more</a>
+					</div>
+					<div class="subscribe__item-img" style="background: #1ed760">
+						<img src="{% static 'img/spotify_logo.svg' %}" alt="netflix" />
+					</div>
+				</div>
+
+				<div class="subscribe__item" id="sub-youtube">
+					<div class="subscribe__item-content">
+						<h3>Youtube Premium</h3>
+						<p>
+							YouTube and YouTube Music without ads, in the background and offline.
+						</p>
+						<a href="##">Read more</a>
+					</div>
+					<div class="subscribe__item-img" style="background: #ff0000;">
+						<img src="{% static 'img/youtube_logo.svg' %}" alt="netflix" />
+					</div>
+				</div>
+
+			</div>
+			<div class="subscribe__preview">
+				<img src="{% static 'img/netflix_logo.svg' %}" alt="preview services">
+>>>>>>> 8e2b9e4314c90c97338ab7afde5f4cd94eaa869d
 			</div>
 		</div>
 	</div>
@@ -48,6 +104,7 @@
 
 <section class="works">
 	<div class="container">
+<<<<<<< HEAD
 		<h2>{% trans 'How it works?' %}</h2>
 		<div class="works__steps">
 
@@ -55,33 +112,52 @@
 				<div class="works__step-text">
 					{% trans 'We work with the media subscriptions of: <br>Netflix <br>Spotify <br>Premium YouTube-Premium' %}
 				</div>
+=======
+		<h2>How it works?</h2>
+		<div class="works__steps">
+
+			<div class="works__step bg-white">
+				<div class="works__step-text">Entering information, registering on the site and filling in personal data.</div>
+>>>>>>> 8e2b9e4314c90c97338ab7afde5f4cd94eaa869d
 				<div class="works__step-img">
 					<img src="{% static 'img/step-1.png' %}" alt="step 1">
 				</div>
 			</div>
 
 			<div class="works__step bg-white">
+<<<<<<< HEAD
 				<div class="works__step-text">
 					{% trans 'You choose the subscription you want On our Telegram Channel then you will receive a link that will direct you to our specialized bot that will provide you with the subscription.' %}
 				</div>
+=======
+				<div class="works__step-text">Choice of subscription, subscription type and subscription period.</div>
+>>>>>>> 8e2b9e4314c90c97338ab7afde5f4cd94eaa869d
 				<div class="works__step-img">
 					<img src="{% static 'img/step-2.png' %}" alt="step 2">
 				</div>
 			</div>
 
 			<div class="works__step bg-white">
+<<<<<<< HEAD
 				<div class="works__step-text">
 					{% trans 'You will choose the desired language, And you will receive the gray tariff. Pay you by PayPal secure payment fill in your account information and we will create the subscription for you. ' %}
 				</div>
+=======
+				<div class="works__step-text">Payment stage, payment is made securely via PayPal or bank card.</div>
+>>>>>>> 8e2b9e4314c90c97338ab7afde5f4cd94eaa869d
 				<div class="works__step-img">
 					<img src="{% static 'img/step-3.png' %}" alt="step 3">
 				</div>
 			</div>
 
 			<div class="works__step bg-white">
+<<<<<<< HEAD
 				<div class="works__step-text">
 					{% trans "It's simple, fast and economical!" %}
 				</div>
+=======
+				<div class="works__step-text">Receipt of the selected subscription by the subscriber.</div>
+>>>>>>> 8e2b9e4314c90c97338ab7afde5f4cd94eaa869d
 				<div class="works__step-img">
 					<img src="{% static 'img/step-4.png' %}" alt="step 4">
 				</div>
@@ -93,6 +169,28 @@
 	</div>
 </section>
 
+<<<<<<< HEAD
+=======
+<!-- <section class="main">
+	<div class="container">
+		<div class="main__body">
+			<div class="main__block main__content bg-blue">
+				<h1>Start enjoying a benefit
+					of up to 50%</h1>
+				<p>You have always wanted to get the same product at a special price for you, without haggling - and it
+					is yours.</p>
+				<a href="##" class="btn btn-wh">Start using</a>
+			</div>
+			<div class="main__block block-img bg-white">
+				<img src="{% static 'img/main-img.jpg' %}" alt="Start enjoying a benefit
+                of up to 50%">
+			</div>
+		</div>
+	</div>
+</section> -->
+
+
+>>>>>>> 8e2b9e4314c90c97338ab7afde5f4cd94eaa869d
 <section class="about">'
 	<div class="about__anchor" id="about"></div>
     <div class="container">

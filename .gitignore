@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 /db.sqlite3
 /conf/settings.py
 /media/media
 config/__pycache__/*
 service/__pycache__/*
+=======
+db.sqlite3
+main/__pycache__/context_processors.cpython-38.pyc
+venv/
+debug.log
+service/__pycache__/urls.cpython-38.pyc
+>>>>>>> 8e2b9e4314c90c97338ab7afde5f4cd94eaa869d
