@@ -34,7 +34,7 @@ paypal.Buttons({
             }).done(function (resp) {
                     window.location.replace("/service/paypal_return/")
             }).fail(function (resp) {
-                    window.location.replace("service/paypal_error/")
+                    window.location.replace("/main/paypal_error/")
             });
         });
     }
